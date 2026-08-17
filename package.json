@@ -1,0 +1,17 @@
+{
+  "name": "fitquest",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "mobile": "npm run start --workspace apps/mobile",
+    "server": "npm run dev --workspace apps/server",
+    "server:build": "npm run build --workspace apps/server",
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down"
+  },
+  "devDependencies": {
+    "@types/react": "~19.1.10"
+  }
+}
