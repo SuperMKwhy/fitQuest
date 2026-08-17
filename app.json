@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "iosAppDemo",
+    "slug": "iosAppDemo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Used to track your arm during the Arm Swing exercise game.",
+        "NSLocationWhenInUseUsageDescription": "Used to track your route and distance while you're running."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "Used to track your arm during the Arm Swing exercise game.",
+          "enableMicrophonePermission": false,
+          "enableFrameProcessors": true
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Used to track your route and distance while you're running."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "906f6b86-c319-4511-8de8-5961bd0b33b2"
+      }
+    },
+    "owner": "mangkorn_eas"
+  }
+}
