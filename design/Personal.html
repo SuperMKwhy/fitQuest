@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitQuest - Your Stats</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Hanken+Grotesk:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-background": "#1c1b1b",
+                            "error": "#ba1a1a",
+                            "surface-container": "#f0eded",
+                            "on-secondary": "#ffffff",
+                            "outline-variant": "#bbcac3",
+                            "surface-container-low": "#f6f3f2",
+                            "on-tertiary-fixed": "#241a00",
+                            "inverse-primary": "#50ddb7",
+                            "tertiary-container": "#e0b331",
+                            "inverse-surface": "#313030",
+                            "primary-fixed": "#71fad2",
+                            "on-primary": "#ffffff",
+                            "on-secondary-container": "#6d0010",
+                            "on-tertiary": "#ffffff",
+                            "on-surface": "#1c1b1b",
+                            "secondary": "#ae2f34",
+                            "on-secondary-fixed-variant": "#8c1520",
+                            "on-surface-variant": "#3c4a44",
+                            "surface-bright": "#fcf9f8",
+                            "secondary-fixed": "#ffdad8",
+                            "surface-container-high": "#eae7e7",
+                            "primary-container": "#3ecfaa",
+                            "primary-fixed-dim": "#50ddb7",
+                            "outline": "#6c7a74",
+                            "surface-variant": "#e5e2e1",
+                            "on-error": "#ffffff",
+                            "tertiary": "#765b00",
+                            "on-primary-container": "#005442",
+                            "surface": "#fcf9f8",
+                            "surface-dim": "#dcd9d9",
+                            "background": "#fcf9f8",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-container-highest": "#e5e2e1",
+                            "secondary-fixed-dim": "#ffb3b0",
+                            "tertiary-fixed": "#ffdf94",
+                            "on-primary-fixed": "#002018",
+                            "on-secondary-fixed": "#410006",
+                            "on-tertiary-fixed-variant": "#594400",
+                            "primary": "#006b55",
+                            "tertiary-fixed-dim": "#efc13e",
+                            "surface-tint": "#006b55",
+                            "on-error-container": "#93000a",
+                            "on-primary-fixed-variant": "#005140",
+                            "secondary-container": "#ff6b6b",
+                            "inverse-on-surface": "#f3f0ef",
+                            "error-container": "#ffdad6",
+                            "on-tertiary-container": "#5c4600"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "md": "24px",
+                            "lg": "40px",
+                            "xl": "64px",
+                            "base": "8px",
+                            "margin-desktop": "48px",
+                            "border-weight": "3px",
+                            "sm": "12px",
+                            "margin-mobile": "20px",
+                            "xs": "4px"
+                    },
+                    "fontFamily": {
+                            "headline-md": ["Space Grotesk"],
+                            "label-sm": ["JetBrains Mono"],
+                            "headline-lg-mobile": ["Space Grotesk"],
+                            "body-lg": ["Hanken Grotesk"],
+                            "label-md": ["JetBrains Mono"],
+                            "headline-xl": ["Space Grotesk"],
+                            "headline-lg": ["Space Grotesk"],
+                            "body-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                            "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                            "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                            "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                            "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8; /* Off-white base */
+            color: #1c1b1b; /* Charcoal */
+        }
+        .chibi-border {
+            border: 3px solid #1c1b1b;
+        }
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .chibi-shadow-sm {
+            box-shadow: 2px 2px 0px 0px #1c1b1b;
+        }
+        .chibi-active:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
+        /* Custom Toggle Switch for cm/ft and kg/lb */
+        .toggle-switch-input:checked + .toggle-switch-label .toggle-bg {
+            background-color: #3ecfaa;
+        }
+        .toggle-switch-input:checked + .toggle-switch-label .toggle-slider {
+            transform: translateX(100%);
+        }
+        
+        /* Dashed border for BMI placeholder */
+        .dashed-border {
+            border: 2px dashed #bbcac3;
+        }
+        
+        /* Sparkle Animation */
+        @keyframes sparkle-float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+            50% { transform: translateY(-5px) scale(1.1); opacity: 1; }
+        }
+        .sparkle {
+            animation: sparkle-float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="w-[390px] h-[930px] mx-auto flex flex-col font-body-md overflow-hidden relative shadow-lg">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface z-40 px-4 py-2 flex justify-between items-center bg-surface">
+<button aria-label="Back" class="w-10 h-10 bg-white chibi-border rounded-lg chibi-shadow flex items-center justify-center text-primary chibi-active transition-all duration-100">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>arrow_back</span>
+</button>
+<!-- Progress Indicator -->
+<div class="flex flex-col items-center flex-1 mx-4">
+<div class="flex items-center w-full max-w-[200px] justify-between relative mb-2">
+<!-- Line behind dots -->
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-full h-1 bg-[#DEDCD5] z-0"></div>
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-[25%] h-1 bg-primary-container z-0"></div>
+<!-- Dots -->
+<div class="w-4 h-4 rounded-full chibi-border bg-primary-container z-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[10px] text-on-primary-container" style='font-variation-settings: "FILL" 1;'>check</span>
+</div>
+<div class="w-4 h-4 rounded-full chibi-border bg-primary-container z-10"></div>
+<div class="w-4 h-4 rounded-full chibi-border bg-white z-10"></div>
+<div class="w-4 h-4 rounded-full chibi-border bg-white z-10"></div>
+<div class="w-4 h-4 rounded-full chibi-border bg-white z-10"></div>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[12px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="font-label-sm text-label-sm tracking-wider text-on-surface-variant uppercase">STEP 2 OF 5</span>
+<span class="material-symbols-outlined text-primary-container text-[12px]" style='font-variation-settings: "FILL" 1;'>star</span>
+</div>
+</div>
+<button aria-label="Close" class="w-10 h-10 bg-white chibi-border rounded-lg chibi-shadow flex items-center justify-center text-primary chibi-active transition-all duration-100">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>arrow_forward</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col px-4 pt-1 pb-[70px] w-full"><!-- Header Section -->
+<div class="text-center mb-2 relative">
+<div class="flex justify-center items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-primary-container sparkle" style='font-variation-settings: "FILL" 1;'>drive_file_rename_outline</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile uppercase tracking-wide">YOUR STATS</h1>
+<span class="material-symbols-outlined text-primary-container sparkle" style='font-variation-settings: "FILL" 1;'>drive_file_rename_outline</span>
+</div>
+<p class="font-body-md text-body-md text-outline">Let's get to know you better!</p>
+</div>
+<!-- Input Area with Chibi -->
+<div class="flex flex-row items-start gap-2 mb-2">
+<!-- Character Image Placeholder -->
+<div class="w-[35%] flex-shrink-0 relative mt-2">
+<img class="w-full h-auto object-contain" data-alt="A detailed 16-bit pixel art style illustration of a chibi anime fitness trainer girl." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUdmFyUnY9KRVG04SEerPd_hWX8XnZf_iHnuTjEWvNI8m8Cargaq8nPlFw6YQFgYYQJZvC-9K9_K7EH9vt5myD0VXCaa1zEotbUrkN1TdVPdXEV-v7H4-gF_Oc83cDLOGa0Z5zbCwoM54paFrVwbnLLP6kr5pWMtqiFScoRRAl9F5gpfnblMzO4MEvD24lhVkTySfG4AE8i8_eY-tzsQxpJ5GGUVGBklxt7A4wq2Dewqjuan3bHiq9hQ4hLDGAd1HWb1BDWE6Tn1yE"/>
+</div>
+<!-- Inputs -->
+<div class="flex-1 flex flex-col gap-3 pt-0">
+<!-- Height Input -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[18px]" style='font-variation-settings: "FILL" 1;'>accessibility_new</span>
+<label class="font-label-md text-label-md uppercase" for="height-input">HEIGHT</label>
+</div>
+<span class="font-label-sm text-label-sm text-outline">(cm)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-white chibi-border rounded-lg px-2 py-1 flex-1 flex justify-center items-center h-10 relative overflow-hidden focus-within:border-primary-container">
+<input aria-label="Enter height" class="w-full text-center font-headline-md text-headline-md bg-transparent border-none outline-none focus:ring-0 p-0" id="height-input" type="number" value="165"/>
+</div>
+<div class="bg-surface-container-high chibi-border rounded-full p-1 flex relative w-[64px] h-10 items-center">
+<div class="absolute left-1 w-6 h-6 bg-primary-container rounded-full chibi-border z-0 transition-transform duration-200"></div>
+<button class="w-6 h-6 z-10 flex items-center justify-center font-label-sm text-[10px] text-on-primary-container">cm</button>
+<button class="w-6 h-6 z-10 flex items-center justify-center font-label-sm text-[10px] text-on-surface-variant">ft</button>
+</div>
+</div>
+</div>
+<!-- Weight Input -->
+<div class="flex flex-col">
+<div class="flex items-center justify-between mb-1">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary-container text-[18px]" style='font-variation-settings: "FILL" 1;'>scale</span>
+<label class="font-label-md text-label-md uppercase" for="weight-input">WEIGHT</label>
+</div>
+<span class="font-label-sm text-label-sm text-outline">(kg)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-white chibi-border rounded-lg px-2 py-1 flex-1 flex justify-center items-center h-10 relative overflow-hidden focus-within:border-primary-container">
+<input aria-label="Enter weight" class="w-full text-center font-headline-md text-headline-md bg-transparent border-none outline-none focus:ring-0 p-0" id="weight-input" type="number" value="50"/>
+</div>
+<div class="bg-surface-container-high chibi-border rounded-full p-1 flex relative w-[64px] h-10 items-center">
+<div class="absolute left-1 w-6 h-6 bg-primary-container rounded-full chibi-border z-0 transition-transform duration-200"></div>
+<button class="w-6 h-6 z-10 flex items-center justify-center font-label-sm text-[10px] text-on-primary-container">kg</button>
+<button class="w-6 h-6 z-10 flex items-center justify-center font-label-sm text-[10px] text-on-surface-variant">lb</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- BMI Calculation Card -->
+<div class="bg-surface-container-lowest chibi-border rounded-xl p-3 chibi-shadow relative mb-1">
+<div class="flex items-center justify-center gap-2 mb-3">
+<div class="w-6 h-6 bg-primary-container rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[14px]" style='font-variation-settings: "FILL" 1;'>calculate</span>
+</div>
+<h2 class="font-headline-md text-[16px] uppercase text-center">WE'LL DO THE MATH FOR YOU!</h2>
+</div>
+<div class="bg-surface-container-low border-2 border-surface-variant rounded-lg p-2 flex items-center justify-between">
+<div class="flex flex-col items-center flex-1">
+<span class="font-label-md text-[12px] uppercase mb-1">BMI</span>
+<div class="dashed-border rounded-lg px-4 py-1 bg-surface-container-lowest">
+<span class="font-headline-lg text-primary-container tracking-widest text-[24px]">- - . -</span>
+</div>
+</div>
+<div class="flex items-center justify-center px-2">
+<span class="material-symbols-outlined text-primary-container text-[20px]">arrow_forward</span>
+</div>
+<div class="flex flex-col items-center flex-1 text-center">
+<span class="text-[10px] text-on-surface font-body-md leading-tight">Get a personalized plan!</span>
+</div>
+</div>
+</div></main>
+<!-- BottomNavBar -->
+<div class="absolute bottom-0 left-0 w-[390px] flex flex-col items-center justify-center px-4 pb-4 pt-2 bg-surface z-50">
+<div class="w-full flex items-center gap-4">
+<!-- Decorative items left/right -->
+<div class="hidden md:flex flex-col items-center justify-center opacity-50">
+<span class="material-symbols-outlined text-tertiary-container text-[16px] sparkle" style='font-variation-settings: "FILL" 1;'>star</span>
+</div>
+<!-- Primary Action Button -->
+<button class="flex-1 bg-primary-container chibi-border rounded-xl py-3 flex items-center justify-center gap-2 chibi-shadow chibi-active transition-all text-on-primary-container group relative overflow-hidden">
+<!-- Diagonal Sheen Effect (Hover) -->
+<div class="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%)] bg-[length:250%_250%] opacity-0 group-hover:opacity-100 group-hover:animate-[gradient_1.5s_linear_infinite]"></div>
+<span class="font-headline-md text-headline-md uppercase tracking-wider">CONTINUE</span>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="hidden md:flex flex-col items-center justify-center opacity-50">
+<span class="material-symbols-outlined text-tertiary-container text-[16px] sparkle" style='font-variation-settings: "FILL" 1;'>star</span>
+</div>
+</div>
+<div class="flex items-center gap-1 mt-2">
+<span class="material-symbols-outlined text-primary-container text-[12px]" style='font-variation-settings: "FILL" 1;'>star</span>
+<span class="font-label-sm text-[10px] tracking-wider text-on-surface-variant uppercase">You can change this later</span>
+<span class="material-symbols-outlined text-primary-container text-[12px]" style='font-variation-settings: "FILL" 1;'>star</span>
+</div>
+</div>
+<style>
+        @keyframes gradient {
+            0% { background-position: 100% 50%; }
+            100% { background-position: -50% 50%; }
+        }
+    </style>
+</body></html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FitQuest - Rank Match</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Space+Grotesk:wght@400;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#241a00",
+                        "on-secondary-fixed-variant": "#8c1520",
+                        "secondary": "#ae2f34",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "outline": "#6c7a74",
+                        "surface": "#fcf9f8",
+                        "surface-tint": "#006b55",
+                        "background": "#fcf9f8",
+                        "inverse-primary": "#50ddb7",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "tertiary-fixed": "#ffdf94",
+                        "primary": "#006b55",
+                        "secondary-container": "#ff6b6b",
+                        "secondary-fixed": "#ffdad8",
+                        "on-background": "#1c1b1b",
+                        "on-secondary-fixed": "#410006",
+                        "surface-container-low": "#f6f3f2",
+                        "primary-fixed": "#71fad2",
+                        "inverse-surface": "#313030",
+                        "on-primary-container": "#005442",
+                        "on-primary-fixed": "#002018",
+                        "on-secondary-container": "#6d0010",
+                        "surface-container-highest": "#e5e2e1",
+                        "tertiary": "#765b00",
+                        "on-error-container": "#93000a",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#ffb3b0",
+                        "on-surface-variant": "#3c4a44",
+                        "outline-variant": "#bbcac3",
+                        "surface-container": "#f0eded",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-dim": "#dcd9d9",
+                        "on-primary-fixed-variant": "#005140",
+                        "on-surface": "#1c1b1b",
+                        "on-tertiary-container": "#5c4600",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#3ecfaa",
+                        "tertiary-container": "#e0b331",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#efc13e",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed-dim": "#50ddb7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "48px",
+                        "border-weight": "3px",
+                        "md": "24px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "xs": "4px",
+                        "lg": "40px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    },
+                    "boxShadow": {
+                        'chibi': '4px 4px 0px 0px #1c1b1b',
+                        'chibi-sm': '2px 2px 0px 0px #1c1b1b',
+                        'none': '0px 0px 0px 0px rgba(0,0,0,0)',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+        }
+        .pixel-corners {
+            border-radius: 12px;
+        }
+        .grid-bg {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(108, 122, 116, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(108, 122, 116, 0.1) 1px, transparent 1px);
+        }
+        .chibi-border {
+            border: 3px solid #1c1b1b;
+        }
+        
+        .number-animation {
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop font-body-md overflow-hidden bg-background">
+<!-- Main Container -->
+<main class="w-full max-w-md bg-surface-container-lowest chibi-border pixel-corners flex flex-col relative h-[850px] shadow-chibi overflow-hidden">
+<!-- Top App Bar equivalent logic (embedded for context) -->
+<header class="flex justify-between items-center px-margin-mobile py-sm w-full border-b-[3px] border-on-background bg-surface sticky top-0 z-10">
+<button class="w-10 h-10 chibi-border rounded-lg bg-surface flex items-center justify-center hover:bg-surface-container-highest active:translate-y-1 active:translate-x-1 active:shadow-none transition-all duration-75">
+<span class="material-symbols-outlined text-on-background">arrow_back</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container">temp_preferences_custom</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background uppercase tracking-tighter">RANK MATCH</h1>
+<span class="material-symbols-outlined text-primary-container">temp_preferences_custom</span>
+</div>
+<button class="w-10 h-10 chibi-border rounded-lg bg-surface flex items-center justify-center hover:bg-surface-container-highest active:translate-y-1 active:translate-x-1 active:shadow-none transition-all duration-75">
+<span class="material-symbols-outlined text-on-background">play_arrow</span>
+</button>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 flex flex-col relative p-4 w-full h-full">
+<!-- Tracking Frame -->
+<div class="flex-1 chibi-border pixel-corners bg-surface-container-lowest relative overflow-hidden flex flex-col items-center pt-4">
+<!-- Instruction Header -->
+<div class="flex items-center gap-2 mb-8 z-10">
+<span class="material-symbols-outlined text-primary-container text-sm">temp_preferences_custom</span>
+<h2 class="font-label-md text-label-md text-primary uppercase tracking-widest relative">
+<span class="absolute top-1/2 left-0 w-full border-t border-dashed border-primary -z-10 -ml-[120%] pl-[240%]"></span>
+<span class="bg-surface-container-lowest px-2">PLEASE MOVE WITHIN THE FRAME</span>
+</h2>
+<span class="material-symbols-outlined text-primary-container text-sm">temp_preferences_custom</span>
+</div>
+<!-- Viewfinder Corners -->
+<div class="absolute top-4 left-4 w-6 h-6 border-t-[4px] border-l-[4px] border-primary rounded-tl-lg z-10"></div>
+<div class="absolute top-4 right-4 w-6 h-6 border-t-[4px] border-r-[4px] border-primary rounded-tr-lg z-10"></div>
+<div class="absolute bottom-4 left-4 w-6 h-6 border-b-[4px] border-l-[4px] border-primary rounded-bl-lg z-10"></div>
+<div class="absolute bottom-4 right-4 w-6 h-6 border-b-[4px] border-r-[4px] border-primary rounded-br-lg z-10"></div>
+<!-- Grid Background & Silhouette -->
+<div class="absolute inset-0 grid-bg opacity-50 z-0"></div>
+<!-- SVG Silhouette Placeholder -->
+<div class="absolute inset-0 flex items-center justify-center z-0 opacity-40">
+<svg class="mt-20" fill="none" height="400" stroke="#006b55" stroke-dasharray="8 8" stroke-width="3" viewBox="0 0 240 400" width="240">
+<path d="M120 40 C100 40, 90 60, 90 80 C90 100, 100 120, 120 120 C140 120, 150 100, 150 80 C150 60, 140 40, 120 40 Z"></path> <!-- Head -->
+<path d="M120 120 L120 250"></path> <!-- Spine -->
+<path d="M120 140 L40 160 C30 165, 25 175, 30 185 L40 190"></path> <!-- Left Arm -->
+<path d="M120 140 L200 160 C210 165, 215 175, 210 185 L200 190"></path> <!-- Right Arm -->
+<path d="M120 250 L70 380 C60 395, 80 400, 90 390 L120 280"></path> <!-- Left Leg -->
+<path d="M120 250 L170 380 C180 395, 160 400, 150 390 L120 280"></path> <!-- Right Leg -->
+<!-- Shadow -->
+<ellipse cx="120" cy="390" fill="#e5e2e1" rx="60" ry="10" stroke="none"></ellipse>
+</svg>
+</div>
+<!-- Countdown Number -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+<!-- Retro Pixel Art Style Number 3 (Simulated with div structure for pixel look or a huge stylized font) -->
+<div class="relative number-animation">
+<span class="font-headline-xl text-[180px] leading-none text-secondary-container" style="text-shadow: rgb(28, 27, 27) 6px 6px 0px, rgb(28, 27, 27) -2px -2px 0px, rgb(28, 27, 27) 2px -2px 0px, rgb(28, 27, 27) -2px 2px 0px, rgb(28, 27, 27) 2px 2px 0px; font-family: &quot;Courier New&quot;, Courier, monospace; font-weight: 900;">3</span>
+<!-- Sparkles around 3 -->
+<div class="absolute top-1/4 -left-8 w-6 h-2 bg-secondary-container rounded-full rotate-45 chibi-border"></div>
+<div class="absolute top-1/2 -left-12 w-6 h-2 bg-secondary-container rounded-full chibi-border"></div>
+<div class="absolute bottom-1/4 -left-8 w-6 h-2 bg-secondary-container rounded-full -rotate-45 chibi-border"></div>
+<div class="absolute top-1/4 -right-8 w-6 h-2 bg-secondary-container rounded-full -rotate-45 chibi-border"></div>
+<div class="absolute top-1/2 -right-12 w-6 h-2 bg-secondary-container rounded-full chibi-border"></div>
+<div class="absolute bottom-1/4 -right-8 w-6 h-2 bg-secondary-container rounded-full rotate-45 chibi-border"></div>
+</div>
+</div>
+<!-- Character and Pet Elements -->
+<div class="absolute bottom-0 left-0 w-full h-64 z-30 pointer-events-none flex justify-between items-end px-4">
+<!-- Hero -->
+
+<!-- Pet -->
+
+</div>
+</div>
+<!-- Footer Area -->
+<div class="mt-4 flex flex-col items-center justify-center w-full z-10 bg-surface-container-lowest border-t-[3px] border-on-background pt-4 pb-2">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-container text-sm">temp_preferences_custom</span>
+<h3 class="font-headline-md text-headline-md text-on-background">Ready ?</h3>
+<span class="material-symbols-outlined text-primary-container text-sm">temp_preferences_custom</span>
+</div>
+<button class="w-full max-w-xs bg-primary-container text-on-primary-container font-headline-lg-mobile text-headline-lg-mobile py-4 px-8 rounded-xl chibi-border shadow-chibi hover:bg-inverse-primary hover:translate-y-1 hover:translate-x-1 hover:shadow-none active:translate-y-1 active:translate-x-1 active:shadow-none transition-all duration-75 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-on-primary-container text-sm">temp_preferences_custom</span>
+                    START!
+                    <span class="material-symbols-outlined text-on-primary-container text-sm">temp_preferences_custom</span>
+</button>
+</div>
+</div>
+</main>
+
+
+</body></html>

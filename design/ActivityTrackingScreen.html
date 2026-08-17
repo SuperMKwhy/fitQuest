@@ -1,0 +1,293 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Activity Quest</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#5c4600",
+                        "surface": "#fcf9f8",
+                        "secondary-container": "#ff6b6b",
+                        "on-surface": "#1c1b1b",
+                        "primary": "#006b55",
+                        "tertiary-fixed": "#ffdf94",
+                        "surface-container-high": "#eae7e7",
+                        "on-secondary-container": "#6d0010",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#002018",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "secondary-fixed": "#ffdad8",
+                        "surface-variant": "#e5e2e1",
+                        "primary-container": "#3ecfaa",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf9f8",
+                        "primary-fixed-dim": "#50ddb7",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-bright": "#fcf9f8",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#ffb3b0",
+                        "on-secondary-fixed": "#410006",
+                        "surface-container": "#f0eded",
+                        "inverse-on-surface": "#f3f0ef",
+                        "primary-fixed": "#71fad2",
+                        "tertiary-fixed-dim": "#efc13e",
+                        "error-container": "#ffdad6",
+                        "on-surface-variant": "#3c4a44",
+                        "on-primary-fixed-variant": "#005140",
+                        "on-background": "#1c1b1b",
+                        "inverse-surface": "#313030",
+                        "secondary": "#ae2f34",
+                        "on-secondary-fixed-variant": "#8c1520",
+                        "outline": "#6c7a74",
+                        "tertiary": "#765b00",
+                        "surface-tint": "#006b55",
+                        "inverse-primary": "#50ddb7",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#e0b331",
+                        "on-primary-container": "#005442",
+                        "surface-container-low": "#f6f3f2",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#dcd9d9",
+                        "outline-variant": "#bbcac3",
+                        "retro-green": "#3ECFAA",
+                        "retro-charcoal": "#1c1b1b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "xl": "64px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "margin-desktop": "48px",
+                        "border-weight": "3px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "headline-xl": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "label-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .chibi-border {
+            border: 3px solid #1c1b1b;
+        }
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .chibi-shadow-sm {
+            box-shadow: 2px 2px 0px 0px #1c1b1b;
+        }
+        .chibi-active:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="bg-background min-h-screen text-on-surface font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<div class="max-w-md mx-auto w-full pb-24 relative">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full pt-4 px-margin-mobile border-none bg-background">
+<button class="w-10 h-10 flex items-center justify-center chibi-border rounded-lg bg-surface chibi-shadow-sm chibi-active transition-all">
+<span class="material-symbols-outlined font-bold text-retro-green">arrow_back</span>
+</button>
+<div class="text-center">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile tracking-tighter text-on-background flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-retro-green" style="font-size: 20px; font-variation-settings: 'FILL' 1;">star</span>
+                    ACTIVITY QUEST
+                    <span class="material-symbols-outlined text-retro-green" style="font-size: 20px; font-variation-settings: 'FILL' 1;">star</span>
+</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1 flex items-center justify-center gap-1">
+                    Move more, level up! <span class="material-symbols-outlined text-tertiary-fixed-dim" style="font-size: 14px; font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</p>
+</div>
+<button class="flex flex-col items-center justify-center chibi-border rounded-lg bg-surface chibi-shadow-sm px-2 py-1 chibi-active transition-all">
+<span class="material-symbols-outlined text-retro-green font-bold leading-none">keyboard_double_arrow_right</span>
+<span class="font-label-sm text-[10px] font-bold">SKIP</span>
+</button>
+</header>
+<main class="px-margin-mobile mt-6 flex flex-col gap-6">
+<!-- Hero Section -->
+<section class="flex justify-between items-end relative h-32">
+<!-- Chibi Boy -->
+<div class="relative w-28 h-28 z-10">
+<img class="w-full h-full object-contain" data-alt="Chibi anime boy character wearing black workout hoodie with white triangle logo, confident pose, thick charcoal outlines, vibrant colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN-Usw_A-KVUrD4XYsafFVe1DhCZrNiGbMTGQ9FpsOtmeZQiIeEtPd828c0ljhpGinR3qI5TELm9AOKJHCC_8vKdfnR1BU0fvjGqKd1TMjZWigP5HnpBE2GUdlSD7jfadmSMfwX5CupxqBSqogbuwtkWrXcgjBMPFrbRuocYyz9IQqNowKRNCewOINCSFfcLQbccetn-TEK_rchrRAmLd2sbfHpCHEiUGLJs9_LETcrPYDiDB5m7so4cJlQTN1zgmQEe-Z2DfYIP5P">
+<!-- Speech Bubble -->
+<div class="absolute -top-6 -right-24 bg-surface chibi-border rounded-xl p-2 z-20 w-40">
+<p class="font-label-sm text-label-sm text-on-surface">You're doing great!<br>Keep moving! 💪</p>
+<!-- Bubble Tail -->
+<div class="absolute -bottom-2 left-4 w-4 h-4 bg-surface border-b-border-weight border-r-border-weight border-outline transform rotate-45"></div>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<!-- Daily Goal Card -->
+<div class="bg-surface chibi-border rounded-xl p-3 chibi-shadow-sm flex flex-col items-center min-w-[100px]">
+<div class="flex items-center gap-1 font-label-sm text-[10px] uppercase font-bold">
+<span class="material-symbols-outlined text-retro-green" style="font-size: 14px; font-variation-settings: 'FILL' 1;">ads_click</span>
+                            DAILY GOAL
+                        </div>
+<div class="font-headline-md text-headline-md text-retro-green flex items-baseline gap-1 mt-1">
+                            450 <span class="font-label-sm text-[12px] text-on-surface">kcal</span>
+</div>
+<div class="font-label-sm text-[10px] text-on-surface-variant mt-1">Keep it up!</div>
+</div>
+<!-- Chibi Cat -->
+<div class="relative w-20 h-20">
+<img class="w-full h-full object-contain" data-alt="Chibi black and white tuxedo cat, thick charcoal outlines, wearing mint green collar with gold bell, cute expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBq459ar_4629n2JBjSqfbY5sXSb3pzxY9I8c1KxbpXMcuE6psK_fNmRdWBRoET5CXVvOtc7aLnkO765qJ1_751WIgHWMMcAghWZBjbLsDXzJaKN8nnupZvi7Otpym4VT_0YfKyvnUc0iQS_5q958De2eOGvRCVTVaviiPDfmVSPvQxrulq8VE2hcWqrmJq1WTa95YoJX4Dit9WhLIGy7t3JpixldFs2Z0en2ydQtjoLWwIaYEAPc8-1r_urYp81GykshmYUjzupYhj">
+<div class="absolute -top-4 -right-2 bg-surface chibi-border rounded-full p-1 z-20 w-8 h-8 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container" style="font-size: 16px; font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Progress Ring -->
+<section class="flex flex-col items-center relative mt-4">
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- Background SVG Ring -->
+<svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="45" stroke="#EAE7E7" stroke-width="8"></circle>
+<circle class="progress-ring__circle" cx="50" cy="50" fill="transparent" r="45" stroke="#3ECFAA" stroke-dasharray="283" stroke-dashoffset="120" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="flex flex-col items-center z-10 bg-surface rounded-full w-48 h-48 justify-center chibi-border shadow-inner">
+<span class="material-symbols-outlined text-secondary-container text-4xl mb-1" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<div class="font-label-sm text-label-sm uppercase flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-retro-green text-xs">star</span>
+                            Activity Ring
+                            <span class="material-symbols-outlined text-retro-green text-xs">star</span>
+</div>
+<div class="font-headline-xl text-headline-xl text-retro-green flex items-baseline">
+                            200<span class="text-on-surface text-3xl">/450</span>
+</div>
+<div class="font-headline-md text-headline-md mt-1">kcal</div>
+</div>
+</div>
+<div class="bg-surface chibi-border rounded-full px-4 py-2 flex items-center gap-2 chibi-shadow-sm -mt-6 z-20">
+<span class="material-symbols-outlined text-retro-green" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-md text-label-md">Active Calories</span>
+</div>
+</section>
+<!-- Stat Cards -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Step & Distance -->
+<div class="bg-surface chibi-border rounded-xl p-4 chibi-shadow-sm flex flex-col gap-3">
+<div class="flex items-center gap-2 font-label-md text-[12px] uppercase">
+<span class="material-symbols-outlined text-retro-green" style="font-variation-settings: 'FILL' 1;">directions_run</span>
+                        STEP &amp; DISTANCE
+                    </div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-on-surface text-sm">directions_walk</span>
+<span class="font-headline-md text-retro-green text-[18px]">2,100 <span class="font-label-sm text-[10px] text-on-surface">/ 10,000 steps</span></span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden border border-outline">
+<div class="h-full bg-retro-green w-1/4"></div>
+</div>
+</div>
+<div class="border-t border-dashed border-outline-variant pt-2">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-on-surface text-sm">location_on</span>
+<span class="font-headline-md text-retro-green text-[18px]">3.2 <span class="font-label-sm text-[10px] text-on-surface">/ 5.0 km</span></span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden border border-outline">
+<div class="h-full bg-retro-green w-3/5"></div>
+</div>
+</div>
+</div>
+<!-- Time -->
+<div class="bg-surface chibi-border rounded-xl p-4 chibi-shadow-sm flex flex-col justify-between">
+<div class="flex items-center gap-2 font-label-md text-[12px] uppercase mb-2">
+<span class="material-symbols-outlined text-retro-green" style="font-variation-settings: 'FILL' 1;">schedule</span>
+                        TIME
+                    </div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-xl text-[36px] text-retro-green leading-none">15:03</span>
+<span class="font-label-md text-[12px]">min</span>
+</div>
+<div class="border-t border-dashed border-outline-variant pt-2 mt-auto flex items-end justify-between">
+<div class="font-body-md text-[12px] text-on-surface-variant leading-tight">
+                            Do it at least for<br>
+<span class="font-bold text-retro-green">20 min!</span>
+</div>
+<span class="material-symbols-outlined text-retro-green text-3xl" style="font-variation-settings: 'FILL' 1;">timer</span>
+</div>
+</div>
+</section>
+<!-- Reward Card -->
+<section class="bg-surface chibi-border rounded-xl p-4 chibi-shadow-sm flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 relative">
+<span class="material-symbols-outlined text-6xl text-tertiary-container absolute inset-0" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+</div>
+<div>
+<div class="font-label-md text-label-md uppercase mb-1">REWARD</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<div class="font-headline-md text-[16px] leading-none">+105 <span class="font-label-sm text-[10px] text-on-surface-variant block">Coins</span></div>
+</div>
+<div class="w-px h-6 bg-outline-variant"></div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-retro-green" style="font-variation-settings: 'FILL' 1;">stars</span>
+<div class="font-headline-md text-[16px] leading-none">+10 <span class="font-label-sm text-[10px] text-on-surface-variant block">XP</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer / FAB equivalent -->
+<footer class="fixed bottom-0 left-0 w-full bg-background/90 backdrop-blur-sm p-margin-mobile z-50">
+<div class="max-w-md mx-auto flex flex-col items-center">
+<button class="w-full bg-retro-green text-on-primary chibi-border rounded-xl p-4 chibi-shadow flex items-center justify-center gap-2 chibi-active transition-all">
+<span class="material-symbols-outlined text-on-primary font-bold">flag</span>
+<span class="font-headline-lg-mobile text-headline-lg-mobile uppercase tracking-wide">FINISH QUEST</span>
+<span class="material-symbols-outlined text-on-primary font-bold ml-auto">chevron_right</span>
+</button>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-2 text-center">Complete the quest to get your reward!</p>
+</div>
+</footer>
+</div>
+
+
+</body></html>

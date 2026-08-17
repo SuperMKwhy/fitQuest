@@ -1,0 +1,238 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FitQuest - Friend Requests</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@700&amp;family=Space+Grotesk:wght@700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "secondary-container": "#ff6b6b",
+                    "surface-container-highest": "#e5e2e1",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#6c7a74",
+                    "tertiary-fixed": "#ffdf94",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed-variant": "#005140",
+                    "on-background": "#1c1b1b",
+                    "surface-container": "#f0eded",
+                    "inverse-primary": "#50ddb7",
+                    "outline-variant": "#bbcac3",
+                    "primary": "#006b55",
+                    "primary-fixed-dim": "#50ddb7",
+                    "on-tertiary-container": "#5c4600",
+                    "error-container": "#ffdad6",
+                    "on-secondary-container": "#6d0010",
+                    "on-surface": "#1c1b1b",
+                    "surface-container-low": "#f6f3f2",
+                    "on-secondary-fixed-variant": "#8c1520",
+                    "surface-bright": "#fcf9f8",
+                    "primary-container": "#3ecfaa",
+                    "inverse-on-surface": "#f3f0ef",
+                    "on-primary-fixed": "#002018",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#410006",
+                    "tertiary-container": "#e0b331",
+                    "tertiary": "#765b00",
+                    "secondary": "#ae2f34",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#efc13e",
+                    "secondary-fixed": "#ffdad8",
+                    "inverse-surface": "#313030",
+                    "primary-fixed": "#71fad2",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#ffb3b0",
+                    "surface": "#fcf9f8",
+                    "on-tertiary-fixed": "#241a00",
+                    "surface-container-high": "#eae7e7",
+                    "on-primary": "#ffffff",
+                    "background": "#fcf9f8",
+                    "surface-dim": "#dcd9d9",
+                    "on-tertiary-fixed-variant": "#594400",
+                    "on-surface-variant": "#3c4a44",
+                    "surface-variant": "#e5e2e1",
+                    "surface-tint": "#006b55",
+                    "on-primary-container": "#005442"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "md": "24px",
+                    "lg": "40px",
+                    "border-weight": "3px",
+                    "xs": "4px",
+                    "margin-desktop": "48px",
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "xl": "64px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["Space Grotesk"],
+                    "headline-md": ["Space Grotesk"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "label-sm": ["JetBrains Mono"],
+                    "label-md": ["JetBrains Mono"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Space Grotesk"],
+                    "headline-lg": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body { background-color: #fcf9f8; }
+        .chibi-shadow { box-shadow: 4px 4px 0px 0px #1c1b1b; }
+        .chibi-active:active { box-shadow: none; transform: translate(4px, 4px); }
+        .chibi-border { border: 3px solid #1c1b1b; }
+        .pixel-art-avatar { image-rendering: pixelated; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface antialiased pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface dark:bg-surface-dim border-b-[3px] border-on-surface dark:border-outline-variant flex items-center justify-between px-margin-mobile py-sm w-full">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:translate-x-1 active:translate-y-1 transition-all duration-75 text-primary dark:text-primary-fixed-dim flex items-center justify-center h-10 w-10 rounded-full">
+<span class="material-symbols-outlined text-2xl" data-icon="arrow_back" data-weight="fill" style="font-variation-settings: 'FILL' 1;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim tracking-tight">FRIEND REQUESTS</h1>
+</div>
+<div class="w-10"></div> <!-- Spacer for balance -->
+</header>
+<!-- Main Canvas -->
+<main class="px-margin-mobile md:px-margin-desktop py-md max-w-4xl mx-auto space-y-md">
+<!-- Pending Requests Count -->
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-outline" data-icon="pending" data-weight="fill" style="font-variation-settings: 'FILL' 1;">pending</span>
+<p class="font-label-md text-label-md text-outline uppercase tracking-wider">3 PENDING REQUESTS</p>
+</div>
+<!-- Request Card 1 -->
+<article class="bg-surface-container-lowest chibi-border rounded-xl p-sm md:p-md chibi-shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="w-16 h-16 rounded-full chibi-border bg-tertiary-fixed overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover pixel-art-avatar" data-alt="A detailed pixel art style portrait of a rogue-like chibi character with dark shadows, glowing red eyes, and a sleek stealth suit against a plain off-white background. The art is strictly 16-bit retro aesthetic with clear staircase edges and a playful, nostalgic energy. The color palette features deep charcoal, vibrant neon mint accents, and a warm off-white base." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADYgsX0BGPurkN9vfoG3wQNIfW1Ac8VKEzYgMKfHgPyzDyo-YTu7GSD96_SugBjshgfppvVX-lewVYKpLx50rn144tYD48VP4oz-EAIq1WCDF9M6Cdkfo9x8A2YMh8fyJj5G7_zc5PppI1vwYa1o34YYpHkk-8Ew5Ew5VeyNcAGtvZknKcJHdsnKJZ6T-5-XJR4gu_GmjVuK07rsMYQZ-WRZXgul8T2nE3h58C0oNP6kmnifj1nB8">
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">ShadowRunner</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-container px-2 py-1 rounded-full chibi-border border-[2px]">LVL 42</span>
+<span class="font-body-md text-body-md text-on-surface-variant">15,200 XP</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0 justify-end">
+<button class="flex items-center justify-center w-12 h-12 rounded-lg bg-secondary-container chibi-border chibi-shadow chibi-active text-on-secondary-container transition-transform">
+<span class="material-symbols-outlined" data-icon="close" data-weight="fill" style="font-variation-settings: 'FILL' 1;">close</span>
+</button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 h-12 rounded-lg bg-primary-container chibi-border chibi-shadow chibi-active text-on-primary-container font-label-md text-label-md transition-transform">
+<span class="material-symbols-outlined" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+                    ACCEPT
+                </button>
+</div>
+</article>
+<!-- Request Card 2 -->
+<article class="bg-surface-container-lowest chibi-border rounded-xl p-sm md:p-md chibi-shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="w-16 h-16 rounded-full chibi-border bg-primary-fixed overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover pixel-art-avatar" data-alt="A highly detailed pixel art avatar of a muscular chibi gym enthusiast wearing an oversized tank top and a sweatband. The character has an intense, determined expression and is rendered in a vibrant 16-bit retro gaming style. The background is a clean off-white (#F8F7F2) highlighting the thick charcoal outlines characteristic of 90s console games." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvgcdOK5G5ZLXuG0LheqIiZ14X24wOdqzVjHh_HzJYY1S5rpAkn5kbM2vLLgSJ_cKTQzwgOAabk41WU2nnjQaYQx-UzXGJl7ot_0SEmckgwx0kTEAFXulZG8igeByar0_lTow-oEHCLKt6rsnCYCIa3w9MNOLjoVwy6dpiwptTYb5sEnNUeMuPnqDGYkTfg8xa0nWn3HFz0jAomdeMhlZ9p_XrUJL8creeUyDEwlUMPWJ9oqTBVjM">
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">PixelGymRat</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-container px-2 py-1 rounded-full chibi-border border-[2px]">LVL 28</span>
+<span class="font-body-md text-body-md text-on-surface-variant">8,450 XP</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0 justify-end">
+<button class="flex items-center justify-center w-12 h-12 rounded-lg bg-secondary-container chibi-border chibi-shadow chibi-active text-on-secondary-container transition-transform">
+<span class="material-symbols-outlined" data-icon="close" data-weight="fill" style="font-variation-settings: 'FILL' 1;">close</span>
+</button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 h-12 rounded-lg bg-primary-container chibi-border chibi-shadow chibi-active text-on-primary-container font-label-md text-label-md transition-transform">
+<span class="material-symbols-outlined" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+                    ACCEPT
+                </button>
+</div>
+</article>
+<!-- Request Card 3 -->
+<article class="bg-surface-container-lowest chibi-border rounded-xl p-sm md:p-md chibi-shadow flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<div class="flex items-center gap-4 w-full md:w-auto">
+<div class="w-16 h-16 rounded-full chibi-border bg-tertiary-fixed-dim overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover pixel-art-avatar" data-alt="A charming pixel art style chibi avatar of a mage character wearing fitness gear, holding a glowing magical dumbbell. The artwork is rendered in classic 16-bit style with thick charcoal borders and a playful, energetic pose. The color scheme features warm coral and energetic mint tones against a stark, light background, capturing the essence of a modern fitness RPG." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxpUes1_f1n0Tluvr_j_5pFJD4eZ67_7mDc6OFmmHv6f8kDxW2wD8fyy1b-TkhGOX2gL8yBupoFuj-lQjVpbgVkQuaSPSnEaA_stkTH2h9SaGvbC-fWdaW2mbz1RiJ8xJ0RGJA-4RZUhU6oFoiuI7ZWTFPFAoSOQaiVW_zNjf2tP3ILwS1G8QIBCVaN7H4JYUxz2yj6Aap6af8OWuDwKJBeqL9qaEliJWYLCqaP3IhRPddTve6xPw">
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-on-surface">IronMage</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-container px-2 py-1 rounded-full chibi-border border-[2px]">LVL 55</span>
+<span class="font-body-md text-body-md text-on-surface-variant">32,100 XP</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto mt-2 md:mt-0 justify-end">
+<button class="flex items-center justify-center w-12 h-12 rounded-lg bg-secondary-container chibi-border chibi-shadow chibi-active text-on-secondary-container transition-transform">
+<span class="material-symbols-outlined" data-icon="close" data-weight="fill" style="font-variation-settings: 'FILL' 1;">close</span>
+</button>
+<button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 h-12 rounded-lg bg-primary-container chibi-border chibi-shadow chibi-active text-on-primary-container font-label-md text-label-md transition-transform">
+<span class="material-symbols-outlined" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+                    ACCEPT
+                </button>
+</div>
+</article>
+<!-- Empty State (Hidden for this specific layout, but good practice) -->
+<div class="hidden flex flex-col items-center justify-center py-xl text-center">
+<span class="material-symbols-outlined text-6xl text-outline-variant mb-4" data-icon="group_off" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group_off</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">NO NEW REQUESTS</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Keep grinding! Invite friends to join your party and conquer quests together.</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl border-t-[3px] border-on-surface dark:border-outline-variant left-0 flex justify-around items-center px-4 py-2 bg-surface dark:bg-surface-dim">
+<!-- ADD FRIENDS (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary dark:hover:text-primary-fixed group w-1/3" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform" data-icon="person_add" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person_add</span>
+<span class="font-label-sm text-label-sm uppercase mt-1 text-center">ADD FRIENDS</span>
+</a>
+<!-- REQUESTS (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary-fixed-dim text-on-primary-container dark:text-on-primary-fixed border-[3px] border-on-surface rounded-lg p-2 translate-x-[-2px] translate-y-[-2px] chibi-shadow hover:text-primary dark:hover:text-primary-fixed active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-75 w-1/3" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-label-sm text-label-sm uppercase mt-1 text-center">REQUESTS</span>
+</a>
+<!-- MY FRIENDS (Inactive) -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant p-2 hover:text-primary dark:hover:text-primary-fixed group w-1/3" href="#">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform" data-icon="group" data-weight="fill" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-sm text-label-sm uppercase mt-1 text-center">MY FRIENDS</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitQuest Home Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#005140",
+                      "on-tertiary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "outline": "#6c7a74",
+                      "surface-dim": "#dcd9d9",
+                      "surface-variant": "#e5e2e1",
+                      "on-tertiary-container": "#5c4600",
+                      "on-background": "#1c1b1b",
+                      "primary": "#006b55",
+                      "on-secondary-fixed": "#410006",
+                      "inverse-surface": "#313030",
+                      "tertiary": "#765b00",
+                      "on-secondary": "#ffffff",
+                      "secondary-fixed": "#ffdad8",
+                      "tertiary-fixed-dim": "#efc13e",
+                      "inverse-primary": "#50ddb7",
+                      "outline-variant": "#bbcac3",
+                      "on-surface": "#1c1b1b",
+                      "surface-container-high": "#eae7e7",
+                      "surface": "#fcf9f8",
+                      "on-primary-container": "#005442",
+                      "on-primary-fixed": "#002018",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#71fad2",
+                      "background": "#fcf9f8",
+                      "on-primary": "#ffffff",
+                      "surface-bright": "#fcf9f8",
+                      "secondary-container": "#ff6b6b",
+                      "surface-container-low": "#f6f3f2",
+                      "tertiary-fixed": "#ffdf94",
+                      "tertiary-container": "#e0b331",
+                      "surface-container": "#f0eded",
+                      "secondary": "#ae2f34",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-secondary-container": "#6d0010",
+                      "secondary-fixed-dim": "#ffb3b0",
+                      "surface-tint": "#006b55",
+                      "on-secondary-fixed-variant": "#8c1520",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#241a00",
+                      "error": "#ba1a1a",
+                      "primary-container": "#3ecfaa",
+                      "on-surface-variant": "#3c4a44",
+                      "inverse-on-surface": "#f3f0ef",
+                      "error-container": "#ffdad6",
+                      "primary-fixed-dim": "#50ddb7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "40px",
+                      "base": "8px",
+                      "xs": "4px",
+                      "xl": "64px",
+                      "sm": "12px",
+                      "md": "24px",
+                      "border-weight": "3px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "48px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Space Grotesk"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Space Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-xl": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .chibi-shadow { box-shadow: 4px 4px 0px 0px #1c1b1b; }
+        .chibi-border { border: 3px solid #1c1b1b; }
+        .sparkle-anim { animation: twinkle 1.5s infinite alternate; }
+        @keyframes twinkle { 0% { opacity: 0.5; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-[100px] font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Status Bar -->
+<header class="w-full top-0 sticky z-40 bg-surface flex justify-between items-center px-margin-mobile py-sm border-b-border-weight border-on-background shadow-[4px_4px_0px_0px_#1c1b1b]">
+<div class="flex items-center gap-sm bg-surface-container-lowest chibi-border rounded-xl p-2 w-full max-w-[200px]">
+<img class="w-12 h-12 rounded-full chibi-border object-cover" data-alt="A small pixel art avatar of a young anime-style boy with messy brown hair wearing a dark hoodie. 16-bit retro style on a white background with a thick black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMsZfdTjsF_VqDJhDip7QMCuiLJfwAxEwFM4x7_Ln6PrnxImwKqxCZ1vOvO9TibUY0I7jgYkqrDMMvx_A6zQmRSJZQivFbQz-j57QmDzJi921aQzkh_VPSOMzE50ljgKM2_JE0y3EwXeX_zp5FxnxzolcUbyEiTCztJmKcjwFCZeNO-VaZtG_dm4YSaL-0UwExUyYmUQU0ngwP48nwXVYbKencsHbbDhrevU1BZrWk_Z7yYgTTReE"/>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary tracking-tighter">FitWarrior</span>
+<span class="font-label-sm text-label-sm text-primary-container">LEVEL 20</span>
+<div class="w-full h-3 bg-surface-container-high rounded-full chibi-border mt-1 relative overflow-hidden">
+<div class="h-full bg-primary-container w-[95%]"></div>
+</div>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-2 bg-surface-container-lowest chibi-border rounded-xl px-3 py-1.5 chibi-shadow">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="monetization_on" data-weight="fill" style='font-variation-settings: "FILL" 1;'>monetization_on</span>
+<span class="font-label-md text-label-md">12,450</span>
+<span class="material-symbols-outlined text-primary-container" data-icon="add">add</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-lowest chibi-border rounded-xl px-3 py-1.5 chibi-shadow">
+<span class="material-symbols-outlined text-primary-container" data-icon="diamond" data-weight="fill" style='font-variation-settings: "FILL" 1;'>diamond</span>
+<span class="font-label-md text-label-md">350</span>
+<span class="material-symbols-outlined text-primary-container" data-icon="add">add</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="relative w-full max-w-5xl mx-auto mt-md px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row gap-md justify-between items-center h-full min-h-[60vh]">
+<!-- Background Decor -->
+<div class="absolute inset-0 z-[-1] opacity-20 pointer-events-none" data-alt="A pixel-art style background showing a cozy, well-lit indoor gym or bedroom with large windows showing a bright day outside. Dumbbells and a potted plant are visible in the 16-bit retro aesthetic with off-white walls." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA6vtLKVYEJMPiVp2dejIaFnIUkqysfbwNlRc9gS-SLt9BsKyuZ_Fz5ad_1Ww58cyN14NWKywROO9GCfgF3Xck0BtMTTrg_hW0YzBAOr0-EMwKOmwU9R_mRT8CGlDDbUnOEMk1aq3SqAqPFbWRJoSH56A3RPu-lPWQUlJI6DTUOss6sDggPucYEwpJzRD0urCFbS0qW9oOI2-j_tvBd_EfKBCPUsjdEvEDrwn1S-iYj4qF5ajk4lFQ"); background-size: cover; background-position: center center;'></div>
+<!-- Left Sidebar Navigation -->
+<div class="hidden md:flex flex-col gap-sm w-32 z-10">
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all">
+<span class="material-symbols-outlined text-secondary" data-icon="storefront" style="font-size: 32px;">storefront</span>
+<span class="font-label-sm text-label-sm mt-1">Shop</span>
+</button>
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all relative">
+<span class="absolute -top-2 -right-2 bg-secondary text-on-secondary rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold chibi-border">!</span>
+<span class="material-symbols-outlined text-primary" data-icon="group" style="font-size: 32px;">group</span>
+<span class="font-label-sm text-label-sm mt-1">Friends</span>
+</button>
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="emoji_events" style="font-size: 32px;">emoji_events</span>
+<span class="font-label-sm text-label-sm mt-1">Rank</span>
+</button>
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings" style="font-size: 32px;">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</button>
+</div>
+<!-- Center Stage -->
+<div class="relative flex-1 flex justify-center items-center w-full h-[600px]">
+<!-- Daily Reward Floating -->
+<div class="absolute top-0 right-0 md:hidden bg-surface-container-lowest chibi-border rounded-xl p-2 flex flex-col items-center justify-center chibi-shadow z-20">
+<span class="absolute -top-2 -right-2 bg-secondary text-on-secondary rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold chibi-border">!</span>
+<span class="material-symbols-outlined text-tertiary-container" data-icon="featured_seasonal_and_gifts">featured_seasonal_and_gifts</span>
+<span class="font-label-sm text-label-sm text-[10px] text-center mt-1">DAILY REWARD<br/><span class="text-secondary">Claim Now!</span></span>
+</div>
+<div class="relative w-full max-w-sm h-full flex justify-center items-end pb-8">
+<!-- Sparkles -->
+<span class="material-symbols-outlined text-tertiary-container absolute top-10 left-10 sparkle-anim" data-icon="sparkles" data-weight="fill" style='font-variation-settings: "FILL" 1;'>arrow_back_ios_new</span>
+<span class="material-symbols-outlined text-primary-container absolute top-1/4 right-10 sparkle-anim" data-icon="sparkles" data-weight="fill" style='font-variation-settings: "FILL" 1;'>arrow_back_ios_new</span>
+<span class="material-symbols-outlined text-tertiary-container absolute bottom-1/3 left-4 sparkle-anim" data-icon="sparkles" data-weight="fill" style='font-variation-settings: "FILL" 1;'>arrow_back_ios_new</span>
+<span class="material-symbols-outlined text-primary-container absolute top-1/2 right-1/4 sparkle-anim" data-icon="sparkles" data-weight="fill" style='font-variation-settings: "FILL" 1;'>arrow_back_ios_new</span>
+<!-- Placeholder for Character Image -->
+<div class="relative h-[500px] w-full flex justify-center items-end z-10">
+<img alt="Hero Character" class="object-contain h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZED7-WRKC1914LElCOIhacbcSAZx3sssY-z4CcusrvaXx8F-9aa_lYa5dt2YAoW6SJxrBLDYm31An-KccD9EZmO_U81QNd8ObWdcxqadZ9TMoyP_ruHfqcy8_9Z-jjDw7p8JGT1xoc0TCxJGuiSmE6DPurKCRwT8xT_624l0N-PJKNU0byvfE98ee0hvHV92g8OgCZioV5GiMVdwFfu0NbU3ZJueiuH-HpBdDFch1rVUwBobZuON9R9XXp6FZMsdy"/>
+<img alt="Pet Cat" class="absolute bottom-0 right-0 h-1/3 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW40__04bsk414VVKZenzYwKVe2JOvFFTVO59kBB8RJvDsxkdVLnmym-FfsMCYHZs3_AKyk6caCo45ezzsFFnr9kK9WtJEm8j5n4P8Knc69AZxKFUUw2wYiI8hPNsRB_d1vi3ARzfZZdfAEIgPuPBkk3ajt5h0MRHODhH3Fy6tczvzqMoEtISfMAW2s9yBNkl4-XdR4apm7i3x-mwCairmodV5Us6bpd7ZY5hq7HniRHkMS88DG7iP8xpug4lOuZfA"/>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Navigation -->
+<div class="hidden md:flex flex-col gap-sm w-32 z-10">
+<div class="bg-surface-container-lowest chibi-border rounded-xl p-2 flex flex-col items-center justify-center chibi-shadow mb-4">
+<span class="absolute -top-2 -right-2 bg-secondary text-on-secondary rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold chibi-border">!</span>
+<span class="material-symbols-outlined text-tertiary-container" data-icon="featured_seasonal_and_gifts" style="font-size: 24px;">featured_seasonal_and_gifts</span>
+<span class="font-label-sm text-label-sm text-[10px] text-center mt-1">DAILY REWARD<br/><span class="text-secondary">Claim Now!</span></span>
+</div>
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all">
+<span class="material-symbols-outlined text-primary-container" data-icon="smart_toy" style="font-size: 32px;">smart_toy</span>
+<span class="font-label-sm text-label-sm mt-1">AI Buddy</span>
+</button>
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="mood" style="font-size: 32px;">mood</span>
+<span class="font-label-sm text-label-sm mt-1 text-center">Mood Tracker</span>
+</button>
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all">
+<span class="material-symbols-outlined text-secondary-container" data-icon="local_fire_department" style="font-size: 32px;">local_fire_department</span>
+<span class="font-label-sm text-label-sm mt-1 text-center">Calories Tracker</span>
+</button>
+<button class="bg-surface-container-lowest chibi-border rounded-xl p-3 flex flex-col items-center justify-center chibi-shadow hover:-translate-y-1 hover:shadow-[4px_8px_0px_0px_#1c1b1b] transition-all">
+<span class="material-symbols-outlined text-primary-container" data-icon="share" style="font-size: 32px;">share</span>
+<span class="font-label-sm text-label-sm mt-1">Share</span>
+</button>
+</div>
+</main>
+<!-- Bottom Actions & Energy -->
+<section class="w-full max-w-md mx-auto px-margin-mobile flex flex-col gap-sm pb-xl mt-4">
+<!-- Energy Bar -->
+<div class="bg-surface-container-lowest chibi-border rounded-full p-2 flex items-center gap-3 chibi-shadow">
+<div class="bg-primary-container rounded-full w-10 h-10 flex justify-center items-center chibi-border">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="bolt" data-weight="fill" style='font-variation-settings: "FILL" 1;'>bolt</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-headline-md text-headline-md text-on-background uppercase">Energy</span>
+<span class="font-label-md text-label-md text-primary">100%</span>
+</div>
+<div class="w-full h-4 bg-surface-container-high rounded-full chibi-border relative overflow-hidden">
+<div class="h-full bg-primary-container w-full border-r-2 border-[#005442]"></div>
+</div>
+<span class="font-label-sm text-label-sm text-primary">100 / 100</span>
+</div>
+</div>
+<!-- Today's Quest Button -->
+<button class="w-full bg-primary-container chibi-border rounded-xl p-4 flex items-center justify-between chibi-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all active:translate-y-2 active:translate-x-2">
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-lowest rounded-lg p-2 chibi-border relative">
+<span class="material-symbols-outlined text-on-background" data-icon="assignment" style="font-size: 32px;">assignment</span>
+<span class="material-symbols-outlined text-tertiary-container absolute -bottom-2 -right-2 bg-surface rounded-full p-0.5 chibi-border" data-icon="star" data-weight="fill" style='font-variation-settings: "FILL" 1; font-size: 16px;'>star</span>
+</div>
+<div class="text-left flex flex-col">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-primary-container">TODAY'S QUEST</span>
+<span class="font-body-md text-body-md text-on-primary-container opacity-90 leading-tight">Complete quests and<br/>earn awesome rewards!</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-tertiary-container chibi-border rounded-lg px-4 py-2 font-headline-md text-headline-md text-on-tertiary-container shadow-[2px_2px_0px_0px_#1c1b1b]">
+                    START
+                </div>
+<span class="material-symbols-outlined text-on-primary-container" data-icon="chevron_right" style="font-size: 32px;">chevron_right</span>
+</div>
+</button>
+<!-- Rank Match Button -->
+<button class="w-full bg-secondary-container chibi-border rounded-xl p-4 flex items-center justify-between chibi-shadow hover:translate-y-1 hover:translate-x-1 hover:shadow-none transition-all active:translate-y-2 active:translate-x-2">
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-lowest rounded-lg p-2 chibi-border">
+<span class="material-symbols-outlined text-on-background" data-icon="swords" style="font-size: 32px;">swords</span>
+</div>
+<div class="text-left flex flex-col">
+<span class="font-headline-lg-mobile text-headline-lg-mobile text-on-secondary-container">RANK MATCH</span>
+<span class="font-body-md text-body-md text-on-secondary-container opacity-90 leading-tight">Compete with players<br/>and climb the ranks!</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<div class="bg-tertiary-container chibi-border rounded-lg px-4 py-2 font-headline-md text-headline-md text-on-tertiary-container shadow-[2px_2px_0px_0px_#1c1b1b]">
+                    START
+                </div>
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="chevron_right" style="font-size: 32px;">chevron_right</span>
+</div>
+</button>
+</section>
+<!-- BottomNavBar (canonical: Home / Quest / Social / Shop / Profile) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-margin-mobile pb-base pt-xs bg-surface dark:bg-surface-dim md:hidden">
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl border-2 border-on-background px-4 py-1 shadow-[2px_2px_0px_0px_#1c1b1b] active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-primary transition-colors active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="swords">swords</span>
+<span class="font-label-sm text-label-sm mt-1">Quest</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-primary transition-colors active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm mt-1">Social</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-primary transition-colors active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm mt-1">Shop</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:text-primary transition-colors active:translate-y-0.5 transition-all">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

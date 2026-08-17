@@ -1,0 +1,373 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FitQuest Avatar Creator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Space+Grotesk:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#006b55",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#50ddb7",
+                      "tertiary": "#765b00",
+                      "surface-tint": "#006b55",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#f6f3f2",
+                      "on-surface-variant": "#3c4a44",
+                      "secondary-fixed": "#ffdad8",
+                      "secondary": "#ae2f34",
+                      "tertiary-fixed": "#ffdf94",
+                      "secondary-fixed-dim": "#ffb3b0",
+                      "surface-bright": "#fcf9f8",
+                      "inverse-surface": "#313030",
+                      "primary-container": "#3ecfaa",
+                      "on-primary-fixed-variant": "#005140",
+                      "primary-fixed": "#71fad2",
+                      "inverse-on-surface": "#f3f0ef",
+                      "surface-dim": "#dcd9d9",
+                      "on-primary": "#ffffff",
+                      "on-secondary-container": "#6d0010",
+                      "on-secondary-fixed-variant": "#8c1520",
+                      "tertiary-container": "#e0b331",
+                      "error": "#ba1a1a",
+                      "on-surface": "#1c1b1b",
+                      "on-tertiary-container": "#5c4600",
+                      "surface": "#fcf9f8",
+                      "outline-variant": "#bbcac3",
+                      "on-error": "#ffffff",
+                      "on-primary-container": "#005442",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-background": "#1c1b1b",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e5e2e1",
+                      "secondary-container": "#ff6b6b",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "on-secondary-fixed": "#410006",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#50ddb7",
+                      "surface-container-high": "#eae7e7",
+                      "tertiary-fixed-dim": "#efc13e",
+                      "background": "#fcf9f8",
+                      "on-tertiary-fixed": "#241a00",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed": "#002018",
+                      "outline": "#6c7a74",
+                      "surface-container": "#f0eded"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "20px",
+                      "xs": "4px",
+                      "border-weight": "3px",
+                      "base": "8px",
+                      "xl": "64px",
+                      "sm": "12px",
+                      "lg": "40px",
+                      "margin-desktop": "48px",
+                      "md": "24px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Space Grotesk"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-xl": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Space Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .chibi-border {
+            border: 3px solid #1c1b1b;
+        }
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .chibi-shadow-sm {
+            box-shadow: 2px 2px 0px 0px #1c1b1b;
+        }
+        .chibi-active:active {
+            box-shadow: 0px 0px 0px 0px #1c1b1b;
+            transform: translate(4px, 4px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-margin-mobile h-16 bg-surface dark:bg-surface border-b-[3px] border-on-surface chibi-shadow">
+<button class="w-10 h-10 flex items-center justify-center chibi-border rounded bg-surface-container-lowest hover:translate-y-1 hover:translate-x-1 hover:shadow-none chibi-shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex flex-col items-center">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface uppercase tracking-tight">CREATE YOUR AVATAR</h1>
+<span class="font-label-sm text-[10px] text-primary uppercase font-bold tracking-widest flex items-center gap-1">
+<span class="text-primary-container text-[14px]">✦</span> BUILD YOUR LEGEND. BE YOU. <span class="text-primary-container text-[14px]">✦</span>
+</span>
+</div>
+<button class="w-10 h-10 flex flex-col items-center justify-center chibi-border rounded bg-surface-container-lowest hover:translate-y-1 hover:translate-x-1 hover:shadow-none chibi-shadow-sm transition-all active:scale-95">
+<span class="material-symbols-outlined text-primary text-[20px] leading-none" data-icon="upload">upload</span>
+<span class="font-label-sm text-[8px] font-bold uppercase leading-none mt-0.5">Export</span>
+</button>
+</header>
+<main class="pt-[88px] px-margin-mobile pb-xl max-w-2xl mx-auto flex flex-col gap-md">
+<!-- Character Canvas -->
+<section class="relative w-full aspect-square max-h-[400px] flex items-center justify-center rounded-xl overflow-hidden group">
+<!-- Decorative sparkles -->
+<div class="absolute inset-0 pointer-events-none z-10">
+<span class="absolute top-[20%] left-[15%] text-primary-container text-2xl animate-pulse">✦</span>
+<span class="absolute top-[40%] right-[10%] text-tertiary-container text-xl animate-pulse">✦</span>
+<span class="absolute bottom-[30%] left-[25%] text-tertiary-container text-lg animate-pulse">✦</span>
+</div>
+<!-- Avatar Image Placeholder -->
+<img class="w-full h-full object-contain z-0" data-alt="A chibi anime boy character standing confidently with hands on hips. He is shirtless, displaying a stylized muscular build, wearing black athletic shorts with mint green trim and black sneakers. Thick charcoal outlines (#1A1A1A), flat vibrant shading, off-white background, 16-bit RPG aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4yAVa0koIdv7Rp6zbMufD6s04N31u9L5Fxxw0Ygmr9dKrzZ9LZ1nBsdz-HzG7HXuJmzSOyzpj1DCmPD0ASVrQ1WLOwNgri6AAEwWsJ5BfU36s8muPnKj7mG9sb3-SbjHn6NVAxOcu4C5LGxltqljZwkhb1i2taWB5mVguQeIJ6puKUFz9Yqj0At0_ZT88oEWzmKAputzzlgtrH__H9_IudifmR5E8FK9Cmtofc2NYAShPSIecNDEKotpThd18CwzkV-PCOHW03y4e">
+<!-- Undo/Redo Buttons Floating -->
+<div class="absolute bottom-4 left-4 right-4 flex justify-between z-20">
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container-lowest chibi-border rounded-lg chibi-shadow-sm hover:bg-surface-variant transition-colors active:translate-y-0.5 active:translate-x-0.5 active:shadow-none">
+<span class="material-symbols-outlined text-primary" data-icon="undo">undo</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center bg-surface-container-lowest chibi-border rounded-lg chibi-shadow-sm hover:bg-surface-variant transition-colors active:translate-y-0.5 active:translate-x-0.5 active:shadow-none">
+<span class="material-symbols-outlined text-primary" data-icon="redo">redo</span>
+</button>
+</div>
+</section>
+<!-- Customization Categories (Tabs) -->
+<div class="bg-surface-container-lowest chibi-border rounded-xl overflow-hidden chibi-shadow-sm">
+<div class="flex overflow-x-auto hide-scrollbar divide-x-[3px] divide-on-surface">
+<!-- Body -->
+<button class="flex-1 min-w-[70px] py-3 flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm uppercase font-bold">Body</span>
+</button>
+<!-- Face (Active) -->
+<button class="flex-1 min-w-[70px] py-3 flex flex-col items-center justify-center gap-1 bg-surface relative text-primary font-bold">
+<span class="material-symbols-outlined" data-icon="face" data-weight="fill">face</span>
+<span class="font-label-sm text-label-sm uppercase font-bold">Face</span>
+<div class="absolute bottom-0 left-0 w-full h-[4px] bg-primary-container"></div>
+</button>
+<!-- Hair -->
+<button class="flex-1 min-w-[70px] py-3 flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="content_cut">content_cut</span>
+<span class="font-label-sm text-label-sm uppercase font-bold">Hair</span>
+</button>
+<!-- Clothes -->
+<button class="flex-1 min-w-[70px] py-3 flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="checkroom">checkroom</span>
+<span class="font-label-sm text-label-sm uppercase font-bold">Clothes</span>
+</button>
+<!-- Items -->
+<button class="flex-1 min-w-[70px] py-3 flex flex-col items-center justify-center gap-1 hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="backpack">backpack</span>
+<span class="font-label-sm text-[10px] uppercase font-bold leading-none mt-1">Accessories</span>
+</button>
+</div>
+</div>
+<!-- Variant Options Container -->
+<div class="bg-surface-container-lowest chibi-border rounded-xl p-4 chibi-shadow-sm flex flex-col gap-6">
+<!-- Eyes Section -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-center gap-2">
+<span class="text-primary-container font-bold text-sm">✦</span>
+<h3 class="font-label-md text-label-md uppercase text-on-surface">EYES</h3>
+<span class="text-primary-container font-bold text-sm">✦</span>
+</div>
+<div class="flex overflow-x-auto gap-3 pb-2 hide-scrollbar">
+<!-- Option 1 (Active) -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[3px] border-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Pixel art style brown anime eyes looking forward. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfgr7mjfpFTDgp5YdBxXh2rJEpFaszQYnVwm5dubb2lSYYtfbHG7Rh0iO_9-8_NXBJpMC_PNOKuHsMrNAdbz9oZ9CRQjCIpPJd7DMX0w6cQCpxaumzLHjIfKytWyMN3xRZKvLCjUGVSqrWmO784HjB4ypXpMRHkGpOrUM8ezTcowtX7aAD_ahWYhBqM0IXWe3IW5BaihksCG6NU2FrQX8fFyhYsuneGOfdtlQ99pF6ouXRoA7rozM">
+</button>
+<!-- Option 2 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Pixel art style black anime eyes looking slightly up. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCU21L-OPVLgmzNmZa73vyHGIh13k6vpkUznWgiQEBhMhTRGfRLwONei-zUz_dWd2mmRKOaOrSY-Gl-HHDeuV7Y9E-Os_viIfvKGVBA4JBzXqBdgzviW7mi2Fcbszx3fInek6K1XSGA3B7I8sLjj1uhribUvQxLTQSGuUOLyMsuIEKWgr9Mngr2Pjz-5lLatwLsj5fxsahv1H_bLDqOOZ1drq5sZQdFOjj7Xo3Fxptc1MoxK6dHegc">
+</button>
+<!-- Option 3 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Pixel art style green anime eyes looking confident. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJpNB2ubXgMgoBWIMpguC3Z2PJ9wHexbjLu_y0F2ialFs0ZKlg339HpdLiKjXcK_BPjsIDKenpbwTpa3sQcaS-7ujL1D62cEEioJ59BR3n3UgiiHqTb2EvQWKhc6rAIoIOAj9wBRVEX09xTRjZAZiYjkDb3cKhvAT2x6IubwPZ0smZ1orJPEoMnKzmJdSqVD1cbSvLP_zHtL6obwkMOli2dlCdsJOEeqm1sqLW55_JlaaDGJfO_xs">
+</button>
+<!-- Option 4 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Pixel art style blue anime eyes, wide and innocent. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARKdPRFq9K8AmUmE8FfsaaL5xfdURD9vxvqouo009dppi6E_A83UV3no92N49JGf9C3N9dUXmUJzmzDUzx2kzgifpbbIqyWpdpu-siOznlO23a88dj5mo6znHAxEl3FgWQitLSl821aR3g6zhAeCUgWXtU_Bjo0WbihVuRUXVqGM3suXMjXdYmkvdL3jaSWrkcIP3mD_fHM-Graqa6ydpacGOog22_XLzf7K4yFM7iMK1lpGAFINw">
+</button>
+<!-- Option 5 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-10 h-10 object-contain" data-alt="Pixel art style sharp narrow anime eyes, serious expression. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTqbToV26au1JOtC0HrFbVga6zjZUMAiWvjb1dVw9S9upMcY12NT6_TrCEzMT3ntQO9kdJWcUb2j7KD8obmhWDzjc5roRH7lJjQVDERC6F6Xl6ZyjKsuerat_i6j96K61W6jyc3uF5P7b5h3kzAMjfBJ9p_f6tcpYhe2RM7RoMph5xbKRqI3Be1Rj454kBz6uA3dAGxtlQ5KyF4GKCXgHmd1rJX5kWyG52oqwbfHN-Lm5ak2JFtgc">
+</button>
+</div>
+</div>
+<hr class="border-t-[2px] border-dashed border-outline-variant w-full">
+<!-- Mouth Section -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-center gap-2">
+<span class="text-primary-container font-bold text-sm">✦</span>
+<h3 class="font-label-md text-label-md uppercase text-on-surface">MOUTH</h3>
+<span class="text-primary-container font-bold text-sm">✦</span>
+</div>
+<div class="flex overflow-x-auto gap-3 pb-2 hide-scrollbar">
+<!-- Option 1 (Active) -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[3px] border-primary-container flex items-center justify-center overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="Pixel art style big open anime smile showing teeth. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzDenRHM_NS84-ipLz9Ss0RF5doMO4zcblxtlRYT0bdTFek-OZslb7Rm92Rv6mdia-8BuL7ZgHiqOc5PMqVEdTEa96FP0To24XN3JHgTox_iD7fB6R_1CTl6T2mdk18n1rsrn8_MFKbkrveatUXsiW0U87zV7r6RhxOKN3VE2s_kUj2GevqszQSpmzU8oFdZng18xp2hczF8a1SjyhxuX_aFSulqBX5kPoX6nMAzHd3YD4CmSV16Q">
+</button>
+<!-- Option 2 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="Pixel art style neutral small straight line mouth. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsltdsUZO-WSWzey0fFwv4UgGz5STupf2pTkK65wvFXQBrXutQYHYiGjl9p2PTFEZCZgmSFWpmsB-fDP4srgzIaLI6LoZK0leF4G5H1Q59fb-hXeYfhAtGQCnew1c-Cq_gFmuxD4FA71TEceq8ZBNBIHUrnc-QV6pqa9XpIYNrldXd0gQZINHR2O6KBscprNsm5lp73UxiU0OPRY3KVpNzWJSQJ7reQJSKalp2xqkFs2GnXdiZOfU">
+</button>
+<!-- Option 3 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="Pixel art style confident smirk showing teeth. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJUX30bFo4CDNfARq6Jc0VsX2mB_S5oQHebD4HkpK9zh1mWoZolgLZ58PuVOAu7BtEv-kh5d9eEgGOCdp-yDz67wBC4dpkWkYTwfoOptssFOlVf7ZddGVTHaNN6WsAJO92R-_D_aEmzTHIDjeMUrEVbqrkzGLIhp82ynTCvzgjEMPUw5gfNqy1prKsy_DhE_QzfOOfleharrO1XGFbJJNcsG-trNcZMIa_sC1yiQqYvzcEkNt8Zfs">
+</button>
+<!-- Option 4 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="Pixel art style open mouth yelling or laughing. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPLdK48m1mY1HTVDyYcQVzQwRrUIKpLAqPysNVj3Btm0Rn3eZZ64PhK2pLBeyS1Vblu95Izyozyh6FbKCWVUfJzqAl7J9CmPIOUtk4fAmXjcjdTmorJLKQ5jB1VmDYIyK8_k2z_ETLRtMQWmYaEQ8tEJ3O2NnQowsef-w4fjXVqCMAg7cTn1GsCfvp2xeVFxAGIsCAliQ7BQls2xXl2H6LEkL13hGZJX-cEC6ra5MO2OR5PzXdoFQ">
+</button>
+<!-- Option 5 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-8 h-8 object-contain" data-alt="Pixel art style small gentle smile. Off-white background, black outline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIWozJU_TcTo9um8DbGxcJTq1A9uj52ZxdPdjWY_facQnOIHjl_UEcshL6yO02F7eXRRQUGulROJz0ejNybymhsvYMfkPexQeCKOyUwOR_rkqSJEx9K-Lqu0TW6A577fuv4VmRCbidOHWUHSGjHGkmVhPkaAtLWfYj7dBbUQ5PbZjIdoxWLcg0Tl_nb6kUs5S6DSUZNtkgijzYrOkaWwGDhItuf0RfluxP7J9CEXDPUU7i0ZTl-kU">
+</button>
+</div>
+</div>
+<hr class="border-t-[2px] border-dashed border-outline-variant w-full">
+<!-- Pose Section (Added based on image reference to fill out the scrolling area) -->
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-center gap-2">
+<span class="text-primary-container font-bold text-sm">✦</span>
+<h3 class="font-label-md text-label-md uppercase text-on-surface">POSE</h3>
+<span class="text-primary-container font-bold text-sm">✦</span>
+</div>
+<div class="flex overflow-x-auto gap-3 pb-2 hide-scrollbar">
+<!-- Option 1 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-12 h-12 object-contain" data-alt="Miniature pixel art icon of chibi character standing with arms down. Off-white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl4WyZmooHTG3MDVppVJ31ynQRUKi-U0fd-oG3GtX104c0ojlUenEm3YKYWQqj3qM8Suo_k5J-j2TVnybvRKKOobp-5X6s7WvXmrlC0McfndVqt8k_grxkSf_9xaf0JNkJzEv02M94X64xrAwRUfcLYKS4OHJkRY9D5cw6UsOHFnZekMmHbd1Y010RYql74FCXPN5qAdMvTQx9oyVZ44lieodeAD6ygJ_ZC22Z8wDEoXQnbWtJNS8">
+</button>
+<!-- Option 2 (Active) -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[3px] border-primary-container flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-12 h-12 object-contain" data-alt="Miniature pixel art icon of chibi character flexing one arm. Off-white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIYRreoxy8eassEKqZu-2ogV7r-6x3yVbGHEQDdnxr2XrZ_5sBqwTLzeeqcnZEBY4mswnOnJ07PQ70nO9fjCuiWSQgs6goHEQ4jOee1cQtl6b1609pvPSHZS2O-ibk0btc7IqxUT4_Db9hFeiAo85NBSD81pVvZFcWQPimraMeFrIviG30pfyTvbPJM2whys_5ifrNXH6ZijCdmrvdlQrVHIXpN8ryK4Pujwgf0hbObg-5LFktLog">
+</button>
+<!-- Option 3 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-12 h-12 object-contain" data-alt="Miniature pixel art icon of chibi character standing with arms crossed. Off-white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwGJKFX7o9NS3c4ilvxcIYGQuvEmGSLAYpNeT9ZCwY4ebQbezxSbXTC1atQ61dUDNQ83BTZBnvUFdBjpHM0xTXnRVz68NdsJr-LxCaPbkBW48B4GXb9ZZmweQEZfy_gdq44xndw2GAlOgCWrJ2XiICfiVeSYCok1FLyIi4-RfY58d5GS5vSxFYnioXxCDNbfMIau8EVtMDHnolL1nd9H85OO2aIFdz5ljwPXGQbkrl9-Q6SCP-4Z0">
+</button>
+<!-- Option 4 -->
+<button class="w-16 h-16 shrink-0 rounded-xl bg-surface border-[2px] border-outline-variant flex items-center justify-center hover:border-on-surface transition-colors overflow-hidden">
+<img class="w-12 h-12 object-contain" data-alt="Miniature pixel art icon of chibi character giving a thumbs up. Off-white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2ufnvW6qxDts5cL5CKLRiFGdvPu00GewM27DbES4fw2vkVNxYfJly66FTm1p3OAn9cmi3YqYA2nFJz0I9pqhJQs2xNz6EsXp1J_4Lj-OYN2_kEf3Q8jsdkvV_Y8mYsPjwqX_ZO2vIBs6ZJ23DoLkTfPcCSBH5CQe-vnof4F20fv_bedRhx6ykkSz2eY6ng45C_a2afiIv2wxlsPo3kziSCGRRvtoZ6yFgwbGEM-Ko-bE1bKujHfA">
+</button>
+</div>
+</div>
+</div>
+<!-- Call to Action -->
+<button class="w-full bg-primary-container text-on-primary-container chibi-border rounded-xl py-4 flex items-center justify-center gap-2 chibi-shadow hover:bg-inverse-primary transition-colors chibi-active mt-4">
+<span class="font-headline-md text-headline-md font-bold uppercase tracking-wide">CONTINUE</span>
+<span class="material-symbols-outlined font-bold" data-icon="chevron_right">chevron_right</span>
+</button>
+<!-- Tip Card -->
+<div class="bg-surface-container-lowest border-[2px] border-outline-variant rounded-xl p-3 flex items-center gap-3">
+<div class="w-8 h-8 bg-tertiary-container rounded border-[2px] border-on-surface flex items-center justify-center shadow-[1px_1px_0px_0px_#1c1b1b]">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm" data-icon="star" data-weight="fill">star</span>
+</div>
+<p class="font-body-md text-sm text-on-surface-variant flex-1">
+                 Tip: You can change your avatar later in the <span class="text-primary font-bold cursor-pointer hover:underline">profile settings</span>!
+             </p>
+<span class="text-tertiary-container text-lg">✦</span>
+</div>
+</main>
+<style>
+        /* Utility to hide scrollbars but keep functionality for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+
+</body></html>

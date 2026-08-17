@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>AI Buddy Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdf94",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#eae7e7",
+                    "on-error-container": "#93000a",
+                    "on-secondary-container": "#6d0010",
+                    "on-primary-container": "#005442",
+                    "on-tertiary-fixed": "#241a00",
+                    "tertiary-container": "#e0b331",
+                    "surface-variant": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#594400",
+                    "on-background": "#1c1b1b",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#fcf9f8",
+                    "inverse-primary": "#50ddb7",
+                    "on-surface-variant": "#3c4a44",
+                    "on-error": "#ffffff",
+                    "primary-fixed": "#71fad2",
+                    "surface-container-low": "#f6f3f2",
+                    "surface": "#fcf9f8",
+                    "on-tertiary-container": "#5c4600",
+                    "secondary-fixed-dim": "#ffb3b0",
+                    "tertiary-fixed-dim": "#efc13e",
+                    "primary-fixed-dim": "#50ddb7",
+                    "secondary-container": "#ff6b6b",
+                    "on-secondary-fixed-variant": "#8c1520",
+                    "secondary": "#ae2f34",
+                    "outline-variant": "#bbcac3",
+                    "inverse-surface": "#313030",
+                    "outline": "#6c7a74",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#006b55",
+                    "on-secondary-fixed": "#410006",
+                    "primary-container": "#3ecfaa",
+                    "secondary-fixed": "#ffdad8",
+                    "tertiary": "#765b00",
+                    "surface-dim": "#dcd9d9",
+                    "surface-bright": "#fcf9f8",
+                    "on-primary-fixed": "#002018",
+                    "error": "#ba1a1a",
+                    "on-surface": "#1c1b1b",
+                    "surface-container": "#f0eded",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#005140",
+                    "primary": "#006b55",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0ef",
+                    "surface-container-highest": "#e5e2e1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "base": "8px",
+                    "lg": "40px",
+                    "margin-mobile": "20px",
+                    "xl": "64px",
+                    "border-weight": "3px",
+                    "margin-desktop": "48px"
+            },
+            "fontFamily": {
+                    "headline-md": [
+                            "Space Grotesk"
+                    ],
+                    "headline-lg": [
+                            "Space Grotesk"
+                    ],
+                    "headline-xl": [
+                            "Space Grotesk"
+                    ],
+                    "headline-lg-mobile": [
+                            "Space Grotesk"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-md": [
+                            "JetBrains Mono"
+                    ],
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-sm": [
+                            "JetBrains Mono"
+                    ]
+            },
+            "fontSize": {
+                    "headline-md": [
+                            "20px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "48px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "fontWeight": "700"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #fcf9f8; /* background */
+            color: #1c1b1b; /* on-background */
+        }
+        .chibi-border {
+            border: 3px solid #1c1b1b; /* on-background / charcoal outline */
+        }
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b; /* Hard shadow */
+        }
+        .chibi-shadow:active {
+            box-shadow: none;
+            transform: translate(4px, 4px);
+        }
+        /* Custom scrollbar for chat */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0eded; /* surface-container */
+            border-left: 3px solid #1c1b1b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1c1b1b;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden font-body-md">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-mobile py-base w-full sticky top-0 z-50 bg-surface text-primary border-b-border-weight border-on-background shadow-[4px_4px_0px_0px_#1c1b1b]">
+<button aria-label="Go Back" class="p-2 flex items-center justify-center hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-surface">AI Buddy</h1>
+<button aria-label="Settings" class="p-2 flex items-center justify-center hover:bg-surface-container-high transition-colors rounded-full">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<!-- Chat Thread (Canvas) -->
+<main class="flex-1 overflow-y-auto p-margin-mobile flex flex-col gap-md pb-24">
+<!-- AI Message 1 -->
+<div class="flex items-start gap-sm max-w-[85%]">
+<div class="w-10 h-10 rounded-full chibi-border overflow-hidden bg-primary-container shrink-0 flex items-center justify-center">
+<img alt="Chibi AI Avatar" class="w-full h-full object-cover" data-alt="A pixel-art style chibi character avatar, male, brown spiky hair, wearing a black and mint green athletic hoodie and shorts. He looks energetic and happy. The style is reminiscent of 16-bit RPG portraits." src="https://lh3.googleusercontent.com/aida/AP1WRLtUIUWlV3-o55zqjEmUlr0CTgnph90JlOUaECicX_WNxafLb9JX6kiinI80XS4ty2nyUdRijvfqZhr4QWCNI98HafovtcGoRVSIfvSS0gEwHQVFmRXe4Sw-NNXfF4-SSwkh9CwZdQlDP5n6yuBmaAniwxduJxlL0V5ZGEcXqOMs4RawY9Qetvl8Jz6ZNpcJKJB-KPFh79uUUm0kbalNlPDX--IaC6RkpOSjgF30iDXBjRKJvQl60NuRgg">
+</div>
+<div class="bg-surface-container-lowest chibi-border rounded-xl rounded-tl-none p-sm flex flex-col gap-xs">
+<p class="font-body-md text-on-surface">Hey! Ready to crush today's leg quest? I've set up a routine that'll boost your STR stat!</p>
+</div>
+</div>
+<!-- User Message 1 -->
+<div class="flex items-start gap-sm self-end max-w-[85%] flex-row-reverse">
+<div class="bg-primary chibi-border rounded-xl rounded-tr-none p-sm flex flex-col gap-xs">
+<p class="font-body-md text-on-primary">Let's go! What's the plan?</p>
+</div>
+</div>
+<!-- AI Message 2 (Quest Details) -->
+<div class="flex items-start gap-sm max-w-[85%]">
+<div class="w-10 h-10 rounded-full chibi-border overflow-hidden bg-primary-container shrink-0 flex items-center justify-center">
+<img alt="Chibi AI Avatar" class="w-full h-full object-cover" data-alt="A pixel-art style chibi character avatar, male, brown spiky hair, wearing a black and mint green athletic hoodie and shorts. He looks energetic and happy. The style is reminiscent of 16-bit RPG portraits." src="https://lh3.googleusercontent.com/aida/AP1WRLtUIUWlV3-o55zqjEmUlr0CTgnph90JlOUaECicX_WNxafLb9JX6kiinI80XS4ty2nyUdRijvfqZhr4QWCNI98HafovtcGoRVSIfvSS0gEwHQVFmRXe4Sw-NNXfF4-SSwkh9CwZdQlDP5n6yuBmaAniwxduJxlL0V5ZGEcXqOMs4RawY9Qetvl8Jz6ZNpcJKJB-KPFh79uUUm0kbalNlPDX--IaC6RkpOSjgF30iDXBjRKJvQl60NuRgg">
+</div>
+<div class="bg-surface-container-lowest chibi-border rounded-xl rounded-tl-none p-sm flex flex-col gap-sm">
+<p class="font-body-md text-on-surface">Here is your current active quest details:</p>
+<div class="bg-surface-container chibi-border p-sm rounded-lg">
+<h3 class="font-label-md text-label-md text-on-surface mb-2">SQUAT MASTERY LVL 2</h3>
+<ul class="font-body-md text-on-surface-variant space-y-1">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span>
+                            3 Sets of 10 Reps
+                        </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">check_box_outline_blank</span>
+                            Rest 60s between sets
+                        </li>
+</ul>
+</div>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim mt-1">Reward: +50 XP</p>
+</div>
+</div>
+<!-- User Message 2 -->
+<div class="flex items-start gap-sm self-end max-w-[85%] flex-row-reverse">
+<div class="bg-primary chibi-border rounded-xl rounded-tr-none p-sm flex flex-col gap-xs">
+<p class="font-body-md text-on-primary">Got it. Starting my warmup now.</p>
+</div>
+</div>
+</main>
+<!-- Bottom Input Area -->
+<div class="bg-surface border-t-border-weight border-on-background p-sm shrink-0 w-full">
+<div class="flex items-center gap-sm">
+<div class="flex-1 bg-surface-container-lowest chibi-border rounded-xl flex items-center px-sm py-xs focus-within:border-primary focus-within:shadow-[0_0_8px_rgba(62,207,170,0.5)] transition-all">
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-md text-on-surface placeholder:text-on-surface-variant/50 h-10" placeholder="Type a message..." type="text">
+</div>
+<button class="bg-secondary-container chibi-border chibi-shadow rounded-xl w-12 h-12 flex items-center justify-center shrink-0 transition-all text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitQuest - Workout Summary</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Hanken+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=JetBrains+Mono:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#fcf9f8",
+                        "inverse-primary": "#50ddb7",
+                        "surface-variant": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "outline": "#6c7a74",
+                        "surface": "#fcf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-tint": "#006b55",
+                        "on-secondary-container": "#6d0010",
+                        "inverse-surface": "#313030",
+                        "surface-container-low": "#f6f3f2",
+                        "outline-variant": "#bbcac3",
+                        "tertiary": "#765b00",
+                        "on-surface": "#1c1b1b",
+                        "primary-fixed-dim": "#50ddb7",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e5e2e1",
+                        "secondary-fixed": "#ffdad8",
+                        "on-tertiary-container": "#5c4600",
+                        "tertiary-fixed-dim": "#efc13e",
+                        "on-secondary-fixed": "#410006",
+                        "error-container": "#ffdad6",
+                        "primary-fixed": "#71fad2",
+                        "tertiary-container": "#e0b331",
+                        "on-secondary-fixed-variant": "#8c1520",
+                        "on-primary-fixed-variant": "#005140",
+                        "on-error": "#ffffff",
+                        "secondary-container": "#ff6b6b",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f0eded",
+                        "on-primary-fixed": "#002018",
+                        "on-primary-container": "#005442",
+                        "tertiary-fixed": "#ffdf94",
+                        "surface-dim": "#dcd9d9",
+                        "on-background": "#1c1b1b",
+                        "on-surface-variant": "#3c4a44",
+                        "secondary": "#ae2f34",
+                        "inverse-on-surface": "#f3f0ef",
+                        "surface-container-high": "#eae7e7",
+                        "secondary-fixed-dim": "#ffb3b0",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#3ecfaa",
+                        "background": "#fcf9f8",
+                        "primary": "#006b55",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "border-weight": "3px",
+                        "margin-desktop": "48px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "md": "24px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .chibi-border {
+            border: 3px solid #1c1b1b;
+        }
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .blob-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center justify-center gap-6 p-4 antialiased">
+<!-- Header (outside the shareable card so it isn't captured when exporting/sharing the image) -->
+<div class="w-full max-w-sm flex items-center justify-between">
+<button aria-label="Go Back" class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-container-lowest chibi-border chibi-shadow active:translate-y-1 active:translate-x-1 active:shadow-none transition-all" onclick="history.back()">
+<span class="material-symbols-outlined text-on-background">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-on-background uppercase tracking-tight">Workout Summary</h1>
+<div class="w-10 h-10"></div>
+</div>
+<!-- The Shareable Card -->
+<div class="bg-surface-container-lowest w-full max-w-sm rounded-xl chibi-border chibi-shadow relative overflow-hidden flex flex-col mx-auto h-[700px]" id="achievement-card">
+<!-- Top Section: Watermark & Header -->
+<div class="p-6 relative z-10 flex justify-between items-start">
+<div class="w-24 h-12">
+<img alt="FitQuest Logo" class="w-full h-full object-contain mix-blend-multiply opacity-80" data-alt="Pixel art text logo that says FIT QUEST with a dumbbell above it. Mint green and coral red letters on a slightly off-white background." src="https://lh3.googleusercontent.com/aida/AP1WRLtYaE86N5RP92BBlsXFW_xQXCyHdlHIZmvRkEyhoOYlvU_6y3jZj1rT6TqYoprcVuwMPJ8Jk6SOxTc5R9dcArWPHhf_3xVaV3aza4gvp9vee1DBDq8eV8UaFl4FZAJe9ujuacThMLa0eeze6ZAv2JIN5rcJG3Qa_G_U89Ul-BzPJ7VopeX0PumZX-gKyULhdHrMTXUVyPOUoTSRo1Ys9y9ZWBwhXWC8yrTjWJFcTApLBpnh_lpU9pFZhA"/>
+</div>
+<!-- Optional Share Button (Hidden when sharing) -->
+<button aria-label="Share" class="bg-surface-bright chibi-border chibi-shadow rounded-full p-2 hover:translate-y-[2px] hover:translate-x-[2px] hover:shadow-none transition-all">
+<span class="material-symbols-outlined text-on-background">ios_share</span>
+</button>
+</div>
+<!-- Central Stats Section -->
+<div class="px-8 mt-4 relative z-10 flex-1">
+<div class="space-y-6">
+<!-- Stat Item 1 -->
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Steps</h3>
+<p class="font-headline-xl text-headline-xl text-on-background">1,400</p>
+</div>
+<!-- Stat Item 2 -->
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Distance</h3>
+<p class="font-headline-lg text-headline-lg text-on-background">3 km</p>
+</div>
+<!-- Stat Item 3 -->
+<div>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-1">Time</h3>
+<p class="font-headline-md text-headline-md text-on-background">15.03 mins</p>
+</div>
+</div>
+</div>
+<!-- Decorative Background Blob -->
+<div class="absolute top-[20%] -right-10 w-72 h-[450px] bg-primary-container chibi-border blob-shape opacity-90 rotate-[-10deg] z-0 pointer-events-none"></div>
+<!-- Bottom Section: Characters -->
+<div class="relative h-64 w-full mt-auto flex items-end justify-center pb-4 z-10">
+<!-- Chibi Hero -->
+<div class="absolute bottom-4 right-[120px] w-48 h-48">
+<img alt="Chibi Hero" class="w-full h-full object-contain filter drop-shadow-[2px_2px_0px_#1c1b1b]" data-alt="Pixel art chibi style anime boy character standing confidently. He has brown spiky hair, wearing a black hoodie with green accents, black shorts, and black sneakers." src="https://lh3.googleusercontent.com/aida/AP1WRLtUIUWlV3-o55zqjEmUlr0CTgnph90JlOUaECicX_WNxafLb9JX6kiinI80XS4ty2nyUdRijvfqZhr4QWCNI98HafovtcGoRVSIfvSS0gEwHQVFmRXe4Sw-NNXfF4-SSwkh9CwZdQlDP5n6yuBmaAniwxduJxlL0V5ZGEcXqOMs4RawY9Qetvl8Jz6ZNpcJKJB-KPFh79uUUm0kbalNlPDX--IaC6RkpOSjgF30iDXBjRKJvQl60NuRgg"/>
+</div>
+<!-- Tuxedo Cat Pet -->
+<div class="absolute bottom-4 right-8 w-24 h-24">
+<img alt="Tuxedo Cat Pet" class="w-full h-full object-contain filter drop-shadow-[2px_2px_0px_#1c1b1b]" data-alt="Pixel art chibi tuxedo cat sitting. Black and white fur, big yellow eyes, wearing a mint green collar with a golden bell." src="https://lh3.googleusercontent.com/aida/AP1WRLsrBPJLtoCh9PY2UxlGF6u-qSCqpg-mAmzST41mE1prdljHtzyYut9ptqvyi5v2t_CLFvb9VBn4knqRMVvTYoUloy1XMptli6JwW1zyyVmhxhBgtTuK6FGSxadApgT3b0b339QKzpTXQVaFzj147M_U8AmXT64b5Xzp51fo6cCaQ1y2vQgEO8obmWYx4Hw0ZIzfB7_hyvO_53Mb1LccC7NRvHkMBWnlUHJ4rjwaI46qe5y7HXLQrbLD"/>
+</div>
+</div>
+</div>
+<!-- Primary CTA: returns to the main hub, completing the post-workout flow -->
+<button class="w-full max-w-sm flex items-center justify-center gap-2 bg-primary-container text-on-primary-container chibi-border chibi-shadow rounded-xl py-3 font-label-md text-label-md uppercase tracking-wider active:translate-y-1 active:translate-x-1 active:shadow-none transition-all">
+<span>Done</span>
+<span class="material-symbols-outlined">check_circle</span>
+</button>
+</body></html>

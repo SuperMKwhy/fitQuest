@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FITQUEST - Health Log</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#6c7a74",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-container": "#5c4600",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#50ddb7",
+                      "tertiary-fixed": "#ffdf94",
+                      "on-secondary-fixed-variant": "#8c1520",
+                      "inverse-on-surface": "#f3f0ef",
+                      "on-primary-container": "#005442",
+                      "surface-tint": "#006b55",
+                      "surface-container-high": "#eae7e7",
+                      "primary-fixed": "#71fad2",
+                      "on-secondary": "#ffffff",
+                      "outline-variant": "#bbcac3",
+                      "primary-container": "#3ecfaa",
+                      "on-background": "#1c1b1b",
+                      "background": "#fcf9f8",
+                      "surface-container-low": "#f6f3f2",
+                      "secondary-container": "#ff6b6b",
+                      "surface-container": "#f0eded",
+                      "on-primary-fixed-variant": "#005140",
+                      "inverse-surface": "#313030",
+                      "on-tertiary-fixed": "#241a00",
+                      "secondary-fixed-dim": "#ffb3b0",
+                      "on-surface-variant": "#3c4a44",
+                      "secondary": "#ae2f34",
+                      "error": "#ba1a1a",
+                      "secondary-fixed": "#ffdad8",
+                      "tertiary-container": "#e0b331",
+                      "surface-variant": "#e5e2e1",
+                      "tertiary-fixed-dim": "#efc13e",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#50ddb7",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "on-primary-fixed": "#002018",
+                      "surface-bright": "#fcf9f8",
+                      "tertiary": "#765b00",
+                      "primary": "#006b55",
+                      "on-surface": "#1c1b1b",
+                      "surface-container-highest": "#e5e2e1",
+                      "on-secondary-container": "#6d0010",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#410006",
+                      "surface-dim": "#dcd9d9",
+                      "surface": "#fcf9f8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "64px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "base": "8px",
+                      "margin-mobile": "20px",
+                      "md": "24px",
+                      "margin-desktop": "48px",
+                      "border-weight": "3px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Space Grotesk"
+                      ],
+                      "headline-xl": [
+                              "Space Grotesk"
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #fcf9f8;
+            color: #1c1b1b;
+            min-height: max(884px, 100dvh);
+        }
+
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+
+        .chibi-border {
+            border: 3px solid #1c1b1b;
+        }
+
+        .chibi-active:active {
+            box-shadow: 0px 0px 0px 0px #1c1b1b;
+            transform: translate(4px, 4px);
+        }
+
+        .stat-bar-stripes {
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.2) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+        
+        /* Pixel art specific styling */
+        .pixelated {
+            image-rendering: pixelated;
+        }
+        
+        /* Hide scrollbar for cleaner look on mobile */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+
+        /* Speech Bubble styles */
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 20px;
+            border-width: 10px 10px 0;
+            border-style: solid;
+            border-color: #ffffff transparent transparent transparent;
+            z-index: 10;
+        }
+        .speech-bubble::before {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            right: 18px;
+            border-width: 12px 12px 0;
+            border-style: solid;
+            border-color: #1c1b1b transparent transparent transparent;
+            z-index: 9;
+        }
+        @keyframes sheen {
+            0% { transform: translateX(-100%) skewX(-12deg); }
+            100% { transform: translateX(200%) skewX(-12deg); }
+        }
+    </style>
+</head>
+<body class="bg-[#fcf9f8] font-body-md">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-margin-mobile py-sm w-full bg-background border-b-[3px] border-on-background sticky top-0 z-50">
+<div class="flex items-center gap-sm cursor-pointer hover:opacity-80 active:translate-y-1 active:translate-x-1 transition-all" onclick="history.back()">
+<span class="material-symbols-outlined text-primary" data-icon="arrow_back">arrow_back</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-primary tracking-tight uppercase">HEALTH LOG</h1>
+<div class="flex items-center gap-sm cursor-pointer hover:opacity-80 active:translate-y-1 active:translate-x-1 transition-all">
+<span class="material-symbols-outlined text-primary" data-icon="settings">settings</span>
+</div>
+</header>
+<main class="px-margin-mobile py-md flex flex-col gap-md max-w-md mx-auto pb-32">
+<!-- Action Row -->
+<div class="flex justify-between items-center">
+<button class="flex items-center gap-2 bg-primary-container chibi-border chibi-shadow rounded-xl px-4 py-3 chibi-active transition-all">
+<span class="material-symbols-outlined text-on-primary-container" data-icon="photo_camera">photo_camera</span>
+<span class="font-label-md text-label-md text-on-primary-container">LOG YOUR FOOD</span>
+</button>
+<button class="flex items-center justify-center bg-surface-container-high chibi-border chibi-shadow rounded-full w-12 h-12 chibi-active transition-all">
+<span class="material-symbols-outlined text-on-surface" data-icon="search">search</span>
+</button>
+</div>
+<!-- Date Navigation & Progress Ring -->
+<div class="bg-surface-container-lowest chibi-border rounded-xl p-md flex flex-col items-center gap-md">
+<div class="flex justify-between w-full items-center">
+<button class="material-symbols-outlined hover:text-primary transition-colors" data-icon="chevron_left">chevron_left</button>
+<span class="font-headline-md text-headline-md">Today</span>
+<button class="material-symbols-outlined hover:text-primary transition-colors" data-icon="chevron_right">chevron_right</button>
+</div>
+<!-- SVG Progress Ring simulating retro pixel look slightly -->
+<div class="relative w-48 h-48 flex items-center justify-center">
+<!-- Background Ring -->
+<svg class="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="#e5e2e1" stroke-linecap="butt" stroke-width="10"></circle>
+<!-- Progress Ring -->
+<circle class="transition-all duration-1000 ease-out" cx="50" cy="50" fill="none" r="45" stroke="#3ecfaa" stroke-dasharray="283" stroke-dashoffset="56.6" stroke-linecap="butt" stroke-width="10"></circle>
+<!-- Pixelation attempt with dasharray -->
+<circle cx="50" cy="50" fill="none" r="45" stroke="#1c1b1b" stroke-dasharray="2 4" stroke-linecap="butt" stroke-width="3"></circle>
+<circle cx="50" cy="50" fill="none" r="50" stroke="#1c1b1b" stroke-width="3"></circle>
+<circle cx="50" cy="50" fill="none" r="40" stroke="#1c1b1b" stroke-width="3"></circle>
+</svg>
+<div class="flex flex-col items-center z-10 bg-[#fcf9f8] p-2 rounded-lg border-2 border-on-background">
+<span class="font-headline-lg text-headline-lg text-on-background leading-none">1600</span>
+<span class="font-label-md text-label-md text-outline">/ 2000</span>
+<span class="font-label-sm text-label-sm text-primary mt-1">kcal</span>
+</div>
+</div>
+<div class="w-full flex justify-between px-4 mt-2">
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-outline">PROTEIN</span>
+<span class="font-label-md text-label-md text-secondary-container">80g</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-outline">CARBS</span>
+<span class="font-label-md text-label-md text-tertiary-container">120g</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="font-label-sm text-label-sm text-outline">FAT</span>
+<span class="font-label-md text-label-md text-surface-tint">45g</span>
+</div>
+</div>
+</div>
+<!-- Meals List -->
+<div class="flex flex-col gap-sm">
+<!-- Breakfast Section -->
+<div>
+<div class="flex justify-between items-center mb-2 px-2">
+<h2 class="font-headline-md text-headline-md">Breakfast</h2>
+<span class="font-label-md text-label-md text-outline">440 kcal</span>
+</div>
+<div class="bg-surface-container-lowest chibi-border rounded-xl flex flex-col divide-y-3 divide-on-background">
+<!-- Item 1 -->
+<div class="flex items-center gap-sm p-3 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-secondary-fixed flex items-center justify-center rounded border-2 border-on-background pixelated">
+<span class="material-symbols-outlined text-on-surface" data-icon="egg_alt">egg_alt</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-background">Fried Egg</h3>
+<p class="font-body-md text-body-md text-outline">2 pcs</p>
+</div>
+<span class="font-label-md text-label-md text-on-background">140 kcal</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-sm p-3 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-tertiary-fixed flex items-center justify-center rounded border-2 border-on-background pixelated">
+<span class="material-symbols-outlined text-on-surface" data-icon="bakery_dining">bakery_dining</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-background">Toast</h3>
+<p class="font-body-md text-body-md text-outline">2 slices</p>
+</div>
+<span class="font-label-md text-label-md text-on-background">160 kcal</span>
+</div>
+</div>
+<button class="mt-2 w-full flex justify-center items-center gap-2 py-2 border-2 border-dashed border-outline rounded-xl text-outline hover:bg-surface-variant transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined" data-icon="add">add</span> ADD FOOD
+            </button>
+</div>
+<!-- Lunch Section -->
+<div class="mt-4">
+<div class="flex justify-between items-center mb-2 px-2">
+<h2 class="font-headline-md text-headline-md">Lunch</h2>
+<span class="font-label-md text-label-md text-outline">440 kcal</span>
+</div>
+<div class="bg-surface-container-lowest chibi-border rounded-xl flex flex-col divide-y-3 divide-on-background">
+<!-- Item 1 -->
+<div class="flex items-center gap-sm p-3 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-secondary-fixed flex items-center justify-center rounded border-2 border-on-background pixelated">
+<span class="material-symbols-outlined text-on-surface" data-icon="restaurant">restaurant</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-background">Holy Basil Pork</h3>
+<p class="font-body-md text-body-md text-outline">1 plate</p>
+</div>
+<span class="font-label-md text-label-md text-on-background">300 kcal</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-sm p-3 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="w-12 h-12 bg-primary-container flex items-center justify-center rounded border-2 border-on-background pixelated">
+<span class="material-symbols-outlined text-on-surface" data-icon="local_drink">local_drink</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-background">Soda</h3>
+<p class="font-body-md text-body-md text-outline">1 can</p>
+</div>
+<span class="font-label-md text-label-md text-on-background">140 kcal</span>
+</div>
+</div>
+<button class="mt-2 w-full flex justify-center items-center gap-2 py-2 border-2 border-dashed border-outline rounded-xl text-outline hover:bg-surface-variant transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined" data-icon="add">add</span> ADD FOOD
+            </button>
+</div>
+</div>
+<!-- Water Tracker Section -->
+<div class="mt-8 flex flex-col gap-sm">
+<!-- Header Section -->
+<div class="mb-md text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background mb-xs">Today's Water Intake</h2>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Goal: 8 Cups</p>
+</div>
+<!-- Progress Bar -->
+<div class="w-full border-[3px] border-on-background rounded-full h-6 bg-surface-container-high mb-md overflow-hidden chibi-shadow">
+<div class="h-full bg-primary-container border-r-[3px] border-on-background flex items-center justify-end pr-2 relative overflow-hidden" style="width: 62.5%;">
+<!-- Sheen effect -->
+<div class="absolute inset-0 bg-white opacity-20 transform -skew-x-12 translate-x-[-100%] animate-[sheen_2s_infinite]"></div>
+<span class="font-label-sm text-label-sm text-on-primary-container">5/8</span>
+</div>
+</div>
+<!-- Water Cup Grid -->
+<div class="grid grid-cols-4 gap-sm mb-lg">
+<!-- Filled Cups (5) -->
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-100 transition-transform duration-500"></div>
+<span class="material-symbols-outlined text-on-primary-container z-10 text-3xl" data-icon="water_drop" data-weight="fill" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</button>
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-100 transition-transform duration-500"></div>
+<span class="material-symbols-outlined text-on-primary-container z-10 text-3xl" data-icon="water_drop" data-weight="fill" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</button>
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-100 transition-transform duration-500"></div>
+<span class="material-symbols-outlined text-on-primary-container z-10 text-3xl" data-icon="water_drop" data-weight="fill" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</button>
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-100 transition-transform duration-500"></div>
+<span class="material-symbols-outlined text-on-primary-container z-10 text-3xl" data-icon="water_drop" data-weight="fill" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</button>
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-100 transition-transform duration-500"></div>
+<span class="material-symbols-outlined text-on-primary-container z-10 text-3xl" data-icon="water_drop" data-weight="fill" style="font-variation-settings: 'FILL' 1;">water_drop</span>
+</button>
+<!-- Empty Cups (3) -->
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group hover:bg-surface-container-high">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-0 transition-transform duration-500 group-hover:scale-y-10"></div>
+<span class="material-symbols-outlined text-outline z-10 text-3xl" data-icon="water_drop">water_drop</span>
+</button>
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group hover:bg-surface-container-high">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-0 transition-transform duration-500 group-hover:scale-y-10"></div>
+<span class="material-symbols-outlined text-outline z-10 text-3xl" data-icon="water_drop">water_drop</span>
+</button>
+<button class="aspect-square bg-surface-container-lowest chibi-border rounded-xl flex items-center justify-center chibi-shadow transition-all relative overflow-hidden group hover:bg-surface-container-high">
+<div class="absolute inset-0 bg-primary-container transform origin-bottom scale-y-0 transition-transform duration-500 group-hover:scale-y-10"></div>
+<span class="material-symbols-outlined text-outline z-10 text-3xl" data-icon="water_drop">water_drop</span>
+</button>
+</div>
+<!-- Mascot & Motivation -->
+<div class="mt-auto flex flex-col items-end w-full relative">
+<div class="speech-bubble bg-surface-container-lowest chibi-border rounded-xl p-3 mb-4 max-w-[200px] chibi-shadow relative">
+<p class="font-label-md text-label-md text-on-background">Stay Hydrated! You're doing great!</p>
+</div>
+<div class="w-24 h-24 rounded-full border-[3px] border-on-background bg-secondary-container chibi-shadow overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A detailed pixel art or chibi style avatar of an energetic, cute anime cat wearing a tiny sweatband. The style is reminiscent of 16-bit RPGs with thick charcoal outlines. The background is a flat, vibrant coral color. The mood is encouraging and playful, fitting a gamified fitness app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqW0ZrKpzwLMO6tslqInjLvUeKRN4uPLbRC5c1R7uNFyuiNW-gGitE9iILjtnBCoT4FZGpammYGcrQsjL1dytsiNtzO-7xKpJMU6qrdo9onS7AU7DSOaTZBe8pIiNc6woY_RTo0Ap_SnmZLCy8DTd970nYm_o5iCRf2uh9N_vDtAyIFH2v3rd5HWjl2pmlLckUMyukvr5qcivg4o15xQN1ZTUMeMdHHHG0cvqUMZQnqgosSGeCmXs">
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (canonical: Home / Quest / Social / Shop / Profile) -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-xs pb-safe pt-2 bg-background border-t-[3px] border-on-background">
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors active:translate-y-1 active:translate-x-1 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<!-- Active Tab -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl border-[3px] border-on-background shadow-[4px_4px_0px_0px_#1c1b1b] py-1 px-3 hover:bg-surface-container-high transition-colors active:translate-y-1 active:translate-x-1 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="swords">swords</span>
+<span class="font-label-sm text-label-sm font-bold">Quest</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors active:translate-y-1 active:translate-x-1 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm">Social</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors active:translate-y-1 active:translate-x-1 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+<span class="font-label-sm text-label-sm">Shop</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors active:translate-y-1 active:translate-x-1 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+</body></html>

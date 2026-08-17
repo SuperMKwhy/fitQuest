@@ -1,0 +1,376 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FitQuest Onboarding - Step 1</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bbcac3",
+                      "primary-fixed-dim": "#50ddb7",
+                      "inverse-primary": "#50ddb7",
+                      "background": "#fcf9f8",
+                      "on-primary-fixed-variant": "#005140",
+                      "surface-variant": "#e5e2e1",
+                      "surface-container-lowest": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-surface": "#1c1b1b",
+                      "error": "#ba1a1a",
+                      "secondary": "#ae2f34",
+                      "on-secondary-container": "#6d0010",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#8c1520",
+                      "secondary-fixed-dim": "#ffb3b0",
+                      "secondary-fixed": "#ffdad8",
+                      "inverse-on-surface": "#f3f0ef",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#e5e2e1",
+                      "surface-bright": "#fcf9f8",
+                      "on-tertiary-fixed": "#241a00",
+                      "outline": "#6c7a74",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-container": "#5c4600",
+                      "on-secondary-fixed": "#410006",
+                      "on-surface-variant": "#3c4a44",
+                      "surface-tint": "#006b55",
+                      "secondary-container": "#ff6b6b",
+                      "tertiary-fixed-dim": "#efc13e",
+                      "surface-container-low": "#f6f3f2",
+                      "tertiary": "#765b00",
+                      "on-primary-fixed": "#002018",
+                      "primary-fixed": "#71fad2",
+                      "tertiary-fixed": "#ffdf94",
+                      "inverse-surface": "#313030",
+                      "surface": "#fcf9f8",
+                      "surface-container": "#f0eded",
+                      "primary-container": "#3ecfaa",
+                      "tertiary-container": "#e0b331",
+                      "on-background": "#1c1b1b",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "surface-dim": "#dcd9d9",
+                      "on-primary-container": "#005442",
+                      "primary": "#006b55",
+                      "on-primary": "#ffffff",
+                      "surface-container-high": "#eae7e7"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "48px",
+                      "lg": "40px",
+                      "sm": "12px",
+                      "base": "8px",
+                      "md": "24px",
+                      "xl": "64px",
+                      "margin-mobile": "20px",
+                      "xs": "4px",
+                      "border-weight": "3px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": [
+                              "Space Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Space Grotesk"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-xl": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        /* Brutalist / Tactile Retro specific styles */
+        .chibi-border {
+            border: 3px solid #1c1b1b;
+        }
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .chibi-active {
+            border: 3px solid #1c1b1b;
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+            transition: all 0.1s ease-in-out;
+        }
+        .chibi-active:active, .chibi-active.active {
+            box-shadow: 0px 0px 0px 0px #1c1b1b;
+            transform: translate(4px, 4px);
+        }
+        .chibi-card {
+            border: 3px solid #1c1b1b;
+            background-color: #ffffff;
+        }
+        .pixel-sparkle-primary { color: #50ddb7; }
+        .pixel-sparkle-tertiary { color: #e0b331; }
+        .pixel-sparkle-secondary { color: #ff6b6b; }
+        
+        /* Custom radio button styling */
+        input[type="radio"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #1c1b1b;
+            border-radius: 4px; /* Square with slight rounding */
+            background-color: white;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+        input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background-color: #50ddb7; /* Mint fill */
+            border-radius: 2px;
+        }
+        
+        /* Progress bar steps */
+        .step-node {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid #1c1b1b;
+            background-color: #ffffff;
+            position: relative;
+            z-index: 10;
+        }
+        .step-node.active {
+            background-color: #50ddb7;
+        }
+        .step-line {
+            height: 3px;
+            background-color: #1c1b1b;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            right: 0;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col items-center pt-md pb-xl md:py-margin-desktop px-margin-mobile">
+<!-- Nav & Progress -->
+<header class="w-full max-w-md flex justify-between items-center mb-md">
+<button class="chibi-active bg-surface-container-lowest w-12 h-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined font-bold text-primary" style="font-variation-settings: &quot;FILL&quot; 0;">arrow_back</span>
+</button>
+<div class="flex-1 px-4 flex flex-col items-center">
+<div class="relative w-full max-w-[200px] h-8 flex items-center justify-between mb-1">
+<div class="step-line"></div>
+<!-- Filled portion of line -->
+<div class="step-line bg-primary" style="width: 25%;"></div>
+<div class="step-node active"></div>
+<div class="step-node"></div>
+<div class="step-node"></div>
+<div class="step-node"></div>
+<div class="step-node"></div>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1 uppercase">
+<span class="pixel-sparkle-primary text-[10px]">✦</span>
+                STEP 1 OF 5
+                <span class="pixel-sparkle-primary text-[10px]">✦</span>
+</div>
+</div>
+<button class="chibi-active bg-surface-container-lowest w-12 h-12 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined font-bold text-primary" style="font-variation-settings: &quot;FILL&quot; 0;">arrow_forward</span>
+</button>
+</header>
+<!-- Main Content Container -->
+<main class="w-full max-w-md flex flex-col gap-md">
+<!-- Header Text -->
+<div class="text-center px-4">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2 uppercase flex items-center justify-center gap-2">
+<span class="pixel-sparkle-primary text-2xl">✦</span>
+                WHAT'S YOUR MAIN GOAL?
+                <span class="pixel-sparkle-primary text-2xl">✦</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Choose the goal that motivates you the most!</p>
+</div>
+<!-- Hero Image Card -->
+<div class="chibi-card rounded-xl p-2 relative overflow-hidden bg-white mb-2">
+<div class="rounded-lg overflow-hidden border-2 border-on-surface aspect-[4/3] relative">
+<!-- Fallback gradient if image doesn't load immediately -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary-fixed-dim/20 to-primary-container/40"></div>
+<img class="w-full h-full object-cover relative z-10" data-alt="16-bit chibi anime girl with brown ponytail in black workout gear flexing her bicep in a gym setting. Mint green sunburst background radiating outward. Retro pixel art style with thick black outlines, bright colors, and small sparkle effects around her. A poster reading 'STRONGER EVERY DAY' with a dumbbell icon is on the wall behind her." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwYP_SEWc5tgBE6H61piTGKLLDqBCuI7Zh-irHA0gfmOAS7yyfb07l9orgvWIm9IbzQZ6Dx69B2ikGi6KNrDIVDG6-CWNYa2FlPdLB-NhO4WmkPCegEBJWUxDYlXVhVlFbDzfpHv13TjE4g9J2NmpOfmRXAjeRnwvJPmoTnLboS9lFbI7ts8-IZLgD7syuYIpOu9a7pLvo44A-FRRGD2yskt7YLtZJ4BrWLxO1dfBTfCrfZBmK90o">
+</div>
+<!-- Pagination dots -->
+<div class="flex justify-center gap-2 mt-3 mb-1">
+<div class="w-2 h-2 rounded-full bg-primary chibi-border"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant chibi-border"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant chibi-border"></div>
+<div class="w-2 h-2 rounded-full bg-surface-variant chibi-border"></div>
+</div>
+</div>
+<!-- Options Form -->
+<form class="flex flex-col gap-3">
+<!-- Option 1 -->
+<label class="chibi-card rounded-lg p-4 flex items-center gap-4 cursor-pointer hover:bg-surface-container-low transition-colors group bg-surface-container">
+<input checked="" name="goal" type="radio" value="muscle">
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface uppercase mb-1">BUILD MUSCLE</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">I want to get stronger and build muscle.</p>
+</div>
+<span class="pixel-sparkle-tertiary text-2xl group-hover:scale-110 transition-transform">✦</span>
+</label>
+<!-- Option 2 -->
+<label class="chibi-card rounded-lg p-4 flex items-center gap-4 cursor-pointer hover:bg-surface-container-low transition-colors group bg-white">
+<input name="goal" type="radio" value="weight">
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface uppercase mb-1">LOSE WEIGHT</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">I want to lose weight and feel lighter.</p>
+</div>
+<span class="pixel-sparkle-primary text-2xl group-hover:scale-110 transition-transform">✦</span>
+</label>
+<!-- Option 3 -->
+<label class="chibi-card rounded-lg p-4 flex items-center gap-4 cursor-pointer hover:bg-surface-container-low transition-colors group bg-white">
+<input name="goal" type="radio" value="health">
+<div class="flex-1">
+<h3 class="font-label-md text-label-md text-on-surface uppercase mb-1">IMPROVE HEALTH</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant leading-tight">I want to feel better and be healthier.</p>
+</div>
+<span class="pixel-sparkle-secondary text-2xl group-hover:scale-110 transition-transform">✦</span>
+</label>
+</form>
+<!-- Mascot Tooltip / Advice -->
+<div class="flex items-end gap-2 mt-2 px-2">
+<!-- Mascot avatar -->
+<div class="w-16 h-16 shrink-0 relative">
+<img class="w-full h-full object-contain" data-alt="Small 16-bit chibi anime girl headshot/bust avatar with brown ponytail in black workout top, smiling and pointing upwards. Retro pixel art style, thick black outlines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA27F1aPSjSYckjSa0WjgA3ifP-IosUiMBAEG2TIOCxRQ7aucIPQnIlDlH9tKa00byCogr8z52gAlJ-xPQ-HAJMExtPEdXsAg7ljO-8rKhznucVv6mCtj5q2pxO9jgu-t3-2IEYHQ_QC8lNN1tdpb5Onz_8PiBse6GjsWy7GYzCfWI2EL_mkvBysqLZ9QejN4eB7m1gBbckxebz4N2nveHVfY17uZn6wkQP_5Si1wbgVS0zFPP25W9wOS4PN-3g2Uzj">
+</div>
+<!-- Speech bubble -->
+<div class="chibi-card rounded-lg p-3 relative flex-1 text-[13px] font-body-md font-medium leading-snug">
+<!-- Tail for speech bubble -->
+<div class="absolute -left-2 bottom-4 w-3 h-3 bg-white border-l-3 border-b-3 border-on-surface rotate-45 transform origin-bottom-left"></div>
+<p class="">There's <span class="text-primary font-bold">no wrong answer!</span></p>
+<p class="">You can always adjust</p>
+<p class="">your goals later. ❤️</p>
+</div>
+</div>
+</main>
+<!-- Bottom Action -->
+<div class="w-full max-w-md mt-auto pt-md pb-4">
+<button class="w-full chibi-active bg-primary-container text-on-primary-container font-headline-md text-headline-md py-4 rounded-xl uppercase tracking-wide hover:bg-primary-fixed transition-colors" type="button">
+            CONTINUE
+        </button>
+</div>
+<script>
+        // Simple interactivity for radio buttons to highlight the selected card
+        document.querySelectorAll('input[name="goal"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                // Reset all cards
+                document.querySelectorAll('label.chibi-card').forEach(label => {
+                    label.classList.remove('bg-surface-container');
+                    label.classList.add('bg-white');
+                });
+                // Highlight selected
+                if(e.target.checked) {
+                    const label = e.target.closest('label');
+                    label.classList.add('bg-surface-container');
+                    label.classList.remove('bg-white');
+                }
+            });
+        });
+        
+        // Initialize state
+        const initialSelected = document.querySelector('input[name="goal"]:checked');
+        if(initialSelected) {
+            initialSelected.closest('label').classList.add('bg-surface-container');
+            initialSelected.closest('label').classList.remove('bg-white');
+        }
+    </script>
+
+
+</body></html>

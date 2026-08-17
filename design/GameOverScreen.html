@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FitQuest - Game Over</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&amp;family=Space+Grotesk:wght@700&amp;family=JetBrains+Mono:wght@700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 700;
+        }
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .chibi-shadow-sm {
+            box-shadow: 2px 2px 0px 0px #1c1b1b;
+        }
+        .chibi-active:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+        /* Dotted border for inner sections to mimic the design */
+        .dotted-border-b {
+            border-bottom: 2px dotted #bbcac3;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary": "#ae2f34",
+                        "secondary-fixed-dim": "#ffb3b0",
+                        "tertiary-container": "#e0b331",
+                        "surface-tint": "#006b55",
+                        "outline-variant": "#bbcac3",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#71fad2",
+                        "surface-container-highest": "#e5e2e1",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fcf9f8",
+                        "secondary-container": "#ff6b6b",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#8c1520",
+                        "primary-container": "#3ecfaa",
+                        "on-primary-fixed-variant": "#005140",
+                        "surface-dim": "#dcd9d9",
+                        "surface-container-high": "#eae7e7",
+                        "on-primary-fixed": "#002018",
+                        "outline": "#6c7a74",
+                        "inverse-surface": "#313030",
+                        "secondary-fixed": "#ffdad8",
+                        "primary": "#006b55",
+                        "on-primary-container": "#005442",
+                        "on-background": "#1c1b1b",
+                        "surface": "#fcf9f8",
+                        "tertiary-fixed": "#ffdf94",
+                        "primary-fixed-dim": "#50ddb7",
+                        "tertiary-fixed-dim": "#efc13e",
+                        "inverse-primary": "#50ddb7",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#f0eded",
+                        "background": "#fcf9f8",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-secondary-container": "#6d0010",
+                        "on-surface-variant": "#3c4a44",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-variant": "#e5e2e1",
+                        "on-secondary-fixed": "#410006",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#765b00",
+                        "on-tertiary-container": "#5c4600",
+                        "surface-container-low": "#f6f3f2"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem"
+                    },
+                    spacing: {
+                        "md": "24px",
+                        "border-weight": "3px",
+                        "sm": "12px",
+                        "base": "8px",
+                        "margin-desktop": "48px",
+                        "xl": "64px",
+                        "lg": "40px",
+                        "margin-mobile": "20px",
+                        "xs": "4px"
+                    },
+                    fontFamily: {
+                        "body-md": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-lg-mobile": ["Space Grotesk"]
+                    },
+                    fontSize: {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-variant font-body-md text-on-surface antialiased h-screen w-screen overflow-hidden flex items-center justify-center">
+<!-- Background Layer (Blurred Gym Setting) -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center" data-alt="A brightly lit indoor gym setting viewed through a window, pixel art style, high contrast, nostalgic 16-bit aesthetic, soft lighting, vibrant colors." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDzXGJuOeQHr0aw4dayIE_QBVGvQ3PxHchQrV014EB091W7QgoGvYLnKEhRf8l8wk4xqvLYOnKIwNJ1qDB4f8ghSoxtINBk1oeRdnB6D-wZTDZ7UDOOO7EZmWk5HBKeo_yr_fz6Cy-njUkcKrpNBai61q3WYhkMCbhisP3PjQgzx76p_GezZl2ijiPhPpYQPP8_PhlbvvIGnzogZZoWt2GN42Ww1Pk1l1-wig6a-n8CME-_Ilcgfro')">
+</div>
+<!-- Dim Overlay -->
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm z-10"></div>
+<!-- Gameplay UI Overlay (Behind Popup) -->
+<div class="absolute top-4 left-4 right-4 flex justify-between z-10 opacity-70 pointer-events-none">
+<div class="bg-surface border-[3px] border-on-background rounded-full px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">monetization_on</span>
+<span class="font-label-md text-on-surface">Score : <span class="text-secondary">4,000</span></span>
+</div>
+<div class="bg-surface border-[3px] border-on-background rounded-full px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">schedule</span>
+<span class="font-label-md text-on-surface">Time : <span class="text-primary-container">12:00</span></span>
+</div>
+<div class="bg-surface border-[3px] border-on-background rounded-lg p-2 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface">pause</span>
+</div>
+</div>
+<!-- Popup Container -->
+<main class="relative z-20 flex flex-col items-center justify-center w-full max-w-md p-margin-mobile">
+<!-- Top Hint Bubble (Behind main card) -->
+<div class="bg-surface-container-high border-[3px] border-on-background rounded-full px-6 py-2 mb-[-16px] z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-sm">arrow_back_ios_new</span>
+<span class="font-label-md text-on-surface">Move your arms up, down</span>
+<span class="material-symbols-outlined text-primary-container text-sm">arrow_back_ios_new</span>
+</div>
+<!-- Main Card -->
+<div class="bg-surface w-full rounded-3xl border-[4px] border-on-background shadow-[8px_8px_0px_0px_rgba(28,27,27,0.3)] flex flex-col items-center pt-8 pb-6 px-6 relative overflow-hidden z-20">
+<!-- Game Over Title -->
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-secondary text-2xl">arrow_forward_ios</span>
+<h1 class="font-headline-xl text-secondary-container tracking-wider drop-shadow-[2px_2px_0_#1c1b1b] uppercase">GAME OVER</h1>
+<span class="material-symbols-outlined text-secondary text-2xl rotate-180">arrow_forward_ios</span>
+</div>
+<!-- Character Graphic Area -->
+<div class="relative w-full h-32 flex justify-center items-end mb-4">
+<!-- Decorative lines -->
+<div class="absolute left-1/4 top-0 flex gap-1 h-12">
+<div class="w-1 bg-outline-variant h-full rounded-full opacity-50"></div>
+<div class="w-1 bg-outline-variant h-3/4 rounded-full opacity-50 mt-2"></div>
+<div class="w-1 bg-outline-variant h-1/2 rounded-full opacity-50 mt-4"></div>
+</div>
+<!-- Character Image -->
+<img class="h-40 object-contain z-10 drop-shadow-[2px_2px_0_#1c1b1b]" data-alt="Chibi anime boy character, spiky brown hair, wearing a green and black athletic top and wristbands, resting his arms on an invisible surface, looking tired but determined, sweating slightly, thick black outlines, pixel art style, off-white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVN0HjvLPGzfZnAtLkmixWXnggH-EpDIz_vMZ3BNl8RhRQIjfcqSCCg4RVuBNLt2Bl1pi2PPMfSyTPgl_8tynlFZ5lnAUXfuieYCJ2e62QQvnkacUsmtsxoJ5K1fJyzGJKsPVpOSTS4_3N67PveDLvQDPIhpvD9G4PnKylKpM62yQwcsjI_yNAlYW5gL6wi8hIDy-2Idi6E5vEvF1tjZXPSedBppi09Gn_yDZR8HmCmNY_cFQAe_4">
+<!-- Speech Bubble -->
+<div class="absolute right-8 top-0 bg-surface border-[3px] border-on-background rounded-xl p-2 z-20 flex flex-col items-center justify-center w-24 h-20 after:content-[''] after:absolute after:bottom-[-10px] after:left-4 after:border-t-[10px] after:border-t-on-background after:border-l-[10px] after:border-l-transparent after:border-r-[10px] after:border-r-transparent">
+<div class="absolute bottom-[-6px] left-[18px] border-t-[8px] border-t-surface border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent z-30"></div>
+<span class="font-label-sm text-on-surface text-center leading-tight">Keep<br>going!</span>
+<span class="text-xl mt-1">💪</span>
+</div>
+</div>
+<!-- Stats Container -->
+<div class="w-full bg-surface-bright border-[3px] border-on-background rounded-2xl p-4 mb-6 relative">
+<!-- Score Row -->
+<div class="flex items-center justify-between py-3 dotted-border-b">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed-dim border-[2px] border-on-background flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-lg">star</span>
+</div>
+<span class="font-label-md text-on-surface">SCORE</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-secondary">4,000</span>
+<span class="font-label-sm text-on-surface">pts</span>
+</div>
+</div>
+<!-- Time Row -->
+<div class="flex items-center justify-between py-3 dotted-border-b">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface border-[2px] border-on-background flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-lg">schedule</span>
+</div>
+<span class="font-label-md text-on-surface">TIME</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-primary-container">12:00</span>
+<span class="font-label-sm text-on-surface">min</span>
+</div>
+</div>
+<!-- Calories Row -->
+<div class="flex items-center justify-between py-3">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container border-[2px] border-on-background flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container text-lg">local_fire_department</span>
+</div>
+<span class="font-label-md text-on-surface">CALORIES BURNED</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg-mobile text-secondary">250</span>
+<span class="font-label-sm text-on-surface">kcal</span>
+</div>
+</div>
+</div>
+<!-- Encouragement Text -->
+<div class="bg-surface-container border-[2px] border-on-background rounded-full px-4 py-1 mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-sm">arrow_back_ios_new</span>
+<span class="font-label-sm text-on-surface">You gave it your all!</span>
+<span class="material-symbols-outlined text-primary-container text-sm">arrow_back_ios_new</span>
+</div>
+<!-- Action Buttons Row -->
+<div class="flex w-full justify-between items-start gap-2">
+<!-- Play Again -->
+<button class="flex flex-col items-center group flex-1">
+<div class="w-16 h-16 rounded-full bg-primary-container border-[3px] border-on-background chibi-shadow flex items-center justify-center mb-2 chibi-active transition-transform relative">
+<span class="material-symbols-outlined text-on-primary-container text-4xl">play_arrow</span>
+<span class="material-symbols-outlined absolute -top-2 -left-2 text-tertiary-fixed-dim text-sm scale-75 opacity-0 group-hover:opacity-100 transition-opacity">arrow_back_ios_new</span>
+</div>
+<span class="font-label-md text-on-surface text-center leading-tight">PLAY AGAIN</span>
+<span class="font-body-md text-[10px] text-on-surface-variant text-center leading-tight mt-1">Try again and<br>beat your score!</span>
+</button>
+<!-- Claim Reward -->
+<button class="flex flex-col items-center group flex-1">
+<div class="w-16 h-16 rounded-full bg-tertiary-fixed-dim border-[3px] border-on-background chibi-shadow flex items-center justify-center mb-2 chibi-active transition-transform relative">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-3xl">redeem</span>
+<span class="material-symbols-outlined absolute -top-3 left-1/2 -translate-x-1/2 text-tertiary-fixed-dim text-sm opacity-0 group-hover:opacity-100 transition-opacity">arrow_back_ios_new</span>
+</div>
+<span class="font-label-md text-on-surface text-center leading-tight">CLAIM REWARD</span>
+<span class="font-body-md text-[10px] text-on-surface-variant text-center leading-tight mt-1">Claim your coins<br>and XP!</span>
+</button>
+<!-- View Rank -->
+<button class="flex flex-col items-center group flex-1">
+<div class="w-16 h-16 rounded-full bg-secondary-container border-[3px] border-on-background chibi-shadow flex items-center justify-center mb-2 chibi-active transition-transform relative">
+<span class="material-symbols-outlined text-on-secondary-container text-3xl">emoji_events</span>
+<span class="material-symbols-outlined absolute top-0 -right-2 text-tertiary-fixed-dim text-sm scale-75 opacity-0 group-hover:opacity-100 transition-opacity">arrow_back_ios_new</span>
+</div>
+<span class="font-label-md text-on-surface text-center leading-tight">VIEW RANK</span>
+<span class="font-body-md text-[10px] text-on-surface-variant text-center leading-tight mt-1">See how you rank<br>among others!</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

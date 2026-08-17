@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FitQuest - Food Scanner</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface": "#fcf9f8",
+                      "surface-variant": "#e5e2e1",
+                      "tertiary-fixed-dim": "#efc13e",
+                      "inverse-surface": "#313030",
+                      "error-container": "#ffdad6",
+                      "primary-fixed": "#71fad2",
+                      "on-primary-container": "#005442",
+                      "primary-fixed-dim": "#50ddb7",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#ffdad8",
+                      "surface-dim": "#dcd9d9",
+                      "tertiary": "#765b00",
+                      "surface-container-high": "#eae7e7",
+                      "on-error": "#ffffff",
+                      "on-surface-variant": "#3c4a44",
+                      "background": "#fcf9f8",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e5e2e1",
+                      "primary": "#006b55",
+                      "on-tertiary-fixed-variant": "#594400",
+                      "on-secondary-fixed-variant": "#8c1520",
+                      "on-secondary": "#ffffff",
+                      "on-primary-fixed-variant": "#005140",
+                      "surface-container": "#f0eded",
+                      "tertiary-container": "#e0b331",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f6f3f2",
+                      "on-secondary-container": "#6d0010",
+                      "outline-variant": "#bbcac3",
+                      "outline": "#6c7a74",
+                      "on-surface": "#1c1b1b",
+                      "tertiary-fixed": "#ffdf94",
+                      "on-background": "#1c1b1b",
+                      "on-tertiary-fixed": "#241a00",
+                      "secondary-container": "#ff6b6b",
+                      "error": "#ba1a1a",
+                      "surface-bright": "#fcf9f8",
+                      "secondary": "#ae2f34",
+                      "inverse-on-surface": "#f3f0ef",
+                      "surface-tint": "#006b55",
+                      "on-tertiary-container": "#5c4600",
+                      "secondary-fixed-dim": "#ffb3b0",
+                      "inverse-primary": "#50ddb7",
+                      "on-secondary-fixed": "#410006",
+                      "primary-container": "#3ecfaa",
+                      "on-primary-fixed": "#002018"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "48px",
+                      "sm": "12px",
+                      "border-weight": "3px",
+                      "xs": "4px",
+                      "base": "8px",
+                      "lg": "40px",
+                      "xl": "64px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "label-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Space Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Space Grotesk"
+                      ],
+                      "headline-xl": [
+                              "Space Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Space Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "48px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .chibi-shadow {
+            box-shadow: 4px 4px 0px 0px #1c1b1b;
+        }
+        .chibi-active:active {
+            box-shadow: 0px 0px 0px 0px #1c1b1b;
+            transform: translate(4px, 4px);
+        }
+        .stat-bar-sheen {
+            background-image: repeating-linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2),
+                rgba(255, 255, 255, 0.2) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="w-full border-b-[3px] border-on-background flex justify-between items-center px-margin-mobile py-sm bg-background">
+<button aria-label="Go Back" class="flex items-center justify-center w-10 h-10 rounded-full border-[3px] border-on-background bg-surface chibi-shadow chibi-active transition-all">
+<span class="material-symbols-outlined text-on-surface" style="font-variation-settings: 'FILL' 1;">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary font-bold tracking-tight">Calories Tracker</h1>
+<button aria-label="Settings" class="flex items-center justify-center w-10 h-10 rounded-full border-[3px] border-on-background bg-surface chibi-shadow chibi-active transition-all">
+<span class="material-symbols-outlined text-on-surface" style="font-variation-settings: 'FILL' 1;">settings</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col items-center px-margin-mobile py-md gap-md overflow-y-auto">
+<!-- Heading -->
+<div class="text-center w-full">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface uppercase tracking-wider">Take a Photo!</h2>
+</div>
+<!-- Camera Viewfinder -->
+<div class="w-full max-w-sm aspect-[4/5] bg-surface-container-highest border-[3px] border-on-background rounded-xl relative chibi-shadow overflow-hidden flex flex-col items-center justify-center">
+<!-- Target Reticle Overlay -->
+<div class="absolute inset-0 pointer-events-none p-4 flex flex-col justify-between z-10">
+<div class="flex justify-between w-full">
+<div class="w-8 h-8 border-t-[4px] border-l-[4px] border-primary-fixed-dim"></div>
+<div class="w-8 h-8 border-t-[4px] border-r-[4px] border-primary-fixed-dim"></div>
+</div>
+<div class="flex justify-between w-full">
+<div class="w-8 h-8 border-b-[4px] border-l-[4px] border-primary-fixed-dim"></div>
+<div class="w-8 h-8 border-b-[4px] border-r-[4px] border-primary-fixed-dim"></div>
+</div>
+</div>
+<!-- Viewfinder Image -->
+<div class="absolute inset-0 w-full h-full">
+<img alt="Food photo viewfinder" class="w-full h-full object-cover pixelated" data-alt="A detailed 16-bit pixel art illustration of a plate of Basil Chicken Rice. The scene is brightly lit with a cheerful, nostalgic gaming vibe. The dish features a mound of white rice topped with savory brown minced chicken and vibrant green basil leaves, accompanied by a bright yellow fried egg with crispy edges. The background is a soft, abstracted retro gaming grid pattern in muted off-white tones. The art style emphasizes thick, chunky pixel outlines and a limited, high-contrast color palette typical of early 90s console games." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOC7HrhO7lQ0SaHx8t2z0Pq4x-9MOtJi0dfp81YiOzZWdEs-rFzlgFsR4bkmWmWIReN_G7LV7XwHCGd17G4Baa4dkNrgnWpvErOstI0mbtQrukexipA-lHM5_4PlcL0Ms4bU1VOOxCetQcD6BGUCZugaEbd0I_fjx4H6j6r7OCfN7qBt-8rwFtlPfurVuKYS3FRIm-hLzzleMBVvhBuvub4xtf4_M8894VB5DSuk8_fF_2vnPWEUw" style="image-rendering: pixelated;"/>
+</div>
+<!-- Scanning Overlay (Simulated) -->
+<div class="absolute inset-0 bg-primary-fixed-dim/20 mix-blend-overlay z-0"></div>
+<div class="absolute top-0 w-full h-1 bg-primary shadow-[0_0_8px_#50ddb7] animate-[scan_2s_ease-in-out_infinite] z-20"></div>
+<!-- Shutter Button Container -->
+<div class="absolute bottom-6 left-0 right-0 flex justify-center z-30">
+<button aria-label="Take Photo" class="w-16 h-16 rounded-full border-[4px] border-tertiary-fixed-dim bg-surface flex items-center justify-center chibi-shadow chibi-active transition-all group">
+<div class="w-10 h-10 rounded-full border-[2px] border-on-background bg-error group-active:bg-secondary-fixed transition-colors"></div>
+</button>
+</div>
+</div>
+<!-- Result Card -->
+<div class="w-full max-w-sm bg-surface border-[3px] border-on-background rounded-xl p-md chibi-shadow flex flex-col gap-sm">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<h3 class="font-label-md text-label-md uppercase text-on-surface tracking-wide">Basil Chicken Rice</h3>
+</div>
+<div class="inline-block bg-secondary-container text-on-secondary-container font-label-sm text-label-sm px-2 py-1 rounded-full border-[2px] border-on-background w-fit">
+                        Total 500 kcal
+                    </div>
+</div>
+</div>
+<!-- Macro Breakdown -->
+<div class="flex flex-col gap-xs mt-2">
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>Protein 20%</span>
+<span>Carb 50%</span>
+<span>Fat 30%</span>
+</div>
+<!-- Custom Segmented Stat Bar -->
+<div class="h-4 w-full bg-surface-container border-[3px] border-on-background rounded-full flex overflow-hidden">
+<div class="h-full bg-primary stat-bar-sheen w-[20%]" title="Protein"></div>
+<div class="h-full bg-tertiary-fixed-dim stat-bar-sheen w-[50%] border-l-[2px] border-on-background" title="Carbs"></div>
+<div class="h-full bg-secondary-container stat-bar-sheen w-[30%] border-l-[2px] border-on-background" title="Fat"></div>
+</div>
+</div>
+</div>
+<!-- Confirm Button -->
+<button class="w-full max-w-sm mt-4 py-3 bg-primary-container text-on-primary-container border-[3px] border-on-background rounded-xl font-label-md text-label-md uppercase tracking-wider chibi-shadow chibi-active transition-all flex justify-center items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+            CONFIRM
+        </button>
+</main>
+<style>
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+    </style>
+</body></html>

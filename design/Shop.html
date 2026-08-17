@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FitQuest - Shop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#ae2f34",
+                        "on-tertiary-container": "#5c4600",
+                        "surface-container-highest": "#e5e2e1",
+                        "surface-dim": "#dcd9d9",
+                        "primary-fixed-dim": "#50ddb7",
+                        "background": "#fcf9f8",
+                        "on-secondary-container": "#6d0010",
+                        "on-secondary-fixed": "#410006",
+                        "inverse-surface": "#313030",
+                        "secondary-container": "#ff6b6b",
+                        "tertiary-fixed-dim": "#efc13e",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface-variant": "#3c4a44",
+                        "tertiary": "#765b00",
+                        "surface-bright": "#fcf9f8",
+                        "on-primary-container": "#005442",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffdf94",
+                        "outline-variant": "#bbcac3",
+                        "on-primary-fixed-variant": "#005140",
+                        "primary": "#006b55",
+                        "on-secondary-fixed-variant": "#8c1520",
+                        "primary-fixed": "#71fad2",
+                        "surface-container-high": "#eae7e7",
+                        "inverse-primary": "#50ddb7",
+                        "surface": "#fcf9f8",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1c1b1b",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#f0eded",
+                        "on-tertiary-fixed-variant": "#594400",
+                        "primary-container": "#3ecfaa",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#006b55",
+                        "on-background": "#1c1b1b",
+                        "on-primary-fixed": "#002018",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e5e2e1",
+                        "outline": "#6c7a74",
+                        "secondary-fixed-dim": "#ffb3b0",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f6f3f2",
+                        "tertiary-container": "#e0b331",
+                        "secondary-fixed": "#ffdad8",
+                        "on-tertiary-fixed": "#241a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "12px",
+                        "border-weight": "3px",
+                        "lg": "40px",
+                        "base": "8px",
+                        "md": "24px",
+                        "xs": "4px",
+                        "xl": "64px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Space Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-md": ["JetBrains Mono"],
+                        "label-sm": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "700" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .chibi-border { border: 3px solid #1c1b1b; }
+        .chibi-shadow { box-shadow: 4px 4px 0 0 #1c1b1b; }
+        .chibi-shadow-sm { box-shadow: 2px 2px 0 0 #1c1b1b; }
+        .pixel-rendering { image-rendering: pixelated; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- Top Navigation -->
+<header class="w-full top-0 sticky bg-background border-b-border-weight border-on-background z-40 flex justify-between items-center px-margin-mobile py-sm">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-surface-container-high transition-colors active:translate-x-[2px] active:translate-y-[2px]">
+<span class="material-symbols-outlined font-bold text-headline-md">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md-mobile text-primary tracking-tight">SHOP</h1>
+<div class="flex items-center gap-2">
+<div class="flex items-center bg-tertiary-container text-on-tertiary-container px-2 py-1 rounded-lg chibi-border chibi-shadow-sm">
+<span class="material-symbols-outlined text-sm mr-1">monetization_on</span>
+<span class="font-label-md">2000</span>
+</div>
+<div class="flex items-center bg-primary-container text-on-primary-container px-2 py-1 rounded-lg chibi-border chibi-shadow-sm">
+<span class="material-symbols-outlined text-sm mr-1">diamond</span>
+<span class="font-label-md">10</span>
+<span class="material-symbols-outlined text-sm ml-1">add</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col pb-24 relative overflow-hidden">
+<!-- Hero Preview Section -->
+<section class="relative w-full h-[45vh] bg-surface-container-low flex justify-center items-end pb-8 border-b-border-weight border-on-background overflow-hidden">
+<!-- Background element -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#6c7a74 2px, transparent 2px); background-size: 24px 24px;"></div>
+<!-- Chibi Hero & Pet -->
+<div class="relative z-10 flex items-end">
+<img alt="Chibi hero character wearing athletic gear" class="h-64 object-contain pixel-rendering drop-shadow-xl" src="https://lh3.googleusercontent.com/aida/AP1WRLtUIUWlV3-o55zqjEmUlr0CTgnph90JlOUaECicX_WNxafLb9JX6kiinI80XS4ty2nyUdRijvfqZhr4QWCNI98HafovtcGoRVSIfvSS0gEwHQVFmRXe4Sw-NNXfF4-SSwkh9CwZdQlDP5n6yuBmaAniwxduJxlL0V5ZGEcXqOMs4RawY9Qetvl8Jz6ZNpcJKJB-KPFh79uUUm0kbalNlPDX--IaC6RkpOSjgF30iDXBjRKJvQl60NuRgg">
+<img alt="Cute pixel art pet cat" class="h-24 object-contain pixel-rendering absolute -right-12 bottom-0 drop-shadow-lg" src="https://lh3.googleusercontent.com/aida/AP1WRLsrBPJLtoCh9PY2UxlGF6u-qSCqpg-mAmzST41mE1prdljHtzyYut9ptqvyi5v2t_CLFvb9VBn4knqRMVvTYoUloy1XMptli6JwW1zyyVmhxhBgtTuK6FGSxadApgT3b0b339QKzpTXQVaFzj147M_U8AmXT64b5Xzp51fo6cCaQ1y2vQgEO8obmWYx4Hw0ZIzfB7_hyvO_53Mb1LccC7NRvHkMBWnlUHJ4rjwaI46qe5y7HXLQrbLD">
+</div>
+<!-- Floating Shopping Basket -->
+<button class="absolute bottom-4 right-4 bg-surface-container-lowest p-3 rounded-xl chibi-border chibi-shadow flex items-center justify-center hover:bg-surface-container-high active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all z-20">
+<span class="material-symbols-outlined text-headline-md">shopping_basket</span>
+<span class="absolute -top-2 -right-2 bg-secondary-container text-on-secondary-container font-label-sm w-6 h-6 rounded-full flex items-center justify-center chibi-border">2</span>
+</button>
+<!-- Undo Button -->
+<button class="absolute bottom-4 left-4 bg-surface-container-lowest p-2 rounded-full chibi-border chibi-shadow-sm flex items-center justify-center hover:bg-surface-container-high active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all z-20">
+<span class="material-symbols-outlined text-lg">undo</span>
+</button>
+</section>
+<!-- Category Tabs -->
+<section class="w-full bg-background border-b-border-weight border-on-background z-30 sticky top-[72px]">
+<ul class="flex overflow-x-auto hide-scrollbar py-2 px-margin-mobile gap-3">
+<li>
+<button class="px-4 py-2 rounded-lg font-label-md bg-surface-container text-on-surface-variant chibi-border hover:bg-surface-container-high whitespace-nowrap">HAIR</button>
+</li>
+<li>
+<button class="px-4 py-2 rounded-lg font-label-md bg-primary-container text-on-primary-container chibi-border chibi-shadow whitespace-nowrap">SHIRT</button>
+</li>
+<li>
+<button class="px-4 py-2 rounded-lg font-label-md bg-surface-container text-on-surface-variant chibi-border hover:bg-surface-container-high whitespace-nowrap">PANTS</button>
+</li>
+<li>
+<button class="px-4 py-2 rounded-lg font-label-md bg-surface-container text-on-surface-variant chibi-border hover:bg-surface-container-high whitespace-nowrap">SHOES</button>
+</li>
+<li>
+<button class="px-4 py-2 rounded-lg font-label-md bg-surface-container text-on-surface-variant chibi-border hover:bg-surface-container-high whitespace-nowrap">PET</button>
+</li>
+<li>
+<button class="px-4 py-2 rounded-lg font-label-md bg-surface-container text-on-surface-variant chibi-border hover:bg-surface-container-high whitespace-nowrap">ACC</button>
+</li>
+</ul>
+</section>
+<!-- Shop Grid -->
+<section class="px-margin-mobile py-6 grid grid-cols-3 md:grid-cols-4 gap-4 bg-background">
+<!-- Item Card 1 (Equipped/Owned) -->
+<div class="bg-surface-container-lowest rounded-xl chibi-border p-3 flex flex-col items-center gap-2 relative opacity-70">
+<div class="absolute top-1 left-1 bg-primary text-on-primary px-1 rounded font-label-sm text-[10px] chibi-border">OWNED</div>
+<div class="w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center chibi-border mt-3">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">checkroom</span>
+</div>
+<div class="font-label-sm text-center w-full truncate mt-1">Basic Tee</div>
+</div>
+<!-- Item Card 2 -->
+<button class="bg-surface-container-lowest rounded-xl chibi-border p-3 flex flex-col items-center gap-2 relative hover:bg-surface-container-high active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all text-left">
+<div class="w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center chibi-border">
+<span class="material-symbols-outlined text-4xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">checkroom</span>
+</div>
+<div class="font-label-sm text-center w-full truncate mt-1">Crimson Tee</div>
+<div class="flex items-center gap-1 bg-tertiary-container px-2 py-1 rounded-md chibi-border w-full justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">monetization_on</span>
+<span class="font-label-sm text-on-tertiary-container">500</span>
+</div>
+</button>
+<!-- Item Card 3 -->
+<button class="bg-surface-container-lowest rounded-xl chibi-border p-3 flex flex-col items-center gap-2 relative hover:bg-surface-container-high active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all text-left">
+<div class="w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center chibi-border">
+<span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">checkroom</span>
+</div>
+<div class="font-label-sm text-center w-full truncate mt-1">Mint Hoodie</div>
+<div class="flex items-center gap-1 bg-tertiary-container px-2 py-1 rounded-md chibi-border w-full justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">monetization_on</span>
+<span class="font-label-sm text-on-tertiary-container">800</span>
+</div>
+</button>
+<!-- Item Card 4 (Premium) -->
+<button class="bg-surface-container-lowest rounded-xl chibi-border p-3 flex flex-col items-center gap-2 relative hover:bg-surface-container-high active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all text-left">
+<div class="absolute -top-2 -right-2 bg-tertiary-container w-6 h-6 rounded-full flex items-center justify-center chibi-border z-10 animate-pulse">
+<span class="material-symbols-outlined text-[12px] text-on-tertiary-container">star</span>
+</div>
+<div class="w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center chibi-border">
+<span class="material-symbols-outlined text-4xl text-tertiary" style="font-variation-settings: 'FILL' 1;">apparel</span>
+</div>
+<div class="font-label-sm text-center w-full truncate mt-1">Gold Armor</div>
+<div class="flex items-center gap-1 bg-primary-container px-2 py-1 rounded-md chibi-border w-full justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-primary-container">diamond</span>
+<span class="font-label-sm text-on-primary-container">50</span>
+</div>
+</button>
+<!-- Item Card 5 -->
+<button class="bg-surface-container-lowest rounded-xl chibi-border p-3 flex flex-col items-center gap-2 relative hover:bg-surface-container-high active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all text-left">
+<div class="w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center chibi-border">
+<span class="material-symbols-outlined text-4xl text-on-surface">styler</span>
+</div>
+<div class="font-label-sm text-center w-full truncate mt-1">Striped Shirt</div>
+<div class="flex items-center gap-1 bg-tertiary-container px-2 py-1 rounded-md chibi-border w-full justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">monetization_on</span>
+<span class="font-label-sm text-on-tertiary-container">400</span>
+</div>
+</button>
+<!-- Item Card 6 -->
+<button class="bg-surface-container-lowest rounded-xl chibi-border p-3 flex flex-col items-center gap-2 relative hover:bg-surface-container-high active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all text-left">
+<div class="w-16 h-16 bg-surface-container-low rounded-lg flex items-center justify-center chibi-border">
+<span class="material-symbols-outlined text-4xl text-on-surface">laundry</span>
+</div>
+<div class="font-label-sm text-center w-full truncate mt-1">Tank Top</div>
+<div class="flex items-center gap-1 bg-tertiary-container px-2 py-1 rounded-md chibi-border w-full justify-center">
+<span class="material-symbols-outlined text-[14px] text-on-tertiary-container">monetization_on</span>
+<span class="font-label-sm text-on-tertiary-container">300</span>
+</div>
+</button>
+</section>
+</main>
+<!-- Bottom Navigation (canonical: Home / Quest / Social / Shop / Profile) -->
+<nav class="fixed bottom-0 w-full z-50 bg-background border-t-[3px] border-on-background shadow-[0_-4px_0_0_#1c1b1b] flex justify-around items-center h-20 px-2 pb-safe md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">home</span>
+<span class="font-label-sm text-[10px]">HOME</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">swords</span>
+<span class="font-label-sm text-[10px]">QUEST</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">group</span>
+<span class="font-label-sm text-[10px]">SOCIAL</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-lg border-[3px] border-on-background shadow-[4px_4px_0_0_#1c1b1b] py-1 px-3 -mt-4 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all" href="#">
+<span class="material-symbols-outlined text-2xl mb-1" style="font-variation-settings: 'FILL' 1;">shopping_bag</span>
+<span class="font-label-sm text-[10px]">SHOP</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-surface-container-high transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">person</span>
+<span class="font-label-sm text-[10px]">PROFILE</span>
+</a>
+</nav>
+</body></html>
