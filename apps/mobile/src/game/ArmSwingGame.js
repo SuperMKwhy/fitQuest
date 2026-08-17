@@ -20,7 +20,7 @@ function getDevServerOrigin() {
   return match ? `https://${match[1]}` : null;
 }
 
-export default function ArmSwingGame({ onExit }) {
+export default function ArmSwingGame({ onExit, onScore }) {
   const origin = useMemo(getDevServerOrigin, []);
   const [failed, setFailed] = useState(false);
 
@@ -47,6 +47,14 @@ export default function ArmSwingGame({ onExit }) {
         mediaPlaybackRequiresUserAction={false}
         mediaCapturePermissionGrantType="grant"
         onError={() => setFailed(true)}
+        onMessage={(event) => {
+          try {
+            const message = JSON.parse(event.nativeEvent.data);
+            if (message.type === 'gameover') onScore?.(message.score);
+          } catch {
+            // Ignore anything that isn't the JSON message we're expecting.
+          }
+        }}
         style={styles.webview}
       />
       <TouchableOpacity style={styles.exitBtn} onPress={onExit}>

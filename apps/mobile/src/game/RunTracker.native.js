@@ -38,9 +38,9 @@ function formatPace(elapsedS, distanceM) {
   return `${min}:${String(sec).padStart(2, '0')}`;
 }
 
-export default function RunTracker({ onExit }) {
+export default function RunTracker({ onExit, onFinish }) {
   const [permissionStatus, setPermissionStatus] = useState('unknown');
-  const [runState, setRunState] = useState('idle'); // idle | active | paused | summary
+  const [runState, setRunState] = useState('idle'); // idle | active | paused
   const [route, setRoute] = useState([]);
   const [distanceM, setDistanceM] = useState(0);
   const [elapsedS, setElapsedS] = useState(0);
@@ -134,16 +134,8 @@ export default function RunTracker({ onExit }) {
   const stopRun = useCallback(() => {
     watchSubscriptionRef.current?.remove();
     watchSubscriptionRef.current = null;
-    setRunState('summary');
-    setTimeout(() => {
-      if (route.length > 1) {
-        mapRef.current?.fitToCoordinates(route, {
-          edgePadding: { top: 60, right: 60, bottom: 60, left: 60 },
-          animated: true,
-        });
-      }
-    }, 200);
-  }, [route]);
+    onFinish({ distanceM, elapsedS, route });
+  }, [onFinish, distanceM, elapsedS, route]);
 
   const confirmExit = useCallback(() => {
     if (runState === 'active' || runState === 'paused') {
@@ -230,38 +222,6 @@ export default function RunTracker({ onExit }) {
         <TouchableOpacity style={styles.secondaryBtn} onPress={onExit}>
           <Text style={styles.secondaryBtnText}>Back</Text>
         </TouchableOpacity>
-      </View>
-    );
-  }
-
-  if (runState === 'summary') {
-    return (
-      <View style={styles.container}>
-        <MapView ref={mapRef} style={styles.map} provider={PROVIDER_DEFAULT}>
-          {route.length > 1 && (
-            <Polyline coordinates={route} strokeColor="#e94560" strokeWidth={4} />
-          )}
-        </MapView>
-        <View style={styles.summarySheet}>
-          <Text style={styles.summaryTitle}>🎉 Run Complete!</Text>
-          <View style={styles.statsRow}>
-            <View style={styles.statBlock}>
-              <Text style={styles.statValue}>{distanceKm}</Text>
-              <Text style={styles.statLabel}>km</Text>
-            </View>
-            <View style={styles.statBlock}>
-              <Text style={styles.statValue}>{formatDuration(elapsedS)}</Text>
-              <Text style={styles.statLabel}>duration</Text>
-            </View>
-            <View style={styles.statBlock}>
-              <Text style={styles.statValue}>{formatPace(elapsedS, distanceM)}</Text>
-              <Text style={styles.statLabel}>min/km</Text>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.primaryBtn} onPress={onExit}>
-            <Text style={styles.primaryBtnText}>Done</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -366,11 +326,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#12122a', borderTopLeftRadius: 24, borderTopRightRadius: 24,
     paddingTop: 20, paddingBottom: 32, paddingHorizontal: 20,
   },
-  summarySheet: {
-    backgroundColor: '#12122a', borderTopLeftRadius: 24, borderTopRightRadius: 24,
-    paddingTop: 20, paddingBottom: 32, paddingHorizontal: 20, alignItems: 'center',
-  },
-  summaryTitle: { color: '#4ade80', fontSize: 18, fontWeight: '800', marginBottom: 16 },
   statsRow: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 },
   statBlock: { alignItems: 'center' },
   statValue: { color: '#fff', fontSize: 22, fontWeight: '800' },

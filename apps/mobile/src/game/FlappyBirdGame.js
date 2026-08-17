@@ -26,7 +26,7 @@ function makePipe(x) {
 // controlledY every frame, dodging obstacles is on you (push-ups, ducking,
 // etc.), not a flap impulse. When omitted, behaves like classic Flappy Bird
 // (gravity + a flap impulse on each swingSignal change).
-export default function FlappyBirdGame({ swingSignal, controlledY, onExit }) {
+export default function FlappyBirdGame({ swingSignal, controlledY, onExit, onGameOver }) {
   const isControlled = controlledY != null;
   const [gameState, setGameState] = useState('ready');
   const [score, setScore] = useState(0);
@@ -84,6 +84,7 @@ export default function FlappyBirdGame({ swingSignal, controlledY, onExit }) {
     gameStateRef.current = 'gameover';
     setGameState('gameover');
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    onGameOver?.(scoreRef.current);
   };
 
   const loop = (time) => {

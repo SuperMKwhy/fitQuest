@@ -59,6 +59,15 @@ function loadMediaPipeTask({ exportName, modelAssetPath, extraOptions = '', even
   });
 }
 
+// Reports the final score back across the WebView boundary to the native
+// ArmSwingGame.js wrapper (see its onMessage handler), which is how
+// QuestGameScreen finds out the game ended so it can submit the activity
+// and show GameOverScreen. No-ops outside a WebView (e.g. testing in a
+// plain browser tab), where there's nothing listening on the other end.
+function reportScore(score) {
+  window.ReactNativeWebView?.postMessage(JSON.stringify({ type: 'gameover', score }));
+}
+
 let faceDetectorPromise = null;
 function loadFaceDetector() {
   if (!faceDetectorPromise) {
@@ -256,7 +265,9 @@ function ArmTracker({ onExit }) {
         )}
       </View>
 
-      {cameraStatus === 'ready' && <FlappyBirdGame swingSignal={swingSignal} onExit={onExit} />}
+      {cameraStatus === 'ready' && (
+        <FlappyBirdGame swingSignal={swingSignal} onExit={onExit} onGameOver={reportScore} />
+      )}
 
       {cameraStatus === 'requesting' && (
         <View style={styles.overlay} pointerEvents="none">
@@ -521,7 +532,7 @@ function PushUpTracker({ onExit, onChangeMode }) {
       </View>
 
       {cameraStatus === 'ready' && cvStatus === 'ready' && (
-        <FlappyBirdGame controlledY={track?.y ?? 0.5} onExit={onExit} />
+        <FlappyBirdGame controlledY={track?.y ?? 0.5} onExit={onExit} onGameOver={reportScore} />
       )}
 
       <TouchableOpacity style={styles.modeBtn} onPress={onChangeMode}>
