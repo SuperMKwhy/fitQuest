@@ -1,6 +1,9 @@
 import { Pressable, ScrollView, Text, View } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChibiButton, ChibiSurface } from '../components/Chibi';
+import tokens from '../theme/tokens';
 import { useAppStore } from '../state/useAppStore';
 
 // Matches design/HomeScreen.html's two primary CTA cards ("Today's Quest" /
@@ -16,22 +19,34 @@ export default function HomeScreen({ navigation }) {
       <ScrollView contentContainerStyle={{ padding: 20, gap: 16 }}>
         <View className="flex-row justify-between items-center">
           <View>
-            <Text className="text-xl font-bold text-on-background">Hey, {profile?.displayName} 👋</Text>
-            <Text className="text-on-surface-variant">Let's crush today's quest</Text>
+            <Text className="text-xl font-headline text-on-background">Hey, {profile?.displayName} 👋</Text>
+            <Text className="font-body text-on-surface-variant">Let's crush today's quest</Text>
           </View>
-          <View className="bg-secondary-container rounded-full px-4 py-2 border-[3px] border-ink">
-            <Text className="font-bold text-on-secondary-container">LVL {profile?.level ?? 1}</Text>
+          <View className="flex-row gap-2">
+            <View className="flex-row items-center gap-1 bg-surface-container-lowest rounded-full px-3 py-1.5 border-[3px] border-ink">
+              <MaterialIcons name="monetization-on" size={16} color={tokens.colors['tertiary-container']} />
+              <Text className="font-label text-xs text-on-background">{profile?.coins ?? 0}</Text>
+            </View>
+            <View className="flex-row items-center gap-1 bg-surface-container-lowest rounded-full px-3 py-1.5 border-[3px] border-ink">
+              <MaterialCommunityIcons name="diamond-stone" size={16} color={tokens.colors['primary-container']} />
+              <Text className="font-label text-xs text-on-background">{profile?.gems ?? 0}</Text>
+            </View>
           </View>
         </View>
 
         <ChibiSurface className="p-4">
-          <View className="flex-row justify-between mb-2">
-            <Text className="font-bold text-on-background">⚡ XP Progress</Text>
-            <Text className="text-primary font-bold">{profile?.xp ?? 0} / {xpForNext} XP</Text>
+          <View className="flex-row justify-between items-center mb-2">
+            <View className="flex-row items-center gap-2">
+              <Text className="font-headline-medium text-on-background">XP Progress</Text>
+              <View className="bg-secondary-container rounded-full px-3 py-1 border-[3px] border-ink">
+                <Text className="font-label text-xs text-on-secondary-container">LVL {profile?.level ?? 1}</Text>
+              </View>
+            </View>
+            <Text className="text-primary font-label text-xs">{profile?.xp ?? 0} / {xpForNext} XP</Text>
           </View>
-          <View className="h-2 bg-surface-container-high rounded-full overflow-hidden">
+          <View className="h-3 bg-surface-container-high rounded-full border-[2px] border-ink overflow-hidden">
             <View
-              className="h-2 bg-primary-container"
+              className="h-full bg-primary-container"
               style={{ width: `${Math.min(100, ((profile?.xp ?? 0) / xpForNext) * 100)}%` }}
             />
           </View>
@@ -41,28 +56,38 @@ export default function HomeScreen({ navigation }) {
           className="p-4 items-start"
           onPress={() => navigation.navigate('PreGameReady', { mode: 'run' })}
         >
-          <Text className="text-lg font-bold text-on-primary-container">Today's Quest 🗡️</Text>
-          <Text className="text-on-primary-container">Track a run — GPS route, distance, pace</Text>
+          <View className="flex-row items-center gap-2 mb-1">
+            <MaterialCommunityIcons name="sword-cross" size={20} color={tokens.colors['on-primary-container']} />
+            <Text className="text-lg font-headline text-on-primary-container">Today's Quest</Text>
+          </View>
+          <Text className="font-body text-on-primary-container">Track a run — GPS route, distance, pace</Text>
         </ChibiButton>
 
         <ChibiButton
           className="p-4 items-start"
           onPress={() => navigation.navigate('PreGameReady', { mode: 'quest_game' })}
         >
-          <Text className="text-lg font-bold text-on-primary-container">Rank Match 🏆</Text>
-          <Text className="text-on-primary-container">Arm-swing arcade — compete for XP</Text>
+          <View className="flex-row items-center gap-2 mb-1">
+            <MaterialIcons name="emoji-events" size={20} color={tokens.colors['on-primary-container']} />
+            <Text className="text-lg font-headline text-on-primary-container">Rank Match</Text>
+          </View>
+          <Text className="font-body text-on-primary-container">Arm-swing arcade — compete for XP</Text>
         </ChibiButton>
 
         <View className="flex-row gap-3">
           {[
-            { label: 'AI Buddy', emoji: '🤖', screen: 'AIBuddyChat' },
-            { label: 'Mood', emoji: '🙂', screen: 'MoodTracker' },
-            { label: 'Health Log', emoji: '🍎', screen: 'HealthLog' },
+            { label: 'AI Buddy', icon: 'robot', family: 'community', screen: 'AIBuddyChat' },
+            { label: 'Mood', icon: 'mood', family: 'material', screen: 'MoodTracker' },
+            { label: 'Health Log', icon: 'restaurant', family: 'material', screen: 'HealthLog' },
           ].map((card) => (
             <Pressable key={card.screen} className="flex-1" onPress={() => navigation.navigate(card.screen)}>
               <ChibiSurface className="p-3 items-center">
-                <Text className="text-2xl mb-1">{card.emoji}</Text>
-                <Text className="text-xs font-bold text-on-background text-center">{card.label}</Text>
+                {card.family === 'community' ? (
+                  <MaterialCommunityIcons name={card.icon} size={24} color={tokens.colors.primary} />
+                ) : (
+                  <MaterialIcons name={card.icon} size={24} color={tokens.colors.primary} />
+                )}
+                <Text className="text-xs font-headline-medium text-on-background text-center mt-1">{card.label}</Text>
               </ChibiSurface>
             </Pressable>
           ))}

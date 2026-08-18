@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import Slider from '@react-native-community/slider';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChibiButton, ChibiSurface } from '../components/Chibi';
+import { OnboardingStepper } from '../components/OnboardingStepper';
+import tokens from '../theme/tokens';
 import { useAppStore } from '../state/useAppStore';
 
 const HAIR_STYLES = [
@@ -48,8 +50,8 @@ export default function AvatarCreatorScreen({ route }) {
 
   return (
     <SafeAreaView className="flex-1 bg-background px-margin-mobile pt-md">
-      <Text className="text-xs text-on-surface-variant uppercase tracking-widest mb-2">Step 3 of 3</Text>
-      <Text className="text-2xl font-bold text-on-background mb-4">Create Your Avatar</Text>
+      <OnboardingStepper step={3} totalSteps={3} />
+      <Text className="text-2xl font-headline text-on-background mb-4">Create Your Avatar</Text>
 
       <ChibiSurface className="h-64 items-center justify-center mb-4 overflow-hidden">
         <View className="w-40 h-52">
@@ -61,37 +63,72 @@ export default function AvatarCreatorScreen({ route }) {
       </ChibiSurface>
 
       <ChibiSurface className="p-4 mb-4">
-        <Text className="font-bold text-on-background mb-2">Hairstyle: {HAIR_STYLES[hairIndex].label}</Text>
-        <Slider
-          minimumValue={0}
-          maximumValue={HAIR_STYLES.length - 1}
-          step={1}
-          value={hairIndex}
-          onValueChange={setHairIndex}
-          minimumTrackTintColor="#006b55"
-          maximumTrackTintColor="#e5e2e1"
-          thumbTintColor="#006b55"
-        />
+        <Text className="font-label text-xs uppercase text-on-surface-variant mb-3">
+          Hairstyle — {HAIR_STYLES[hairIndex].label}
+        </Text>
+        <View className="flex-row flex-wrap gap-3">
+          {HAIR_STYLES.map((h, i) => {
+            const selected = i === hairIndex;
+            return (
+              <TouchableOpacity key={h.id} onPress={() => setHairIndex(i)} activeOpacity={0.8}>
+                <View
+                  className={`w-16 h-16 rounded-lg border-[3px] border-ink items-center justify-center overflow-hidden ${
+                    selected ? 'bg-primary-container' : 'bg-surface-container-lowest'
+                  }`}
+                >
+                  {h.asset ? (
+                    <Image source={h.asset} className="w-10 h-10" resizeMode="contain" />
+                  ) : (
+                    <MaterialIcons name="face" size={28} color={tokens.colors['on-surface-variant']} />
+                  )}
+                  {selected && (
+                    <View
+                      className="absolute top-0.5 right-0.5 w-4 h-4 rounded-full bg-primary items-center justify-center border-[2px] border-ink"
+                    >
+                      <MaterialIcons name="check" size={10} color={tokens.colors['on-primary']} />
+                    </View>
+                  )}
+                </View>
+                <Text className="text-[10px] text-center font-label text-on-surface-variant mt-1">
+                  {h.label}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
       </ChibiSurface>
 
       <ChibiSurface className="p-4 mb-4">
-        <Text className="font-bold text-on-background mb-2">Skin Tone: {SKIN_TONES[skinIndex].label}</Text>
-        <View className="flex-row gap-3 flex-wrap">
-          {SKIN_TONES.map((s, i) => (
-            <TouchableOpacity
-              key={s.id}
-              onPress={() => setSkinIndex(i)}
-              className="w-10 h-10 rounded-full border-2"
-              style={{ backgroundColor: s.swatch, borderColor: i === skinIndex ? '#1c1b1b' : 'transparent' }}
-            />
-          ))}
+        <Text className="font-label text-xs uppercase text-on-surface-variant mb-3">
+          Skin Tone — {SKIN_TONES[skinIndex].label}
+        </Text>
+        <View className="flex-row flex-wrap gap-3">
+          {SKIN_TONES.map((s, i) => {
+            const selected = i === skinIndex;
+            return (
+              <TouchableOpacity key={s.id} onPress={() => setSkinIndex(i)} activeOpacity={0.8}>
+                <View
+                  className="w-14 h-14 rounded-full border-[3px] border-ink items-center justify-center overflow-hidden"
+                  style={{ backgroundColor: s.swatch }}
+                >
+                  {selected && (
+                    <View
+                      className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-primary items-center justify-center border-[2px] border-ink"
+                    >
+                      <MaterialIcons name="check" size={12} color={tokens.colors['on-primary']} />
+                    </View>
+                  )}
+                </View>
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </ChibiSurface>
 
       <View className="flex-1" />
 
       <ChibiButton className="py-4 mb-6" onPress={finish} disabled={submitting}>
-        <Text className="font-bold uppercase text-on-primary-container">
+        <Text className="font-headline uppercase text-on-primary-container">
           {submitting ? 'Saving…' : "Let's go!"}
         </Text>
       </ChibiButton>

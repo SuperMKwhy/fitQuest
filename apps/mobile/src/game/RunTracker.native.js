@@ -4,6 +4,8 @@ import {
 } from 'react-native';
 import MapView, { Polyline, Marker, PROVIDER_DEFAULT } from 'react-native-maps';
 import * as Location from 'expo-location';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import tokens from '../theme/tokens';
 
 // Reject GPS fixes that are too imprecise or imply an impossible speed
 // (jitter from urban canyons / cold GPS locks), so distance doesn't inflate.
@@ -186,18 +188,23 @@ export default function RunTracker({ onExit, onFinish }) {
   if (permissionStatus !== 'granted') {
     return (
       <View style={styles.center}>
-        <Text style={styles.permTitle}>📍 Location access needed</Text>
+        <View style={styles.permIconWrap}>
+          <MaterialIcons name="location-on" size={40} color={tokens.colors['on-primary-container']} />
+        </View>
+        <Text style={styles.permTitle}>Location access needed</Text>
         <Text style={styles.permMessage}>
           {permissionStatus === 'denied'
             ? "Location access was denied. Enable it in Settings to track your run."
             : "We need your location to draw your route on the map and measure distance."}
         </Text>
         {permissionStatus === 'denied' ? (
-          <TouchableOpacity style={styles.primaryBtn} onPress={() => Linking.openSettings()}>
+          <TouchableOpacity style={styles.primaryBtn} onPress={() => Linking.openSettings()} activeOpacity={0.9}>
+            <MaterialIcons name="settings" size={18} color={tokens.colors['on-background']} style={styles.btnIcon} />
             <Text style={styles.primaryBtnText}>Open Settings</Text>
           </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={styles.primaryBtn} onPress={requestPermission}>
+          <TouchableOpacity style={styles.primaryBtn} onPress={requestPermission} activeOpacity={0.9}>
+            <MaterialIcons name="my-location" size={18} color={tokens.colors['on-background']} style={styles.btnIcon} />
             <Text style={styles.primaryBtnText}>Allow Location</Text>
           </TouchableOpacity>
         )}
@@ -211,12 +218,15 @@ export default function RunTracker({ onExit, onFinish }) {
   if (runState === 'idle') {
     return (
       <View style={styles.center}>
-        <Text style={styles.idleEmoji}>🏃</Text>
+        <View style={styles.permIconWrap}>
+          <MaterialIcons name="directions-run" size={44} color={tokens.colors['on-primary-container']} />
+        </View>
         <Text style={styles.permTitle}>Ready to run?</Text>
         <Text style={styles.permMessage}>
           We'll track your route live on the map and measure your distance, pace, and time.
         </Text>
-        <TouchableOpacity style={styles.primaryBtn} onPress={startRun}>
+        <TouchableOpacity style={styles.primaryBtn} onPress={startRun} activeOpacity={0.9}>
+          <MaterialIcons name="play-arrow" size={20} color={tokens.colors['on-background']} style={styles.btnIcon} />
           <Text style={styles.primaryBtnText}>Start Run</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.secondaryBtn} onPress={onExit}>
@@ -238,7 +248,7 @@ export default function RunTracker({ onExit, onFinish }) {
         } : undefined}
       >
         {route.length > 1 && (
-          <Polyline coordinates={route} strokeColor="#e94560" strokeWidth={4} />
+          <Polyline coordinates={route} strokeColor={tokens.colors.primary} strokeWidth={4} />
         )}
         {currentPosition && (
           <Marker coordinate={currentPosition} anchor={{ x: 0.5, y: 0.5 }}>
@@ -248,42 +258,55 @@ export default function RunTracker({ onExit, onFinish }) {
       </MapView>
 
       <TouchableOpacity style={styles.exitBtn} onPress={confirmExit}>
-        <Text style={styles.exitText}>✕</Text>
+        <MaterialIcons name="close" size={18} color={tokens.colors['on-background']} />
       </TouchableOpacity>
 
       {signalWeak && (
         <View style={styles.signalBanner}>
-          <Text style={styles.signalBannerText}>⚠️ Weak GPS signal</Text>
+          <MaterialIcons name="warning-amber" size={14} color={tokens.colors['on-error-container']} />
+          <Text style={styles.signalBannerText}>Weak GPS signal</Text>
         </View>
       )}
 
       <View style={styles.statsSheet}>
         <View style={styles.statsRow}>
           <View style={styles.statBlock}>
+            <View style={styles.statIconRow}>
+              <MaterialIcons name="straighten" size={14} color={tokens.colors.primary} />
+              <Text style={styles.statLabel}>KM</Text>
+            </View>
             <Text style={styles.statValue}>{distanceKm}</Text>
-            <Text style={styles.statLabel}>km</Text>
           </View>
-          <View style={styles.statBlock}>
+          <View style={[styles.statBlock, styles.statBlockDivider]}>
+            <View style={styles.statIconRow}>
+              <MaterialIcons name="schedule" size={14} color={tokens.colors.primary} />
+              <Text style={styles.statLabel}>DURATION</Text>
+            </View>
             <Text style={styles.statValue}>{formatDuration(elapsedS)}</Text>
-            <Text style={styles.statLabel}>duration</Text>
           </View>
           <View style={styles.statBlock}>
+            <View style={styles.statIconRow}>
+              <MaterialIcons name="speed" size={14} color={tokens.colors.primary} />
+              <Text style={styles.statLabel}>MIN/KM</Text>
+            </View>
             <Text style={styles.statValue}>{formatPace(elapsedS, distanceM)}</Text>
-            <Text style={styles.statLabel}>min/km</Text>
           </View>
         </View>
         <View style={styles.controlsRow}>
           {runState === 'active' ? (
-            <TouchableOpacity style={[styles.controlBtn, styles.pauseBtn]} onPress={pauseRun}>
+            <TouchableOpacity style={[styles.controlBtn, styles.pauseBtn]} onPress={pauseRun} activeOpacity={0.9}>
+              <MaterialIcons name="pause" size={20} color={tokens.colors['on-background']} style={styles.btnIcon} />
               <Text style={styles.controlBtnText}>Pause</Text>
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity style={[styles.controlBtn, styles.resumeBtn]} onPress={resumeRun}>
+            <TouchableOpacity style={[styles.controlBtn, styles.resumeBtn]} onPress={resumeRun} activeOpacity={0.9}>
+              <MaterialIcons name="play-arrow" size={20} color={tokens.colors['on-background']} style={styles.btnIcon} />
               <Text style={styles.controlBtnText}>Resume</Text>
             </TouchableOpacity>
           )}
-          <TouchableOpacity style={[styles.controlBtn, styles.stopBtn]} onPress={stopRun}>
-            <Text style={styles.controlBtnText}>Stop</Text>
+          <TouchableOpacity style={[styles.controlBtn, styles.stopBtn]} onPress={stopRun} activeOpacity={0.9}>
+            <MaterialIcons name="stop" size={20} color={tokens.colors['on-secondary-container']} style={styles.btnIcon} />
+            <Text style={[styles.controlBtnText, styles.stopBtnText]}>Stop</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -291,49 +314,99 @@ export default function RunTracker({ onExit, onFinish }) {
   );
 }
 
+const INK = tokens.colors.ink;
+const SHADOW = tokens.hardShadowOffset;
+
+// Flat "brutalist" ink border + hard offset shadow, matching Chibi.js/
+// design.md's chibi-border + chibi-shadow treatment, expressed via plain
+// RN shadow/elevation since this file intentionally stays on StyleSheet
+// (see src/components/Chibi.js for the NativeWind equivalent).
+const chibiCard = {
+  borderWidth: 3,
+  borderColor: INK,
+  borderRadius: tokens.radius.xl,
+  shadowColor: INK,
+  shadowOffset: { width: SHADOW, height: SHADOW },
+  shadowOpacity: 1,
+  shadowRadius: 0,
+  elevation: 4,
+};
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0a0a1a' },
+  container: { flex: 1, backgroundColor: tokens.colors.background },
   map: { flex: 1 },
   center: {
-    flex: 1, backgroundColor: '#0a0a1a', alignItems: 'center', justifyContent: 'center',
+    flex: 1, backgroundColor: tokens.colors.background, alignItems: 'center', justifyContent: 'center',
     paddingHorizontal: 32,
   },
-  idleEmoji: { fontSize: 56, marginBottom: 12 },
-  permTitle: { color: '#fff', fontSize: 20, fontWeight: '800', marginBottom: 10, textAlign: 'center' },
-  permMessage: { color: '#aaa', fontSize: 14, textAlign: 'center', lineHeight: 20, marginBottom: 24 },
+  permIconWrap: {
+    width: 88, height: 88, borderRadius: tokens.radius.full,
+    backgroundColor: tokens.colors['primary-container'],
+    alignItems: 'center', justifyContent: 'center', marginBottom: 20,
+    borderWidth: 3, borderColor: INK,
+  },
+  permTitle: {
+    color: tokens.colors['on-background'], fontSize: 20, marginBottom: 10, textAlign: 'center',
+    fontFamily: 'SpaceGrotesk-Bold',
+  },
+  permMessage: {
+    color: tokens.colors['on-surface-variant'], fontSize: 14, textAlign: 'center', lineHeight: 20,
+    marginBottom: 24, fontFamily: 'HankenGrotesk-Regular',
+  },
   primaryBtn: {
-    backgroundColor: '#e94560', borderRadius: 16, paddingVertical: 14, paddingHorizontal: 36,
-    marginBottom: 12,
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+    backgroundColor: tokens.colors['primary-container'], borderRadius: tokens.radius.lg,
+    paddingVertical: 14, paddingHorizontal: 36, marginBottom: 12,
+    ...chibiCard,
   },
-  primaryBtnText: { color: '#fff', fontSize: 16, fontWeight: '800' },
+  primaryBtnText: { color: tokens.colors['on-background'], fontSize: 16, fontFamily: 'SpaceGrotesk-Bold' },
   secondaryBtn: { paddingVertical: 8 },
-  secondaryBtnText: { color: '#666', fontSize: 14 },
+  secondaryBtnText: { color: tokens.colors['on-surface-variant'], fontSize: 14, fontFamily: 'HankenGrotesk-Medium' },
+  btnIcon: { marginRight: 8 },
   exitBtn: {
-    position: 'absolute', top: 56, right: 20, width: 36, height: 36, borderRadius: 18,
-    backgroundColor: 'rgba(10,10,26,0.8)', alignItems: 'center', justifyContent: 'center',
+    position: 'absolute', top: 56, right: 20, width: 36, height: 36, borderRadius: tokens.radius.full,
+    backgroundColor: tokens.colors['surface-container-lowest'], alignItems: 'center', justifyContent: 'center',
+    borderWidth: 3, borderColor: INK,
+    shadowColor: INK, shadowOffset: { width: 2, height: 2 }, shadowOpacity: 1, shadowRadius: 0, elevation: 3,
   },
-  exitText: { color: '#fff', fontSize: 16, fontWeight: '700' },
   signalBanner: {
     position: 'absolute', top: 56, left: 20, right: 68,
-    backgroundColor: 'rgba(233,69,96,0.9)', borderRadius: 12, paddingVertical: 8, paddingHorizontal: 12,
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6,
+    backgroundColor: tokens.colors['error-container'], borderRadius: tokens.radius.lg,
+    paddingVertical: 8, paddingHorizontal: 12,
+    borderWidth: 3, borderColor: INK,
   },
-  signalBannerText: { color: '#fff', fontSize: 12, fontWeight: '700', textAlign: 'center' },
+  signalBannerText: {
+    color: tokens.colors['on-error-container'], fontSize: 12, textAlign: 'center',
+    fontFamily: 'JetBrainsMono-Bold',
+  },
   currentDot: {
-    width: 18, height: 18, borderRadius: 9, backgroundColor: '#e94560',
-    borderWidth: 3, borderColor: '#fff',
+    width: 18, height: 18, borderRadius: 9, backgroundColor: tokens.colors['primary-container'],
+    borderWidth: 3, borderColor: INK,
   },
   statsSheet: {
-    backgroundColor: '#12122a', borderTopLeftRadius: 24, borderTopRightRadius: 24,
+    backgroundColor: tokens.colors['surface-container-lowest'],
+    borderTopLeftRadius: tokens.radius.xl, borderTopRightRadius: tokens.radius.xl,
+    borderTopWidth: 3, borderColor: INK,
     paddingTop: 20, paddingBottom: 32, paddingHorizontal: 20,
   },
   statsRow: { flexDirection: 'row', justifyContent: 'space-around', marginBottom: 20 },
-  statBlock: { alignItems: 'center' },
-  statValue: { color: '#fff', fontSize: 22, fontWeight: '800' },
-  statLabel: { color: '#888', fontSize: 12, marginTop: 2 },
+  statBlock: { alignItems: 'center', flex: 1 },
+  statBlockDivider: {
+    borderLeftWidth: 1, borderRightWidth: 1, borderColor: tokens.colors['outline-variant'],
+  },
+  statIconRow: { flexDirection: 'row', alignItems: 'center', gap: 4, marginBottom: 4 },
+  statValue: { color: tokens.colors['on-background'], fontSize: 22, fontFamily: 'JetBrainsMono-Bold' },
+  statLabel: { color: tokens.colors['on-surface-variant'], fontSize: 10, fontFamily: 'JetBrainsMono-Bold' },
   controlsRow: { flexDirection: 'row', gap: 12 },
-  controlBtn: { flex: 1, borderRadius: 16, paddingVertical: 14, alignItems: 'center' },
-  pauseBtn: { backgroundColor: '#1e1e3a' },
-  resumeBtn: { backgroundColor: '#4ade80' },
-  stopBtn: { backgroundColor: '#e94560' },
-  controlBtnText: { color: '#fff', fontSize: 15, fontWeight: '800' },
+  controlBtn: {
+    flex: 1, flexDirection: 'row', borderRadius: tokens.radius.lg, paddingVertical: 14,
+    alignItems: 'center', justifyContent: 'center',
+    ...chibiCard,
+  },
+  pauseBtn: { backgroundColor: tokens.colors['surface-container'] },
+  resumeBtn: { backgroundColor: tokens.colors['primary-container'] },
+  stopBtn: { backgroundColor: tokens.colors['secondary-container'] },
+  controlBtnText: { color: tokens.colors['on-background'], fontSize: 15, fontFamily: 'SpaceGrotesk-Bold' },
+  stopBtnText: { color: tokens.colors['on-secondary-container'] },
 });

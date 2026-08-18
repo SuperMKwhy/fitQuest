@@ -17,9 +17,11 @@ module.exports = {
       },
       fontFamily: {
         headline: ['SpaceGrotesk-Bold'],
+        'headline-medium': ['SpaceGrotesk-Medium'],
         body: ['HankenGrotesk-Regular'],
         'body-medium': ['HankenGrotesk-Medium'],
         label: ['JetBrainsMono-Bold'],
+        pixel: ['PressStart2P'],
       },
     },
   },

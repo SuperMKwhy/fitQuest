@@ -43,7 +43,8 @@
         {
           "locationWhenInUsePermission": "Used to track your route and distance while you're running."
         }
-      ]
+      ],
+      "expo-font"
     ],
     "extra": {
       "eas": {

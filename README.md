@@ -23,75 +23,106 @@ fitQuest/
 - Docker (for Postgres, and optionally the server)
 - For running the mobile app on a phone: the [Expo Go](https://expo.dev/go) app
 
-## First-time setup
+## Quick start (step by step)
 
-```bash
-git clone <this repo>
-cd fitQuest
-cp .env.example .env
-npm install
+These steps take you from a fresh clone to the app running on your phone.
+Run everything from the repo root unless a step says otherwise.
 
-# Expo-managed native deps need Expo's own resolver, not plain npm, to pick
-# versions that actually match this project's Expo SDK — see Troubleshooting
-# below for why this specific package needs its own explicit install step.
-cd apps/mobile
-npx expo install react-native-worklets
-cd ../..
-```
+1. **Install dependencies**
 
-## Running the backend
+   ```bash
+   git clone <this repo>
+   cd fitQuest
+   cp .env.example .env
+   npm install
 
-The API and database run via Docker Compose:
+   # Expo-managed native deps need Expo's own resolver, not plain npm, to
+   # pick versions that actually match this project's Expo SDK — see
+   # Troubleshooting below for why this one needs its own install step.
+   cd apps/mobile
+   npx expo install react-native-worklets
+   cd ../..
+   ```
 
-```bash
-docker compose up --build
-```
+2. **Start Postgres**
 
-This starts Postgres and the server on `http://localhost:3000` (seed the
-shop's item catalog once with `docker compose exec server npm run seed`).
+   ```bash
+   npm run db:up
+   ```
 
-Prefer running the server directly on your host (faster iteration, no
-rebuild-on-change)? Start just the database, then run the server locally:
+3. **Set up and start the API server**
 
-```bash
-npm run db:up          # starts only the postgres container
-cp apps/server/.env.example apps/server/.env
-npm run server          # apps/server: tsx watch, restarts on save
-```
+   ```bash
+   cp apps/server/.env.example apps/server/.env
+   npm run prisma:generate --workspace apps/server   # generates the Prisma client (needed once, and after schema changes)
+   npm run server                                     # tsx watch, restarts on save — leave this running in its own terminal
+   ```
 
-## Running the mobile app
+   (Alternative: `docker compose up --build` runs Postgres *and* the server
+   together, no separate `npm run server` needed — pick one or the other,
+   don't run both, they'll fight over port 3000. Seed the shop's item
+   catalog once either way with `npm run --workspace apps/server seed`, or
+   `docker compose exec server npm run seed` if using Docker.)
 
-```bash
-npm run mobile
-```
+4. **Point the mobile app at the API.** Create `apps/mobile/.env`:
 
-This runs `expo start` in `apps/mobile`. Press `i`/`a` for a simulator, or
-scan the QR code with Expo Go on your phone.
+   - **iOS Simulator / Android Emulator / web** — the app defaults to
+     `http://localhost:3000`, so you can skip this file entirely.
+   - **Physical phone, same Wi-Fi network as your computer** — `localhost`
+     on the phone means the phone itself, not your computer, so point it at
+     your machine's LAN IP instead:
+     ```
+     EXPO_PUBLIC_API_URL=http://192.168.1.23:3000
+     ```
+     (find your IP with `ip addr` / `ifconfig` / System Settings → Wi-Fi).
+   - **Physical phone, different network than your computer** (e.g. phone
+     on cellular, or you can't get them on the same Wi-Fi) — see step 6,
+     you'll need a tunnel instead of a LAN IP.
 
-### Pointing the app at the backend
+5. **Start the mobile app**
 
-The mobile app reads the API's base URL from `EXPO_PUBLIC_API_URL`:
+   ```bash
+   npm run mobile
+   ```
 
-- **iOS Simulator / Android Emulator / web**: defaults to `http://localhost:3000`, no setup needed.
-- **A physical phone via Expo Go**: `localhost` means the phone itself, not your computer. Create `apps/mobile/.env` with your machine's LAN IP:
-  ```
-  EXPO_PUBLIC_API_URL=http://192.168.1.23:3000
-  ```
+   This runs `expo start` in `apps/mobile`. Press `i`/`a` for a simulator,
+   or scan the printed QR code with Expo Go on your phone (same-Wi-Fi case
+   only — see step 6 if your phone's on a different network).
+
+6. **Different network / no shared Wi-Fi?** You need two tunnels — one for
+   the API, one for the Expo dev server itself:
+
+   ```bash
+   # Terminal A — tunnel the API server (port 3000) with ngrok:
+   ngrok http 3000
+   # copy the printed https://xxxx.ngrok-free.app URL into apps/mobile/.env:
+   #   EXPO_PUBLIC_API_URL=https://xxxx.ngrok-free.app
+
+   # Terminal B — tunnel the Expo dev server itself:
+   npx expo start --tunnel
+   ```
+
+   `expo start --tunnel` prints an `exp://...exp.direct` URL — open Expo Go
+   on your phone, tap your profile icon → "Enter URL manually", and paste
+   it in. Both tunnel URLs are randomly generated and **change every time
+   you restart** the tunnel (free ngrok/Expo tunnels aren't stable) — if you
+   restart either one, update `apps/mobile/.env` and re-enter the new
+   `exp://` URL on your phone.
+
+   Get a free ngrok authtoken at [ngrok.com](https://ngrok.com) and run
+   `ngrok config add-authtoken <token>` once before your first `ngrok http`
+   call. This same tunnel setup is also what the Arm Swing Game ("Rank
+   Match") needs even on the *same* network, since its camera access
+   requires an HTTPS origin — see below.
 
 ### Running the Arm Swing Game ("Rank Match") on a physical phone
 
 The arm-swing mini-game uses the phone's camera through the browser's
 `getUserMedia` API, embedded in a WebView — this works inside plain Expo Go
 with no custom dev client or Apple Developer account, but it needs an HTTPS
-tunnel to the dev server (camera access requires a secure origin):
-
-```bash
-NGROK_AUTHTOKEN=<your ngrok authtoken> npx expo start --tunnel
-```
-
-Get a free authtoken at [ngrok.com](https://ngrok.com) — sign up, then copy
-it from your dashboard. Don't commit it; put it in your shell environment or
-a local `.env` you don't check in.
+tunnel to the dev server (camera access requires a secure origin), i.e.
+`npx expo start --tunnel` from step 6 above, even if your phone and computer
+are already on the same Wi-Fi.
 
 See `apps/mobile/src/game/` for how this works: `ArmSwingGame.js` is the
 native wrapper that opens a full-screen WebView pointed at the same dev
@@ -137,3 +168,17 @@ re-diagnosing:
   not the repo root. Some tools (like `expo install`) write to whichever
   `package.json` is in the current directory, and in a workspace that's easy
   to get wrong silently.
+- **`Unable to resolve "react-native-css-interop/jsx-runtime"`** — npm
+  sometimes nests `react-native-css-interop` under
+  `node_modules/nativewind/node_modules/` (to satisfy a peer-dependency
+  conflict) instead of hoisting it to the workspace root. Metro's
+  `disableHierarchicalLookup` setting in `apps/mobile/metro.config.js`
+  (needed for the monorepo `AppEntry.js` fix above) then can't find it.
+  Already fixed via `resolver.extraNodeModules` in that same file, pointing
+  Metro straight at the nested path.
+- **`Environment variable not found: DATABASE_URL`** when running
+  `npm run server` — `tsx watch` doesn't load `.env` files on its own (no
+  `dotenv` is used anywhere in `apps/server`). Already fixed: the `dev`,
+  `start`, and `seed` scripts in `apps/server/package.json` pass
+  `--env-file=.env` explicitly. If you add a new script that runs server
+  code directly (not through `npm run dev/server`), give it the same flag.

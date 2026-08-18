@@ -15,6 +15,7 @@ import GameOverScreen from '../screens/GameOverScreen';
 import AIBuddyChatScreen from '../screens/AIBuddyChatScreen';
 import MoodTrackerScreen from '../screens/MoodTrackerScreen';
 import HealthLogScreen from '../screens/HealthLogScreen';
+import AIFoodScanScreen from '../screens/AIFoodScanScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +47,7 @@ export default function RootNavigator() {
           <Stack.Screen name="AIBuddyChat" component={AIBuddyChatScreen} />
           <Stack.Screen name="MoodTracker" component={MoodTrackerScreen} />
           <Stack.Screen name="HealthLog" component={HealthLogScreen} />
+          <Stack.Screen name="AIFoodScan" component={AIFoodScanScreen} />
         </Stack.Group>
       )}
     </Stack.Navigator>
