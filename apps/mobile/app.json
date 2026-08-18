@@ -9,7 +9,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "Used to track your arm during the Arm Swing exercise game.",
+        "NSCameraUsageDescription": "Used to track your arm during the Arm Swing exercise game and to take photos of food for the AI calorie scanner.",
         "NSLocationWhenInUseUsageDescription": "Used to track your route and distance while you're running."
       }
     },
@@ -42,6 +42,12 @@
         "expo-location",
         {
           "locationWhenInUsePermission": "Used to track your route and distance while you're running."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Used to take photos of food for the AI calorie scanner."
         }
       ],
       "expo-font"

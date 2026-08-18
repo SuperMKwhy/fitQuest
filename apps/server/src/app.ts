@@ -8,6 +8,9 @@ import { activityRoutes } from './routes/activities.js';
 import { leaderboardRoutes } from './routes/leaderboard.js';
 import { shopRoutes } from './routes/shop.js';
 import { friendsRoutes } from './routes/friends.js';
+import { aiBuddyRoutes } from './routes/aiBuddy.js';
+import { foodScanRoutes } from './routes/foodScan.js';
+import { foodLogRoutes } from './routes/foodLog.js';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -16,7 +19,8 @@ declare module 'fastify' {
 }
 
 export function buildApp() {
-  const app = Fastify({ logger: true });
+  // Default 1MB body limit is too small for a base64-encoded food photo.
+  const app = Fastify({ logger: true, bodyLimit: 10 * 1024 * 1024 });
 
   app.register(cors, { origin: true });
   app.register(jwt, { secret: process.env.JWT_SECRET || 'dev-secret-change-me' });
@@ -37,6 +41,9 @@ export function buildApp() {
   app.register(leaderboardRoutes);
   app.register(shopRoutes);
   app.register(friendsRoutes);
+  app.register(aiBuddyRoutes);
+  app.register(foodScanRoutes);
+  app.register(foodLogRoutes);
 
   return app;
 }

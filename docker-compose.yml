@@ -27,6 +27,8 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-fitquest}:${POSTGRES_PASSWORD:-fitquest}@postgres:5432/${POSTGRES_DB:-fitquest}
       JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
       PORT: 3000
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-2.5-flash}
     ports:
       - '${SERVER_PORT:-3000}:3000'
 

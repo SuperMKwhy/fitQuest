@@ -15,6 +15,7 @@ model User {
 
   profile    Profile?
   activities Activity[]
+  foodLogs   FoodLog[]
 
   friendshipsInitiated Friendship[] @relation("FriendshipInitiator")
   friendshipsReceived  Friendship[] @relation("FriendshipReceiver")
@@ -66,6 +67,31 @@ model Activity {
   createdAt DateTime @default(now())
 
   @@index([userId, createdAt])
+}
+
+model FoodLog {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name     String
+  // "Breakfast" | "Lunch" | "Dinner" | "Snack"
+  mealType String
+  calories Int
+  proteinG Float?
+  carbsG   Float?
+  fatG     Float?
+  // "scan" | "manual"
+  source     String @default("manual")
+  // 0-100, only set for source = "scan"
+  confidence Float?
+
+  // The day/time this food is logged against — lets a user backdate or
+  // browse a past day, independent of when the row was actually inserted.
+  loggedAt  DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  @@index([userId, loggedAt])
 }
 
 model Friendship {
