@@ -75,5 +75,10 @@ net-new pieces added?
 ## Existing assets (already covered, no action needed)
 
 `apps/mobile/assets/icon.png`, `favicon.png`, `splash-icon.png`,
-`android-icon-*.png`, `character/body_{brown,deep,fair,olive,porcelain,tan}.png`,
-`character/hair_{long,mohawk,short,spiky}.png`.
+`android-icon-*.png`, `character/body/{porcelain,fair,olive,tan,brown,deep}.png`,
+`character/hair/{bald,short,long,spiky,mohawk}.png`.
+
+Character assets are organized one subfolder per part under
+`apps/mobile/assets/character/`: `body/`, `hair/`, `shirt/`, `pant/`. `shirt/`
+and `pant/` exist but are still empty — outfit art (item 3's shirt/pant
+equivalents, if that scope lands) belongs there, one file per option.
