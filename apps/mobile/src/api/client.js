@@ -40,4 +40,7 @@ export const api = {
   getFriends: () => request('/friends'),
   sendBuddyMessage: (message, history) =>
     request('/ai-buddy/chat', { method: 'POST', body: { message, history } }),
+  scanFood: (imageBase64, mimeType) => request('/food-scan', { method: 'POST', body: { imageBase64, mimeType } }),
+  getFoodLog: (date) => request(`/food-log?date=${date}`),
+  logFood: (entry) => request('/food-log', { method: 'POST', body: entry }),
 };

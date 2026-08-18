@@ -1,36 +1,88 @@
 import { useCallback, useMemo, useState } from 'react';
-import { Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
+import { ActivityIndicator, Modal, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { ChibiButton, ChibiSurface } from '../components/Chibi';
+import { api } from '../api/client';
 
-// Matches design/HealthLog.html (calorie/food/water log). Mock-data pass —
-// there is no food database or backend for this yet, everything below is
-// local component state. See AIFoodScanScreen.js for the "scan food" flow
-// that feeds `route.params.scannedFood` back into this screen.
+// Matches design/HealthLog.html. Food log is real, backed by
+// GET/POST /food-log (apps/server/src/routes/foodLog.ts) — the "calendar" is
+// the chevron_left/Today/chevron_right day nav from the mockup, one day of
+// entries at a time. "Scan food" hands off to AIFoodScanScreen, which posts
+// its Gemini vision result straight to /food-log and navigates back here.
+// Water tracking has no backend model yet, so it stays local-only for now.
 
 const CALORIE_TARGET = 2000;
 const WATER_TARGET = 8;
 const MEAL_TYPES = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
-const SEED_FOOD_LOG = [
-  { id: 'seed-1', name: 'Fried Egg', calories: 140, mealType: 'Breakfast', time: '7:30 AM' },
-  { id: 'seed-2', name: 'Toast', calories: 160, mealType: 'Breakfast', time: '7:32 AM' },
-  { id: 'seed-3', name: 'Holy Basil Pork', calories: 300, mealType: 'Lunch', time: '12:10 PM' },
-  { id: 'seed-4', name: 'Soda', calories: 140, mealType: 'Lunch', time: '12:15 PM' },
-];
+function toDateKey(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
 
-export default function HealthLogScreen({ navigation, route }) {
-  const [foodLog, setFoodLog] = useState(SEED_FOOD_LOG);
+function shiftDay(date, delta) {
+  const next = new Date(date);
+  next.setDate(next.getDate() + delta);
+  return next;
+}
+
+function dateLabel(date) {
+  const today = new Date();
+  if (toDateKey(date) === toDateKey(today)) return 'Today';
+  if (toDateKey(date) === toDateKey(shiftDay(today, -1))) return 'Yesterday';
+  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+
+export default function HealthLogScreen({ navigation }) {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [foodLog, setFoodLog] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [waterCount, setWaterCount] = useState(5);
   const [modalVisible, setModalVisible] = useState(false);
   const [activeMealType, setActiveMealType] = useState('Snack');
   const [foodName, setFoodName] = useState('');
   const [foodCalories, setFoodCalories] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const totalCalories = useMemo(() => foodLog.reduce((sum, item) => sum + item.calories, 0), [foodLog]);
-  const progress = Math.min(1, totalCalories / CALORIE_TARGET);
+  const loadFoodLog = useCallback(async (date) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const entries = await api.getFoodLog(toDateKey(date));
+      setFoodLog(entries);
+    } catch (err) {
+      setError(err.message || 'Could not load your food log.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadFoodLog(selectedDate);
+    }, [loadFoodLog, selectedDate]),
+  );
+
+  const totals = useMemo(
+    () =>
+      foodLog.reduce(
+        (acc, item) => ({
+          calories: acc.calories + item.calories,
+          proteinG: acc.proteinG + (item.proteinG || 0),
+          carbsG: acc.carbsG + (item.carbsG || 0),
+          fatG: acc.fatG + (item.fatG || 0),
+        }),
+        { calories: 0, proteinG: 0, carbsG: 0, fatG: 0 },
+      ),
+    [foodLog],
+  );
+  const progress = Math.min(1, totals.calories / CALORIE_TARGET);
+  const isToday = toDateKey(selectedDate) === toDateKey(new Date());
 
   const mealSections = useMemo(
     () =>
@@ -41,27 +93,6 @@ export default function HealthLogScreen({ navigation, route }) {
     [foodLog],
   );
 
-  // Consume a food entry handed back by AIFoodScanScreen's canned vision
-  // result, then clear the param so re-focusing this screen doesn't re-add it.
-  useFocusEffect(
-    useCallback(() => {
-      const scanned = route.params?.scannedFood;
-      if (scanned) {
-        setFoodLog((prev) => [
-          ...prev,
-          {
-            id: `scan-${Date.now()}`,
-            name: scanned.name,
-            calories: scanned.calories,
-            mealType: 'Snack',
-            time: new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
-          },
-        ]);
-        navigation.setParams({ scannedFood: undefined });
-      }
-    }, [route.params?.scannedFood, navigation]),
-  );
-
   const openAddFoodModal = (mealType) => {
     setActiveMealType(mealType);
     setFoodName('');
@@ -69,20 +100,30 @@ export default function HealthLogScreen({ navigation, route }) {
     setModalVisible(true);
   };
 
-  const submitFood = () => {
+  const submitFood = async () => {
     const calories = parseInt(foodCalories, 10);
     if (!foodName.trim() || Number.isNaN(calories) || calories <= 0) return;
-    setFoodLog((prev) => [
-      ...prev,
-      {
-        id: `manual-${Date.now()}`,
+
+    const loggedAt = new Date(selectedDate);
+    const now = new Date();
+    loggedAt.setHours(now.getHours(), now.getMinutes(), now.getSeconds());
+
+    setSubmitting(true);
+    try {
+      await api.logFood({
         name: foodName.trim(),
-        calories,
         mealType: activeMealType,
-        time: new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
-      },
-    ]);
-    setModalVisible(false);
+        calories,
+        source: 'manual',
+        loggedAt: loggedAt.toISOString(),
+      });
+      setModalVisible(false);
+      await loadFoodLog(selectedDate);
+    } catch (err) {
+      setError(err.message || 'Could not save that food.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const toggleWaterAt = (index) => {
@@ -108,86 +149,111 @@ export default function HealthLogScreen({ navigation, route }) {
           </ChibiButton>
         </View>
 
-        {/* Calorie progress */}
+        {error && (
+          <ChibiSurface className="p-3">
+            <Text className="font-body text-error text-center">{error}</Text>
+          </ChibiSurface>
+        )}
+
+        {/* Date nav + calorie progress */}
         <ChibiSurface className="p-6 items-center gap-4">
-          <Text className="font-headline text-lg text-on-background">Today</Text>
-          <View className="items-center gap-1">
-            <Text className="font-headline text-4xl text-on-background">{totalCalories}</Text>
-            <Text className="font-label text-outline">/ {CALORIE_TARGET} kcal</Text>
+          <View className="w-full flex-row items-center justify-between">
+            <Pressable onPress={() => setSelectedDate((d) => shiftDay(d, -1))} hitSlop={8}>
+              <MaterialIcons name="chevron-left" size={28} color="#1c1b1b" />
+            </Pressable>
+            <Text className="font-headline text-lg text-on-background">{dateLabel(selectedDate)}</Text>
+            <Pressable onPress={() => !isToday && setSelectedDate((d) => shiftDay(d, 1))} hitSlop={8} disabled={isToday}>
+              <MaterialIcons name="chevron-right" size={28} color={isToday ? '#bbcac3' : '#1c1b1b'} />
+            </Pressable>
           </View>
-          <View className="w-full h-4 rounded-full border-[3px] border-ink bg-surface-container-high overflow-hidden">
-            <View
-              className="h-full bg-primary-container border-r-[3px] border-ink"
-              style={{ width: `${progress * 100}%` }}
-            />
-          </View>
-          <View className="w-full flex-row justify-between px-2">
-            <View className="items-center">
-              <Text className="font-label text-xs text-outline">PROTEIN</Text>
-              <Text className="font-label text-secondary-container">80g</Text>
-            </View>
-            <View className="items-center">
-              <Text className="font-label text-xs text-outline">CARBS</Text>
-              <Text className="font-label text-tertiary-container">120g</Text>
-            </View>
-            <View className="items-center">
-              <Text className="font-label text-xs text-outline">FAT</Text>
-              <Text className="font-label text-primary">45g</Text>
-            </View>
-          </View>
+
+          {loading ? (
+            <ActivityIndicator size="large" color="#3ecfaa" />
+          ) : (
+            <>
+              <View className="items-center gap-1">
+                <Text className="font-headline text-4xl text-on-background">{totals.calories}</Text>
+                <Text className="font-label text-outline">/ {CALORIE_TARGET} kcal</Text>
+              </View>
+              <View className="w-full h-4 rounded-full border-[3px] border-ink bg-surface-container-high overflow-hidden">
+                <View
+                  className="h-full bg-primary-container border-r-[3px] border-ink"
+                  style={{ width: `${progress * 100}%` }}
+                />
+              </View>
+              <View className="w-full flex-row justify-between px-2">
+                <View className="items-center">
+                  <Text className="font-label text-xs text-outline">PROTEIN</Text>
+                  <Text className="font-label text-secondary-container">{Math.round(totals.proteinG)}g</Text>
+                </View>
+                <View className="items-center">
+                  <Text className="font-label text-xs text-outline">CARBS</Text>
+                  <Text className="font-label text-tertiary-container">{Math.round(totals.carbsG)}g</Text>
+                </View>
+                <View className="items-center">
+                  <Text className="font-label text-xs text-outline">FAT</Text>
+                  <Text className="font-label text-primary">{Math.round(totals.fatG)}g</Text>
+                </View>
+              </View>
+            </>
+          )}
         </ChibiSurface>
 
         {/* Meal sections */}
-        <View className="gap-4">
-          {mealSections.map((section) => (
-            <View key={section.mealType}>
-              <View className="flex-row justify-between items-center mb-2 px-1">
-                <Text className="font-headline text-lg text-on-background">{section.mealType}</Text>
-                <Text className="font-label text-outline">
-                  {section.items.reduce((sum, i) => sum + i.calories, 0)} kcal
-                </Text>
+        {!loading && (
+          <View className="gap-4">
+            {mealSections.map((section) => (
+              <View key={section.mealType}>
+                <View className="flex-row justify-between items-center mb-2 px-1">
+                  <Text className="font-headline text-lg text-on-background">{section.mealType}</Text>
+                  <Text className="font-label text-outline">
+                    {section.items.reduce((sum, i) => sum + i.calories, 0)} kcal
+                  </Text>
+                </View>
+                <ChibiSurface>
+                  {section.items.map((item, idx) => (
+                    <View
+                      key={item.id}
+                      className={`flex-row items-center gap-3 p-3 ${idx > 0 ? 'border-t-[3px] border-ink' : ''}`}
+                    >
+                      <View className="w-12 h-12 bg-secondary-container items-center justify-center rounded border-2 border-ink">
+                        <MaterialIcons name={item.source === 'scan' ? 'photo-camera' : 'restaurant'} size={20} color="#1c1b1b" />
+                      </View>
+                      <View className="flex-1">
+                        <Text className="font-label text-on-background">{item.name}</Text>
+                        <Text className="font-body text-outline text-xs">
+                          {new Date(item.loggedAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}
+                        </Text>
+                      </View>
+                      <Text className="font-label text-on-background">{item.calories} kcal</Text>
+                    </View>
+                  ))}
+                </ChibiSurface>
+                <Pressable
+                  onPress={() => openAddFoodModal(section.mealType)}
+                  className="mt-2 flex-row justify-center items-center gap-2 py-2 border-2 border-dashed border-outline rounded-xl"
+                >
+                  <MaterialIcons name="add" size={18} color="#6c7a74" />
+                  <Text className="font-label text-outline uppercase">Add food</Text>
+                </Pressable>
               </View>
-              <ChibiSurface>
-                {section.items.map((item, idx) => (
-                  <View
-                    key={item.id}
-                    className={`flex-row items-center gap-3 p-3 ${idx > 0 ? 'border-t-[3px] border-ink' : ''}`}
-                  >
-                    <View className="w-12 h-12 bg-secondary-container items-center justify-center rounded border-2 border-ink">
-                      <MaterialIcons name="restaurant" size={20} color="#1c1b1b" />
-                    </View>
-                    <View className="flex-1">
-                      <Text className="font-label text-on-background">{item.name}</Text>
-                      <Text className="font-body text-outline text-xs">{item.time}</Text>
-                    </View>
-                    <Text className="font-label text-on-background">{item.calories} kcal</Text>
-                  </View>
-                ))}
+            ))}
+
+            {mealSections.length === 0 && (
+              <ChibiSurface className="p-4">
+                <Text className="text-on-surface-variant text-center">No food logged {isToday ? 'yet today' : 'this day'}.</Text>
               </ChibiSurface>
-              <Pressable
-                onPress={() => openAddFoodModal(section.mealType)}
-                className="mt-2 flex-row justify-center items-center gap-2 py-2 border-2 border-dashed border-outline rounded-xl"
-              >
-                <MaterialIcons name="add" size={18} color="#6c7a74" />
-                <Text className="font-label text-outline uppercase">Add food</Text>
-              </Pressable>
-            </View>
-          ))}
+            )}
 
-          {mealSections.length === 0 && (
-            <ChibiSurface className="p-4">
-              <Text className="text-on-surface-variant text-center">No food logged yet today.</Text>
-            </ChibiSurface>
-          )}
-
-          <Pressable
-            onPress={() => openAddFoodModal('Snack')}
-            className="flex-row justify-center items-center gap-2 py-2 border-2 border-dashed border-outline rounded-xl"
-          >
-            <MaterialIcons name="add" size={18} color="#6c7a74" />
-            <Text className="font-label text-outline uppercase">Add snack</Text>
-          </Pressable>
-        </View>
+            <Pressable
+              onPress={() => openAddFoodModal('Snack')}
+              className="flex-row justify-center items-center gap-2 py-2 border-2 border-dashed border-outline rounded-xl"
+            >
+              <MaterialIcons name="add" size={18} color="#6c7a74" />
+              <Text className="font-label text-outline uppercase">Add snack</Text>
+            </Pressable>
+          </View>
+        )}
 
         {/* Water tracker */}
         <View className="gap-3 items-center">
@@ -243,11 +309,15 @@ export default function HealthLogScreen({ navigation, route }) {
               className="border-b-2 border-outline-variant py-2 text-on-background"
             />
             <View className="flex-row gap-3">
-              <ChibiButton className="flex-1 py-3" onPress={() => setModalVisible(false)}>
+              <ChibiButton className="flex-1 py-3" onPress={() => setModalVisible(false)} disabled={submitting}>
                 <Text className="font-label uppercase text-on-primary-container">Cancel</Text>
               </ChibiButton>
-              <ChibiButton className="flex-1 py-3" onPress={submitFood}>
-                <Text className="font-label uppercase text-on-primary-container">Add</Text>
+              <ChibiButton className="flex-1 py-3" onPress={submitFood} disabled={submitting}>
+                {submitting ? (
+                  <ActivityIndicator color="#005442" />
+                ) : (
+                  <Text className="font-label uppercase text-on-primary-container">Add</Text>
+                )}
               </ChibiButton>
             </View>
           </ChibiSurface>
