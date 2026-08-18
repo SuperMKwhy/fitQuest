@@ -2,34 +2,13 @@ import { useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, Pressable, ScrollView, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { api } from '../api/client';
 
-// Matches design/AIBuddyChat.html. Needs a real LLM integration decision
-// before this can talk to anything real — everything here is local state
-// and canned replies. See getMockBuddyReply below for the swap point.
+// Matches design/AIBuddyChat.html. Talks to POST /ai-buddy/chat on the
+// server, which forwards to the Gemini API (Google AI Studio) — see
+// apps/server/src/routes/aiBuddy.ts and apps/server/src/lib/gemini.ts.
 
-const REPLY_DELAY_MS = 600;
-
-const CANNED_REPLIES = [
-  "You've got this! Every rep counts toward your next level.",
-  "Nice work checking in — consistency is your best stat boost.",
-  "Remember to hydrate between sets, hero!",
-  "Small steps today, big XP gains tomorrow. Keep going!",
-  "I'm proud of you for showing up. Let's crush the next quest together.",
-];
-
-let replyIndex = 0;
-
-// ---------------------------------------------------------------------------
-// SEAM: this is the one place that stands in for a real LLM call. Swap the
-// body of this function for a real request (send `userMessage` + history to
-// a model, await its reply) — everything else in this screen only depends on
-// this function resolving/returning a string.
-function getMockBuddyReply(userMessage) {
-  const reply = CANNED_REPLIES[replyIndex % CANNED_REPLIES.length];
-  replyIndex += 1;
-  return reply;
-}
-// ---------------------------------------------------------------------------
+const FALLBACK_REPLY = "Hmm, I couldn't reach my brain just now — mind trying that again?";
 
 const INITIAL_MESSAGES = [
   {
@@ -42,23 +21,32 @@ const INITIAL_MESSAGES = [
 export default function AIBuddyChatScreen({ navigation }) {
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [draft, setDraft] = useState('');
+  const [isSending, setIsSending] = useState(false);
   const scrollRef = useRef(null);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     const text = draft.trim();
-    if (!text) return;
+    if (!text || isSending) return;
 
     const userMessage = { id: `${Date.now()}-user`, sender: 'user', text };
+    const history = messages.map(({ sender, text }) => ({ sender, text }));
     setMessages((prev) => [...prev, userMessage]);
     setDraft('');
-
-    setTimeout(() => {
-      const reply = getMockBuddyReply(text);
-      setMessages((prev) => [...prev, { id: `${Date.now()}-ai`, sender: 'ai', text: reply }]);
-      scrollRef.current?.scrollToEnd({ animated: true });
-    }, REPLY_DELAY_MS);
-
+    setIsSending(true);
     requestAnimationFrame(() => scrollRef.current?.scrollToEnd({ animated: true }));
+
+    try {
+      const { reply } = await api.sendBuddyMessage(text, history);
+      setMessages((prev) => [...prev, { id: `${Date.now()}-ai`, sender: 'ai', text: reply }]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        { id: `${Date.now()}-ai-error`, sender: 'ai', text: err.message || FALLBACK_REPLY },
+      ]);
+    } finally {
+      setIsSending(false);
+      requestAnimationFrame(() => scrollRef.current?.scrollToEnd({ animated: true }));
+    }
   };
 
   return (
@@ -99,6 +87,16 @@ export default function AIBuddyChatScreen({ navigation }) {
               </View>
             );
           })}
+          {isSending && (
+            <View className="flex-row items-start gap-2 max-w-[85%] self-start">
+              <View className="w-10 h-10 rounded-full border-[3px] border-ink bg-primary-container items-center justify-center shrink-0">
+                <MaterialIcons name="smart-toy" size={20} color="#005442" />
+              </View>
+              <View className="p-3 rounded-xl rounded-tl-none border-[3px] border-ink bg-surface-container-lowest">
+                <Text className="text-on-surface">Typing…</Text>
+              </View>
+            </View>
+          )}
         </ScrollView>
 
         <View className="flex-row items-center gap-3 p-3 border-t-[3px] border-ink bg-surface">
@@ -110,11 +108,15 @@ export default function AIBuddyChatScreen({ navigation }) {
               className="text-on-surface h-10"
               onSubmitEditing={handleSend}
               returnKeyType="send"
+              editable={!isSending}
             />
           </View>
           <Pressable
             onPress={handleSend}
-            className="w-12 h-12 rounded-xl border-[3px] border-ink bg-secondary-container items-center justify-center"
+            disabled={isSending}
+            className={`w-12 h-12 rounded-xl border-[3px] border-ink bg-secondary-container items-center justify-center ${
+              isSending ? 'opacity-50' : ''
+            }`}
           >
             <MaterialIcons name="send" size={22} color="#6d0010" />
           </Pressable>

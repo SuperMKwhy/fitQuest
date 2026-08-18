@@ -8,6 +8,7 @@ import { activityRoutes } from './routes/activities.js';
 import { leaderboardRoutes } from './routes/leaderboard.js';
 import { shopRoutes } from './routes/shop.js';
 import { friendsRoutes } from './routes/friends.js';
+import { aiBuddyRoutes } from './routes/aiBuddy.js';
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -37,6 +38,7 @@ export function buildApp() {
   app.register(leaderboardRoutes);
   app.register(shopRoutes);
   app.register(friendsRoutes);
+  app.register(aiBuddyRoutes);
 
   return app;
 }

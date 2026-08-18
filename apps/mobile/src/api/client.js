@@ -38,4 +38,6 @@ export const api = {
   getLeaderboard: () => request('/leaderboard'),
   getShopItems: () => request('/shop/items'),
   getFriends: () => request('/friends'),
+  sendBuddyMessage: (message, history) =>
+    request('/ai-buddy/chat', { method: 'POST', body: { message, history } }),
 };
