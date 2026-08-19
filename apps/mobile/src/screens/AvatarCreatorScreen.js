@@ -3,90 +3,10 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ChibiButton, ChibiSurface } from '../components/Chibi';
+import { AvatarCanvas, DEFAULT_SELECTION, PARTS } from '../components/Avatar';
 import { OnboardingStepper } from '../components/OnboardingStepper';
 import tokens from '../theme/tokens';
 import { useAppStore } from '../state/useAppStore';
-
-// `apps/mobile/assets/character/<part>/` holds one flat-transparent PNG per
-// option, all painted on the same 260x505 canvas so any combination lines up
-// without per-part offsets. Compositing is just stacking them in RENDER_ORDER.
-const PARTS = [
-  {
-    key: 'body',
-    label: 'Body',
-    icon: 'person',
-    options: [
-      { id: 'slim', label: 'Slim', asset: require('../../assets/character/body/slim.png') },
-      { id: 'athletic', label: 'Athletic', asset: require('../../assets/character/body/athletic.png') },
-      { id: 'muscular', label: 'Muscular', asset: require('../../assets/character/body/muscular.png') },
-      { id: 'shredded', label: 'Shredded', asset: require('../../assets/character/body/shredded.png') },
-    ],
-  },
-  {
-    key: 'hair',
-    label: 'Hair',
-    icon: 'content-cut',
-    options: [
-      { id: 'short', label: 'Short', asset: require('../../assets/character/hair/short.png') },
-      { id: 'twintails', label: 'Twintails', asset: require('../../assets/character/hair/twintails.png') },
-    ],
-  },
-  {
-    key: 'shirt',
-    label: 'Top',
-    icon: 'checkroom',
-    options: [
-      { id: 'tank', label: 'Tank', asset: require('../../assets/character/shirt/tank.png') },
-      { id: 'henley', label: 'Henley', asset: require('../../assets/character/shirt/henley.png') },
-      { id: 'jacket', label: 'Jacket', asset: require('../../assets/character/shirt/jacket.png') },
-    ],
-  },
-  {
-    key: 'pant',
-    label: 'Bottom',
-    icon: 'dry-cleaning',
-    options: [
-      { id: 'shorts', label: 'Shorts', asset: require('../../assets/character/pant/shorts.png') },
-      { id: 'joggers', label: 'Joggers', asset: require('../../assets/character/pant/joggers.png') },
-    ],
-  },
-  {
-    key: 'shoe',
-    label: 'Shoes',
-    icon: 'directions-run',
-    options: [{ id: 'sneakers', label: 'Sneakers', asset: require('../../assets/character/shoe/sneakers.png') }],
-  },
-];
-
-// Back-to-front paint order — matches the physical stacking the assets were
-// authored for: body at the bottom, shirt topmost.
-const RENDER_ORDER = ['body', 'shoe', 'hair', 'pant', 'shirt'];
-
-const DEFAULT_SELECTION = { body: 'muscular', hair: 'short', shirt: 'jacket', pant: 'joggers', shoe: 'sneakers' };
-
-const PARTS_BY_KEY = Object.fromEntries(PARTS.map((p) => [p.key, p]));
-
-// Every option for every part stays mounted the whole time — switching is
-// just an opacity flip instead of a mount/decode, so it's instant after the
-// one-time decode cost at screen-open instead of re-paying it on every tap.
-function AvatarCanvas({ selection, className = '' }) {
-  return (
-    <View className={`relative ${className}`}>
-      {RENDER_ORDER.map((key) =>
-        PARTS_BY_KEY[key].options.map((option) => (
-          <Image
-            key={option.id}
-            source={option.asset}
-            resizeMode="contain"
-            fadeDuration={0}
-            className="absolute inset-0 w-full h-full"
-            style={{ opacity: selection[key] === option.id ? 1 : 0 }}
-          />
-        ))
-      )}
-    </View>
-  );
-}
 
 function PartSwatch({ option, selected, onPress }) {
   return (
@@ -112,8 +32,6 @@ export default function AvatarCreatorScreen({ navigation, route }) {
   const [future, setFuture] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const completeOnboarding = useAppStore((s) => s.completeOnboarding);
-
-  const activeDef = PARTS.find((p) => p.key === activePart);
 
   const pick = (partKey, optionId) => {
     if (selection[partKey] === optionId) return;
@@ -243,23 +161,28 @@ export default function AvatarCreatorScreen({ navigation, route }) {
           </View>
         </ChibiSurface>
 
-        {/* Variant options */}
+        {/* Variant options — every category's row stays mounted (just hidden)
+            so its swatch thumbnails are already decoded before you tab to it. */}
         <ChibiSurface className="p-4 mb-4">
-          <View className="flex-row items-center justify-center gap-2 mb-3">
-            <Text className="text-primary-container font-label text-sm">✦</Text>
-            <Text className="font-label text-[13px] uppercase text-on-surface">{activeDef.label}</Text>
-            <Text className="text-primary-container font-label text-sm">✦</Text>
-          </View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerClassName="gap-3">
-            {activeDef.options.map((option) => (
-              <PartSwatch
-                key={option.id}
-                option={option}
-                selected={selection[activeDef.key] === option.id}
-                onPress={() => pick(activeDef.key, option.id)}
-              />
-            ))}
-          </ScrollView>
+          {PARTS.map((p) => (
+            <View key={p.key} style={{ display: p.key === activePart ? 'flex' : 'none' }}>
+              <View className="flex-row items-center justify-center gap-2 mb-3">
+                <Text className="text-primary-container font-label text-sm">✦</Text>
+                <Text className="font-label text-[13px] uppercase text-on-surface">{p.label}</Text>
+                <Text className="text-primary-container font-label text-sm">✦</Text>
+              </View>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerClassName="gap-3">
+                {p.options.map((option) => (
+                  <PartSwatch
+                    key={option.id}
+                    option={option}
+                    selected={selection[p.key] === option.id}
+                    onPress={() => pick(p.key, option.id)}
+                  />
+                ))}
+              </ScrollView>
+            </View>
+          ))}
         </ChibiSurface>
 
         <ChibiButton className="py-4 flex-row gap-1 mb-4" onPress={finish} disabled={submitting}>

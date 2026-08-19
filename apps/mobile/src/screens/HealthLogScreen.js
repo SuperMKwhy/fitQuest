@@ -24,6 +24,12 @@ function toDateKey(date) {
   return `${y}-${m}-${d}`;
 }
 
+// The instant this device's local midnight falls at, for `date` — what the
+// server's /food-log?date= actually wants (see apps/server's foodLog.ts).
+function startOfDayISO(date) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate()).toISOString();
+}
+
 function shiftDay(date, delta) {
   const next = new Date(date);
   next.setDate(next.getDate() + delta);
@@ -53,7 +59,7 @@ export default function HealthLogScreen({ navigation }) {
     setLoading(true);
     setError(null);
     try {
-      const entries = await api.getFoodLog(toDateKey(date));
+      const entries = await api.getFoodLog(startOfDayISO(date));
       setFoodLog(entries);
     } catch (err) {
       setError(err.message || 'Could not load your food log.');

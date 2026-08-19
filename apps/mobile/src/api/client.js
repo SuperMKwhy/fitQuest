@@ -41,6 +41,10 @@ export const api = {
   sendBuddyMessage: (message, history) =>
     request('/ai-buddy/chat', { method: 'POST', body: { message, history } }),
   scanFood: (imageBase64, mimeType) => request('/food-scan', { method: 'POST', body: { imageBase64, mimeType } }),
-  getFoodLog: (date) => request(`/food-log?date=${date}`),
+  // `date` must be the ISO instant of the caller's local midnight for that
+  // day (see HealthLogScreen's `startOfDayISO`) — the server has no way to
+  // know the caller's timezone, so it treats this literally as "today"
+  // starts here, rather than re-deriving midnight itself.
+  getFoodLog: (date) => request(`/food-log?date=${encodeURIComponent(date)}`),
   logFood: (entry) => request('/food-log', { method: 'POST', body: entry }),
 };

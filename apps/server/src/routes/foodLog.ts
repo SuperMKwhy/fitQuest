@@ -3,9 +3,14 @@ import { prisma } from '../lib/prisma.js';
 
 const MEAL_TYPES = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 
+// `date` is the ISO instant of the *client's* local midnight (e.g.
+// `new Date(2026, 7, 20).toISOString()`), not a bare YYYY-MM-DD — the server
+// has no idea what timezone the client is in, so reinterpreting a bare date
+// as UTC midnight silently shifts "today" by the client's UTC offset (food
+// logged in the evening in UTC+ zones was landing in "yesterday"). Treating
+// the client's instant as the literal start of its day sidesteps that.
 function dayBounds(dateParam: unknown): { start: Date; end: Date } {
-  const base = typeof dateParam === 'string' && dateParam ? new Date(`${dateParam}T00:00:00.000Z`) : new Date();
-  const start = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth(), base.getUTCDate()));
+  const start = typeof dateParam === 'string' && dateParam ? new Date(dateParam) : new Date(new Date().toDateString());
   const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
   return { start, end };
 }
@@ -15,8 +20,8 @@ export async function foodLogRoutes(app: FastifyInstance) {
     const userId = (request.user as { sub: string }).sub;
     const { date } = request.query as { date?: string };
 
-    if (date && Number.isNaN(new Date(`${date}T00:00:00.000Z`).getTime())) {
-      return reply.code(400).send({ error: 'date must be an ISO date string (YYYY-MM-DD)' });
+    if (date && Number.isNaN(new Date(date).getTime())) {
+      return reply.code(400).send({ error: 'date must be a valid ISO date-time string' });
     }
     const { start, end } = dayBounds(date);
 
