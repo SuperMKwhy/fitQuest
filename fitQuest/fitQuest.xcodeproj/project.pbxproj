@@ -256,6 +256,9 @@
 				DEVELOPMENT_TEAM = T5U833UVK4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "FitQuest uses your camera to track arm-swing motion during Rank Match and to scan food for calorie logging.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "FitQuest uses your location to draw your route on the map and measure distance during a run.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "FitQuest can use photos from your library to scan food for calorie logging.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -288,6 +291,9 @@
 				DEVELOPMENT_TEAM = T5U833UVK4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "FitQuest uses your camera to track arm-swing motion during Rank Match and to scan food for calorie logging.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "FitQuest uses your location to draw your route on the map and measure distance during a run.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "FitQuest can use photos from your library to scan food for calorie logging.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

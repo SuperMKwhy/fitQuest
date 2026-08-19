@@ -1,0 +1,13 @@
+{
+  "name": "fitquest-ios",
+  "private": true,
+  "scripts": {
+    "db:up": "docker compose up -d postgres",
+    "db:down": "docker compose down",
+    "server": "npm --prefix server run dev",
+    "server:build": "npm --prefix server run build",
+    "prisma:generate": "npm --prefix server run prisma:generate",
+    "prisma:studio": "npm --prefix server run prisma:studio",
+    "seed": "npm --prefix server run seed"
+  }
+}
