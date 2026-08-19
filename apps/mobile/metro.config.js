@@ -26,12 +26,19 @@ config.resolver.disableHierarchicalLookup = true;
 // (to satisfy a peer-dependency constraint) instead of hoisting it to
 // <root>/node_modules. `disableHierarchicalLookup` above means Metro won't
 // walk up from there to find it, so point Metro at it directly.
+// Same story for `semver`: react-native-reanimated's version-check script
+// needs semver v7's modular `semver/functions/*` subpath API, but the
+// workspace root has an old top-level semver@6 (some other tool's
+// dependency) that predates that layout, and reanimated's own compatible
+// copy is nested in its node_modules — again invisible to Metro with
+// disableHierarchicalLookup on.
 config.resolver.extraNodeModules = {
   ...config.resolver.extraNodeModules,
   'react-native-css-interop': path.resolve(
     workspaceRoot,
     'node_modules/nativewind/node_modules/react-native-css-interop'
   ),
+  semver: path.resolve(workspaceRoot, 'node_modules/react-native-reanimated/node_modules/semver'),
 };
 
 module.exports = withNativeWind(config, { input: './global.css' });
