@@ -34,5 +34,13 @@ struct RootView: View {
         .task {
             await appState.bootstrap()
         }
+        .onChange(of: appState.status) { oldStatus, newStatus in
+            // Router persists for RootView's lifetime (unlike the RN version,
+            // where the whole Stack.Group remounts on status change) — reset
+            // it on logout so a later login doesn't resume a stale tab/path.
+            if oldStatus == .ready, newStatus != .ready {
+                router.jumpToRoot(tab: .home)
+            }
+        }
     }
 }

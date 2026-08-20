@@ -2,9 +2,7 @@
 //  RouteDestinationView.swift
 //  fitQuest
 //
-//  Central `.navigationDestination(for: Route.self)` switch. Cases not yet
-//  built by the current phase show ComingSoonView; later phases replace
-//  just their case body with the real screen.
+//  Central `.navigationDestination(for: Route.self)` switch.
 //
 
 import SwiftUI
@@ -21,35 +19,17 @@ struct RouteDestinationView: View {
         case .workoutSummary(let distanceM, let elapsedS, let xpEarned, let coinsEarned):
             WorkoutSummaryScreen(distanceM: distanceM, elapsedS: elapsedS, xpEarned: xpEarned, coinsEarned: coinsEarned)
         case .questGame:
-            ComingSoonView(title: "Rank Match", phase: "Phase 3")
-        case .gameOver:
-            ComingSoonView(title: "Game Over", phase: "Phase 3")
+            QuestGameScreen()
+        case .gameOver(let score, let xpEarned, let coinsEarned):
+            GameOverScreen(score: score, xpEarned: xpEarned, coinsEarned: coinsEarned)
         case .aiBuddyChat:
-            ComingSoonView(title: "AI Buddy", phase: "Phase 4")
+            AIBuddyChatScreen()
         case .moodTracker:
-            ComingSoonView(title: "Mood Tracker", phase: "Phase 4")
+            MoodTrackerScreen()
         case .healthLog:
-            ComingSoonView(title: "Health Log", phase: "Phase 4")
+            HealthLogScreen()
         case .aiFoodScan:
-            ComingSoonView(title: "Food Scan", phase: "Phase 4")
+            AIFoodScanScreen()
         }
-    }
-}
-
-struct ComingSoonView: View {
-    let title: String
-    let phase: String
-
-    var body: some View {
-        VStack(spacing: Tokens.Spacing.base) {
-            Text(title)
-                .font(.title2.bold())
-            Text("Coming in \(phase)")
-                .foregroundStyle(Tokens.Colors.onSurfaceVariant)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Tokens.Colors.background)
-        .navigationTitle(title)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }

@@ -13,12 +13,24 @@
 import Combine
 import SwiftUI
 
+enum MainTab: Int {
+    case home, quest, social, shop, profile
+}
+
 @MainActor
 final class Router: ObservableObject {
     @Published var path = NavigationPath()
+    @Published var selectedTab: MainTab = .home
 
     func push(_ route: Route) {
         path.append(route)
+    }
+
+    /// Pops to the tab root and switches tabs — equivalent of
+    /// `navigation.navigate('Main', { screen: 'Social' })`.
+    func jumpToRoot(tab: MainTab) {
+        path = NavigationPath()
+        selectedTab = tab
     }
 
     /// Equivalent of `navigation.replace(...)`: swaps the current top
